@@ -1,0 +1,34 @@
+﻿@model  ML.Usuario
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="~/Content/Login/Login.css" />
+</head>
+<body>
+    <h2>Login</h2>
+
+    @using (Html.BeginForm("Validacion", "Login", FormMethod.Post))
+    {
+        <div>
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @id = "txtEmail" })
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Contraseña)
+            @Html.PasswordFor(m => m.Contraseña, new { @class = "form-control", @id = "txtContraseña" })
+        </div>
+
+        <input type="submit" value="Iniciar sesión" />
+        <p>¿Aún no tienes cuenta? <a href="@Url.Action("Register", "Login")">Regístrate</a></p>
+    }
+
+</body>
+</html>

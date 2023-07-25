@@ -1,0 +1,62 @@
+﻿@model  ML.Usuario
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Registro</title>
+    <link rel="stylesheet" href="~/Content/Login/Registro.css" />
+</head>
+<body>
+    <h2>Registro</h2>
+
+    @using (Html.BeginForm("Register", "Login", FormMethod.Post))
+    {
+        <div>
+            @Html.LabelFor(m => m.Nombre)
+            @Html.TextBoxFor(m => m.Nombre)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.ApellidoPaterno)
+            @Html.TextBoxFor(m => m.ApellidoPaterno)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.ApellidoMaterno)
+            @Html.TextBoxFor(m => m.ApellidoMaterno)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.FechaNacimiento)
+            @Html.TextBoxFor(m => m.FechaNacimiento, "{0:yyyy-MM-dd}", new { type = "date", @Value = DateTime.Now.ToString("yyyy-MM-dd") })
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email)
+            @if (!string.IsNullOrEmpty(ViewBag.Mensaje1))
+            {
+                <p>@ViewBag.Mensaje1</p>
+            }
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Contraseña)
+            @Html.PasswordFor(m => m.Contraseña)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Rol.IdRol)
+            @Html.DropDownListFor(m => m.Rol.IdRol, new SelectList(Model.Rol.Roles, "IdRol", "Nombre"), "Seleccionar", new { @class = "input-dropdown" })
+        </div>
+
+        <input type="submit" value="Registrarse" />
+        <p>¿Ya tienes cuenta? <a href="@Url.Action("Login", "Login")">Iniciar Sesión</a></p>
+    }
+</body>
+</html>
+

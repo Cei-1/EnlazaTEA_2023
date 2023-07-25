@@ -1,0 +1,62 @@
+﻿@model ML.Especialista
+@{
+    ViewBag.Title = "Asignación";
+}
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 id="titulo">Validar Cuentas</h1>
+                </div>
+            </div>
+            <div>
+                @if (Model.Especialistas.Count > 0)
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <center>
+                                <table class="table table-striped table-hover table-responsive" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <td class="hidden">ID</td>
+                                            <td align="center">Nombre</td>
+                                            <td align="center">Número de Cedula</td>
+                                            <td align="center">Validar</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (ML.Especialista alumno in Model.Especialistas)
+                                        {
+                                            <tr>
+                                                <td align="center" class="hidden">@alumno.IdEspecialista</td>
+                                                <td align="center">@alumno.Usuario.Nombre @alumno.Usuario.ApellidoPaterno @alumno.Usuario.ApellidoMaterno</td>
+                                                <td align="center">@alumno.NoCedula</td>
+                                                <td align="center">
+                                                    <label class="custom-checkbox">
+                                                        <input type="checkbox" class="form-check-input" disabled>
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </center>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-danger" role="alert">No se encontraron registros. Da click en + para agregar un nuevo registro</div>
+                }
+            </div>
+        </div>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+
+
+
+

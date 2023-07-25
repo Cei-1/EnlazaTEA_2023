@@ -1,0 +1,97 @@
+﻿@model ML.Paciente
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Registro</title>
+    <link rel="stylesheet" href="~/Content/Login/Registro.css" />
+</head>
+<body>
+    <h2>Registro</h2>
+
+    @using (Html.BeginForm("AgregarPaciente", "Login", FormMethod.Post))
+    {
+        <div>
+            @Html.LabelFor(m => m.Nombre)
+            @Html.TextBoxFor(m => m.Nombre)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.ApellidoPaterno)
+            @Html.TextBoxFor(m => m.ApellidoPaterno)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.ApellidoMaterno)
+            @Html.TextBoxFor(m => m.ApellidoMaterno)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Parentesco)
+            @Html.TextBoxFor(m => m.Parentesco)
+        </div>
+
+        <div>
+            @Html.Label("Sexo")
+            <label>
+                @Html.RadioButtonFor(m => m.Sexo, true) Hombre
+            </label>
+            <label>
+                @Html.RadioButtonFor(m => m.Sexo, false) Mujer
+            </label>
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Edad)
+            @Html.TextBoxFor(m => m.Edad)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Calle)
+            @Html.TextBoxFor(m => m.Calle)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.NumeroExterior)
+            @Html.TextBoxFor(m => m.NumeroExterior)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.NumeroInterior)
+            @Html.TextBoxFor(m => m.NumeroInterior)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Colonia)
+            @Html.TextBoxFor(m => m.Colonia)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Municipio)
+            @Html.TextBoxFor(m => m.Municipio)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Estado)
+            @Html.TextBoxFor(m => m.Estado)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.CP)
+            @Html.TextBoxFor(m => m.CP)
+        </div>
+
+        <div>
+            @Html.LabelFor(m => m.Escolaridad)
+            @Html.TextBoxFor(m => m.Escolaridad)
+        </div>
+
+        <input type="submit" value="Guardar" />
+    }
+</body>
+</html>
