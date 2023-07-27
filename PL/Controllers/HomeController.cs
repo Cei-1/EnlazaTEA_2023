@@ -25,6 +25,18 @@ namespace PL.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }        
+        public ActionResult SobreNosotros()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+        public ActionResult Privacy()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
         }
     }
 }

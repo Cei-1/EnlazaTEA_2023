@@ -1,33 +1,51 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Inicio";
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+<link rel="stylesheet" href="~/Content/css/InicioStyle.css" />
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+<header class="main-content  mt-0">
+    <div class="page-header align-items-start min-vh-10 pt-2 pb-6 m-3 border-radius-lg" style="background-image: url('@Url.Content("~/Content/Images/tea-2.jpeg")'); background-position: center;">
+        <span class="mask bg-gradient-dark opacity-6"></span>
+        <div class="container pt-6 pb-5 m-auto">
+            <div class="row justify-content-center">
+                <div class="col-lg-9 text-center mx-auto">
+                    <h4 class="text-lead text-white mb-2 mt-5">Se parte de nuestra familia, recuerda tranquilidad y confianza con</h4>
+                    <h1 class="text-white mb-0 mt-2">Enlaza-TEA</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <h3 class="text-center m-4">Nuestro Propósito</h3>
+    <div class="inicio mb-2">
+        <!-- <div class="inicio__img">
+            <img class="img-fluid" src="~/Content/Images/bg-inicio-1.jpg" alt="">
+        </div> -->
+        <div class="inicio__texto">
+            <p>Nosotros buscamos crear una solución informática que permita reducir la ansiedad, frustración, estrés, miedo y confusión de los familiares de menores con TEA, por medio de capacitación gratuita, así como, enlazarlos con especialistas de la región, quienes, mediante el uso de la plataforma incrementarán el número de citas, ganancias, además, mejorarán su organización y seguimiento de pacientes.</p>
+        </div>
+    </div>
+    <h3 class="text-center m-4">¿Qué ofrecemos?</h3>
+    <h4 class=" mb-4">ENLAZA-TEA, ofrece a:</h4>
+    <div class="ofrecemos mb-4">
+        <div class="ofrecemos__texto">
+            <h4 class="text-center">Familiares TEA</h4>
+            <p>Capacitación accesible y gratuita, organizada por temas tea relevantes y pertinentes como: atención y comportamiento; Alimentación y nutrición y atención alternativa, entre otros, además el enlace con especialistas de la región socialmente comprometidos, que brindan una atención y seguimiento profesionales.</p>
+        </div>
+        <div class="ofrecemos__imagen">
+            <img class="img-fluid" src="~/Content/Images/bg-inicio-4.jpeg" alt="">
+        </div>
+    </div>
+    <div class="ofrecemos mb-4">
+        <div class="ofrecemos__texto">
+            <h4 class="text-center">Especialistas TEA</h4>
+            <p>Incrementar hasta en un 30% el número de consultas realizadas y las ganancias generadas por este concepto, además, acceso total al módulo de organización de citas y seguimiento de pacientes.</p>
+        </div>
+        <div class="ofrecemos__imagen">
+            <img class="img-fluid" src="~/Content/Images/bg-inicio-3.jpeg" alt="">
+        </div>
     </div>
 </main>

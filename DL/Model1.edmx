@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="EnlazaTEA2023Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Especialista">
           <Key>
             <PropertyRef Name="IdEspecialista" />
@@ -68,7 +68,7 @@
           <Property Name="Contraseña" Type="varchar(max)" />
           <Property Name="IdRol" Type="int" />
         </EntityType>
-        <Association Name="FK__Especiali__IdUsu__74AE54BC">
+        <Association Name="FK__Especiali__IdUsu__3E52440B">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Especialista" Type="Self.Especialista" Multiplicity="*" />
           <ReferentialConstraint>
@@ -80,7 +80,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Paciente__IdUsua__02FC7413">
+        <Association Name="FK__Paciente__IdUsua__4316F928">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Paciente" Type="Self.Paciente" Multiplicity="*" />
           <ReferentialConstraint>
@@ -92,7 +92,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Usuario__IdRol__71D1E811">
+        <Association Name="FK__Usuario__IdRol__38996AB5">
           <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -158,60 +158,150 @@
         <Function Name="sp_BuscarEspecialistaPorIdUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdUsuario" Type="int" Mode="In" />
         </Function>
-        <EntityContainer Name="Model1StoreContainer">
+        <EntityContainer Name="EnlazaTEA2023ModelStoreContainer">
           <EntitySet Name="Especialista" EntityType="Self.Especialista" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Paciente" EntityType="Self.Paciente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Especiali__IdUsu__74AE54BC" Association="Self.FK__Especiali__IdUsu__74AE54BC">
+          <AssociationSet Name="FK__Especiali__IdUsu__3E52440B" Association="Self.FK__Especiali__IdUsu__3E52440B">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Especialista" EntitySet="Especialista" />
           </AssociationSet>
-          <AssociationSet Name="FK__Paciente__IdUsua__02FC7413" Association="Self.FK__Paciente__IdUsua__02FC7413">
+          <AssociationSet Name="FK__Paciente__IdUsua__4316F928" Association="Self.FK__Paciente__IdUsua__4316F928">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Paciente" EntitySet="Paciente" />
           </AssociationSet>
-          <AssociationSet Name="FK__Usuario__IdRol__71D1E811" Association="Self.FK__Usuario__IdRol__71D1E811">
+          <AssociationSet Name="FK__Usuario__IdRol__38996AB5" Association="Self.FK__Usuario__IdRol__38996AB5">
             <End Role="Rol" EntitySet="Rol" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="EnlazaTEA2023Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Especialista">
+          <Key>
+            <PropertyRef Name="IdEspecialista" />
+          </Key>
+          <Property Name="IdEspecialista" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCarrera" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NoCedula" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Especialidad" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Calle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroExterno" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroInterno" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Estatus" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="Colonia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Especiali__IdUsu__3E52440B" FromRole="Especialista" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="IdPaciente" />
+          </Key>
+          <Property Name="IdPaciente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Parentesco" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NivelTDA" Type="Int32" />
+          <Property Name="Sexo" Type="Boolean" />
+          <Property Name="Edad" Type="Int32" />
+          <Property Name="Calle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroExterior" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroInterior" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Colonia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Municipio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Escolaridad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK__Paciente__IdUsua__4316F928" FromRole="Paciente" ToRole="Usuario" />
+        </EntityType>
         <EntityType Name="Rol">
           <Key>
             <PropertyRef Name="IdRol" />
           </Key>
           <Property Name="IdRol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Usuarios" Relationship="Model1.FK__Usuario__IdRol__5CD6CB2B" FromRole="Rol" ToRole="Usuario" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuario__IdRol__38996AB5" FromRole="Rol" ToRole="Usuario" />
         </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="Fotografia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdRol" Type="Int32" />
+          <NavigationProperty Name="Especialistas" Relationship="Self.FK__Especiali__IdUsu__3E52440B" FromRole="Usuario" ToRole="Especialista" />
+          <NavigationProperty Name="Pacientes" Relationship="Self.FK__Paciente__IdUsua__4316F928" FromRole="Usuario" ToRole="Paciente" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK__Usuario__IdRol__38996AB5" FromRole="Usuario" ToRole="Rol" />
+        </EntityType>
+        <Association Name="FK__Especiali__IdUsu__3E52440B">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Especialista" Type="Self.Especialista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Especialista">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Paciente__IdUsua__4316F928">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Paciente">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuario__IdRol__38996AB5">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="IdRol" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="IdRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="EnlazaTEA2023Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Especialistas" EntityType="Self.Especialista" />
+          <EntitySet Name="Pacientes" EntityType="Self.Paciente" />
           <EntitySet Name="Rols" EntityType="Self.Rol" />
-          <FunctionImport Name="GetAllRol" ReturnType="Collection(Model1.GetAllRol_Result)" />
-          <FunctionImport Name="GetUsuarioByEmail" ReturnType="Collection(Model1.GetUsuarioByEmail_Result)">
-          <Parameter Name="Email" Mode="In" Type="String" />
-          </FunctionImport>
-          <EntitySet Name="Usuarios" EntityType="Model1.Usuario" />
-          <AssociationSet Name="FK__Usuario__IdRol__5CD6CB2B" Association="Model1.FK__Usuario__IdRol__5CD6CB2B">
-            <End Role="Rol" EntitySet="Rols" />
-            <End Role="Usuario" EntitySet="Usuarios" />
-          </AssociationSet>
-          <FunctionImport Name="AddUsuario">
-            <Parameter Name="Nombre" Mode="In" Type="String" />
-            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
-            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
-            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
-            <Parameter Name="Email" Mode="In" Type="String" />
-            <Parameter Name="Contraseña" Mode="In" Type="String" />
-            <Parameter Name="IdRol" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <EntitySet Name="Especialistas" EntityType="Model1.Especialista" />
-          <AssociationSet Name="FK__Especiali__IdUsu__693CA210" Association="Model1.FK__Especiali__IdUsu__693CA210">
+          <EntitySet Name="Usuarios" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK__Especiali__IdUsu__3E52440B" Association="Self.FK__Especiali__IdUsu__3E52440B">
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="Especialista" EntitySet="Especialistas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Paciente__IdUsua__4316F928" Association="Self.FK__Paciente__IdUsua__4316F928">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Paciente" EntitySet="Pacientes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuario__IdRol__38996AB5" Association="Self.FK__Usuario__IdRol__38996AB5">
+            <End Role="Rol" EntitySet="Rols" />
+            <End Role="Usuario" EntitySet="Usuarios" />
           </AssociationSet>
           <FunctionImport Name="AddEspecialista">
             <Parameter Name="NombreCarrera" Mode="In" Type="String" />
@@ -229,14 +319,15 @@
             <Parameter Name="Estatus" Mode="In" Type="Boolean" />
             <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_BuscarEspecialistaPorIdUsuario" ReturnType="Collection(Model1.sp_BuscarEspecialistaPorIdUsuario_Result)">
-          <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          <FunctionImport Name="AddUsuario">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Contraseña" Mode="In" Type="String" />
+            <Parameter Name="IdRol" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="Pacientes" EntityType="Model1.Paciente" />
-          <AssociationSet Name="FK__Paciente__IdUsua__02FC7413" Association="Model1.FK__Paciente__IdUsua__02FC7413">
-            <End Role="Usuario" EntitySet="Usuarios" />
-            <End Role="Paciente" EntitySet="Pacientes" />
-          </AssociationSet>
           <FunctionImport Name="AgregarPaciente">
             <Parameter Name="Nombre" Mode="In" Type="String" />
             <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
@@ -255,140 +346,18 @@
             <Parameter Name="Escolaridad" Mode="In" Type="String" />
             <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="BuscarPacientePorIdUsuario" ReturnType="Collection(Model1.BuscarPacientePorIdUsuario_Result)">
-          <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          <FunctionImport Name="BuscarPacientePorIdUsuario" ReturnType="Collection(EnlazaTEA2023Model.BuscarPacientePorIdUsuario_Result)">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="ConsultarEspecialistasInactivos" ReturnType="Collection(Model1.ConsultarEspecialistasInactivos_Result)" />
+          <FunctionImport Name="ConsultarEspecialistasInactivos" ReturnType="Collection(EnlazaTEA2023Model.ConsultarEspecialistasInactivos_Result)" />
+          <FunctionImport Name="GetAllRol" ReturnType="Collection(EnlazaTEA2023Model.GetAllRol_Result)" />
+          <FunctionImport Name="GetUsuarioByEmail" ReturnType="Collection(EnlazaTEA2023Model.GetUsuarioByEmail_Result)">
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_BuscarEspecialistaPorIdUsuario" ReturnType="Collection(EnlazaTEA2023Model.sp_BuscarEspecialistaPorIdUsuario_Result)">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="GetAllRol_Result">
-          <Property Type="Int32" Name="IdRol" Nullable="false" />
-          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
-        </ComplexType>
-        <ComplexType Name="GetUsuarioByEmail_Result">
-          <Property Type="Int32" Name="IdUsuario" Nullable="false" />
-          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
-          <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" />
-          <Property Type="String" Name="Fotografia" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Contraseña" Nullable="true" />
-          <Property Type="Int32" Name="IdRol" Nullable="true" />
-        </ComplexType>
-        <EntityType Name="Usuario">
-          <Key>
-            <PropertyRef Name="IdUsuario" />
-          </Key>
-          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
-          <Property Name="Fotografia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Contraseña" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IdRol" Type="Int32" />
-          <NavigationProperty Name="Rol" Relationship="Model1.FK__Usuario__IdRol__5CD6CB2B" FromRole="Usuario" ToRole="Rol" />
-          <NavigationProperty Name="Especialistas" Relationship="Model1.FK__Especiali__IdUsu__693CA210" FromRole="Usuario" ToRole="Especialista" />
-          <NavigationProperty Name="Pacientes" Relationship="Model1.FK__Paciente__IdUsua__02FC7413" FromRole="Usuario" ToRole="Paciente" />
-        </EntityType>
-        <Association Name="FK__Usuario__IdRol__5CD6CB2B">
-          <End Type="Model1.Rol" Role="Rol" Multiplicity="0..1" />
-          <End Type="Model1.Usuario" Role="Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rol">
-              <PropertyRef Name="IdRol" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="IdRol" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Especialista">
-          <Key>
-            <PropertyRef Name="IdEspecialista" />
-          </Key>
-          <Property Name="IdEspecialista" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NombreCarrera" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="NoCedula" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Especialidad" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Calle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="NumeroExterno" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="NumeroInterno" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Ciudad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Estatus" Type="Boolean" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <NavigationProperty Name="Usuario" Relationship="Model1.FK__Especiali__IdUsu__693CA210" FromRole="Especialista" ToRole="Usuario" />
-          <Property Name="Colonia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Celular" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <Association Name="FK__Especiali__IdUsu__693CA210">
-          <End Type="Model1.Usuario" Role="Usuario" Multiplicity="0..1" />
-          <End Type="Model1.Especialista" Role="Especialista" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="IdUsuario" />
-            </Principal>
-            <Dependent Role="Especialista">
-              <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <ComplexType Name="sp_BuscarEspecialistaPorIdUsuario_Result">
-          <Property Type="Int32" Name="IdEspecialista" Nullable="false" />
-          <Property Type="String" Name="NombreCarrera" Nullable="true" />
-          <Property Type="String" Name="NoCedula" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="Especialidad" Nullable="true" />
-          <Property Type="String" Name="Calle" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="NumeroExterno" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="NumeroInterno" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Estado" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="CodigoPostal" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
-          <Property Type="Boolean" Name="Estatus" Nullable="true" />
-          <Property Type="Int32" Name="IdUsuario" Nullable="true" />
-          <Property Type="String" Name="Colonia" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="Celular" Nullable="true" MaxLength="20" />
-        </ComplexType>
-        <EntityType Name="Paciente">
-          <Key>
-            <PropertyRef Name="IdPaciente" />
-          </Key>
-          <Property Name="IdPaciente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ApellidoPaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ApellidoMaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Parentesco" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NivelTDA" Type="Int32" />
-          <Property Name="Sexo" Type="Boolean" />
-          <Property Name="Edad" Type="Int32" />
-          <Property Name="Calle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="NumeroExterior" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="NumeroInterior" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Colonia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Municipio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Escolaridad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <NavigationProperty Name="Usuario" Relationship="Model1.FK__Paciente__IdUsua__02FC7413" FromRole="Paciente" ToRole="Usuario" />
-        </EntityType>
-        <Association Name="FK__Paciente__IdUsua__02FC7413">
-          <End Type="Model1.Usuario" Role="Usuario" Multiplicity="0..1" />
-          <End Type="Model1.Paciente" Role="Paciente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="IdUsuario" />
-            </Principal>
-            <Dependent Role="Paciente">
-              <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="BuscarPacientePorIdUsuario_Result">
           <Property Type="Int32" Name="IdPaciente" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
@@ -416,129 +385,117 @@
           <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="NoCedula" Nullable="true" MaxLength="20" />
         </ComplexType>
+        <ComplexType Name="GetAllRol_Result">
+          <Property Type="Int32" Name="IdRol" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetUsuarioByEmail_Result">
+          <Property Type="Int32" Name="IdUsuario" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" />
+          <Property Type="String" Name="Fotografia" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contraseña" Nullable="true" />
+          <Property Type="Int32" Name="IdRol" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_BuscarEspecialistaPorIdUsuario_Result">
+          <Property Type="Int32" Name="IdEspecialista" Nullable="false" />
+          <Property Type="String" Name="NombreCarrera" Nullable="true" />
+          <Property Type="String" Name="NoCedula" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Especialidad" Nullable="true" />
+          <Property Type="String" Name="Calle" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NumeroExterno" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NumeroInterno" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CodigoPostal" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
+          <Property Type="Boolean" Name="Estatus" Nullable="true" />
+          <Property Type="Int32" Name="IdUsuario" Nullable="true" />
+          <Property Type="String" Name="Colonia" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Celular" Nullable="true" MaxLength="20" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="EnlazaTEA2023Entities1">
+        <EntityContainerMapping StorageEntityContainer="EnlazaTEA2023ModelStoreContainer" CdmEntityContainer="EnlazaTEA2023Entities1">
+          <EntitySetMapping Name="Especialistas">
+            <EntityTypeMapping TypeName="EnlazaTEA2023Model.Especialista">
+              <MappingFragment StoreEntitySet="Especialista">
+                <ScalarProperty Name="IdEspecialista" ColumnName="IdEspecialista" />
+                <ScalarProperty Name="NombreCarrera" ColumnName="NombreCarrera" />
+                <ScalarProperty Name="NoCedula" ColumnName="NoCedula" />
+                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="NumeroExterno" ColumnName="NumeroExterno" />
+                <ScalarProperty Name="NumeroInterno" ColumnName="NumeroInterno" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pacientes">
+            <EntityTypeMapping TypeName="EnlazaTEA2023Model.Paciente">
+              <MappingFragment StoreEntitySet="Paciente">
+                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Parentesco" ColumnName="Parentesco" />
+                <ScalarProperty Name="NivelTDA" ColumnName="NivelTDA" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="NumeroExterior" ColumnName="NumeroExterior" />
+                <ScalarProperty Name="NumeroInterior" ColumnName="NumeroInterior" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="CP" ColumnName="CP" />
+                <ScalarProperty Name="Escolaridad" ColumnName="Escolaridad" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Rols">
-            <EntityTypeMapping TypeName="Model1.Rol">
+            <EntityTypeMapping TypeName="EnlazaTEA2023Model.Rol">
               <MappingFragment StoreEntitySet="Rol">
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetAllRol" FunctionName="Model1.Store.GetAllRol">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model1.GetAllRol_Result">
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetUsuarioByEmail" FunctionName="Model1.Store.GetUsuarioByEmail">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model1.GetUsuarioByEmail_Result">
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
-                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
-                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
-                <ScalarProperty Name="Fotografia" ColumnName="Fotografia" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="Usuarios">
-            <EntityTypeMapping TypeName="Model1.Usuario">
+            <EntityTypeMapping TypeName="EnlazaTEA2023Model.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
-                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Fotografia" ColumnName="Fotografia" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
                 <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
-                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
-                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Fotografia" ColumnName="Fotografia" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="AddUsuario" FunctionName="Model1.Store.AddUsuario" />
-          <EntitySetMapping Name="Especialistas">
-            <EntityTypeMapping TypeName="Model1.Especialista">
-              <MappingFragment StoreEntitySet="Especialista">
-                <ScalarProperty Name="Celular" ColumnName="Celular" />
-                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
-                <ScalarProperty Name="NumeroInterno" ColumnName="NumeroInterno" />
-                <ScalarProperty Name="NumeroExterno" ColumnName="NumeroExterno" />
-                <ScalarProperty Name="Calle" ColumnName="Calle" />
-                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
-                <ScalarProperty Name="NoCedula" ColumnName="NoCedula" />
-                <ScalarProperty Name="NombreCarrera" ColumnName="NombreCarrera" />
-                <ScalarProperty Name="IdEspecialista" ColumnName="IdEspecialista" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="AddEspecialista" FunctionName="Model1.Store.AddEspecialista" />
-          <FunctionImportMapping FunctionImportName="sp_BuscarEspecialistaPorIdUsuario" FunctionName="Model1.Store.sp_BuscarEspecialistaPorIdUsuario">
+          <FunctionImportMapping FunctionImportName="AddEspecialista" FunctionName="EnlazaTEA2023Model.Store.AddEspecialista" />
+          <FunctionImportMapping FunctionImportName="AddUsuario" FunctionName="EnlazaTEA2023Model.Store.AddUsuario" />
+          <FunctionImportMapping FunctionImportName="AgregarPaciente" FunctionName="EnlazaTEA2023Model.Store.AgregarPaciente" />
+          <FunctionImportMapping FunctionImportName="BuscarPacientePorIdUsuario" FunctionName="EnlazaTEA2023Model.Store.BuscarPacientePorIdUsuario">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Model1.sp_BuscarEspecialistaPorIdUsuario_Result">
-                <ScalarProperty Name="IdEspecialista" ColumnName="IdEspecialista" />
-                <ScalarProperty Name="NombreCarrera" ColumnName="NombreCarrera" />
-                <ScalarProperty Name="NoCedula" ColumnName="NoCedula" />
-                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
-                <ScalarProperty Name="Calle" ColumnName="Calle" />
-                <ScalarProperty Name="NumeroExterno" ColumnName="NumeroExterno" />
-                <ScalarProperty Name="NumeroInterno" ColumnName="NumeroInterno" />
-                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
-                <ScalarProperty Name="Celular" ColumnName="Celular" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <EntitySetMapping Name="Pacientes">
-            <EntityTypeMapping TypeName="Model1.Paciente">
-              <MappingFragment StoreEntitySet="Paciente">
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Escolaridad" ColumnName="Escolaridad" />
-                <ScalarProperty Name="CP" ColumnName="CP" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
-                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
-                <ScalarProperty Name="NumeroInterior" ColumnName="NumeroInterior" />
-                <ScalarProperty Name="NumeroExterior" ColumnName="NumeroExterior" />
-                <ScalarProperty Name="Calle" ColumnName="Calle" />
-                <ScalarProperty Name="Edad" ColumnName="Edad" />
-                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
-                <ScalarProperty Name="NivelTDA" ColumnName="NivelTDA" />
-                <ScalarProperty Name="Parentesco" ColumnName="Parentesco" />
-                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
-                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="AgregarPaciente" FunctionName="Model1.Store.AgregarPaciente" />
-          <FunctionImportMapping FunctionImportName="BuscarPacientePorIdUsuario" FunctionName="Model1.Store.BuscarPacientePorIdUsuario">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Model1.BuscarPacientePorIdUsuario_Result">
+              <ComplexTypeMapping TypeName="EnlazaTEA2023Model.BuscarPacientePorIdUsuario_Result">
                 <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
@@ -559,15 +516,59 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="ConsultarEspecialistasInactivos" FunctionName="Model1.Store.ConsultarEspecialistasInactivos">
+          <FunctionImportMapping FunctionImportName="ConsultarEspecialistasInactivos" FunctionName="EnlazaTEA2023Model.Store.ConsultarEspecialistasInactivos">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="Model1.ConsultarEspecialistasInactivos_Result">
+              <ComplexTypeMapping TypeName="EnlazaTEA2023Model.ConsultarEspecialistasInactivos_Result">
                 <ScalarProperty Name="IdEspecialista" ColumnName="IdEspecialista" />
                 <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
                 <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
                 <ScalarProperty Name="NoCedula" ColumnName="NoCedula" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllRol" FunctionName="EnlazaTEA2023Model.Store.GetAllRol">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnlazaTEA2023Model.GetAllRol_Result">
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUsuarioByEmail" FunctionName="EnlazaTEA2023Model.Store.GetUsuarioByEmail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnlazaTEA2023Model.GetUsuarioByEmail_Result">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Fotografia" ColumnName="Fotografia" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_BuscarEspecialistaPorIdUsuario" FunctionName="EnlazaTEA2023Model.Store.sp_BuscarEspecialistaPorIdUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnlazaTEA2023Model.sp_BuscarEspecialistaPorIdUsuario_Result">
+                <ScalarProperty Name="IdEspecialista" ColumnName="IdEspecialista" />
+                <ScalarProperty Name="NombreCarrera" ColumnName="NombreCarrera" />
+                <ScalarProperty Name="NoCedula" ColumnName="NoCedula" />
+                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="NumeroExterno" ColumnName="NumeroExterno" />
+                <ScalarProperty Name="NumeroInterno" ColumnName="NumeroInterno" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -588,7 +589,7 @@
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
