@@ -12,6 +12,7 @@
         <AssociationConnector Association="EnlazaTEA2023Model.FK__Especiali__IdUsu__3E52440B" ManuallyRouted="false" />
         <AssociationConnector Association="EnlazaTEA2023Model.FK__Paciente__IdUsua__4316F928" ManuallyRouted="false" />
         <AssociationConnector Association="EnlazaTEA2023Model.FK__Usuario__IdRol__38996AB5" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EnlazaTEA2023Model.Blog" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

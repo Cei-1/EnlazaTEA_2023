@@ -1,0 +1,93 @@
+﻿@model ML.Blog
+
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2> Crear Articulo</h2>
+            </div>
+        </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h5> Ingrese los datos del articulo</h5>
+        </div>
+        <hr />
+    </div>
+
+    @using (Html.BeginForm("Form", "Blog", FormMethod.Post, new { enctype = "multipart/form-data" })) //se hace uso del form Post
+    {
+        <div class="row">
+            <div class="col-md-4">
+                @Html.LabelFor(model => Model.IdBlog, new { @class = "d-none" })
+                @Html.TextBoxFor(model => Model.IdBlog, new { @class = "form-control d-none" })
+            </div>
+        </div>
+        <br />
+
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                    <div class="row-md-4">
+                        @Html.LabelFor(model => Model.Titulo)
+                        @Html.TextBoxFor(model => Model.Titulo, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => Model.Titulo, "", new { @class = "text-danger", @id = "lblCurpErrorMessage" })
+                    </div>
+
+                    <div class="row-md-4">
+                        @Html.LabelFor(model => Model.Nombre)
+                        @Html.TextBoxFor(model => Model.Nombre, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => Model.Nombre, "", new { @class = "text-danger", @id = "lblCurpErrorMessage" })
+                    </div>
+
+                    <div class="row-md-4">
+                        @Html.LabelFor(model => Model.Descripcion)
+                        @Html.TextAreaFor(model => Model.Descripcion, new { @class = "form-control", @rows = 5, @cols = 60 })
+                        @Html.ValidationMessageFor(model => Model.Descripcion, "", new { @class = "text-danger", @id = "lblCurpErrorMessage" })
+                    </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="row-md-6">
+                    <label class="mb-2">Seleccione una imagen o deje la predeterminada</label>
+                  
+
+                    <input type="file" name="imgBlog" id="fuimgBlog" onchange="return ValidarImagen(event,this);" />
+                    @Html.ValidationMessageFor(model => Model.Imagen, "", new { @class = "text-danger", @id = "lblImagenErrorMessage" })
+                    <br />
+                    <br />
+                    @if (Model.Imagen != null)
+                    {
+                        @Html.HiddenFor(model => Model.Imagen)
+                        <img id="imgBlog" src="data:image/jpg;base64,@Convert.ToBase64String(Model.Imagen)" style="width:350px; height:250px" />
+                    }
+                    else
+                    {
+                        <img id="imgBlog" src="~/Content/Images/bg-inicio-1.jpg" style="width:350px; height:250px" />
+                    }
+                </div>
+            </div>
+        </div>
+
+
+        <br>
+        <div class="row">
+            <div class="col-md-2 col-md-offset-5 mb-2">
+                <input type="submit" class="btn btn-success" value="Guardar" />
+            </div>
+            <div class="col-md-2 ">
+                @Html.ActionLink("Cancelar", "GetAll", "Blog", new { @class = "btn btn-danger", @id = "btnCancelar" })
+            </div>
+        </div>
+    }
+</div>
+
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<script src="~/Scripts/Blog/PreviewImage.js"></script>
+<script src="~/Scripts/Blog/Validaciones.js"></script>

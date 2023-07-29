@@ -31,6 +31,7 @@ namespace DL
         public virtual DbSet<Paciente> Pacientes { get; set; }
         public virtual DbSet<Rol> Rols { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<Blog> Blogs { get; set; }
     
         public virtual int AddEspecialista(string nombreCarrera, string noCedula, string especialidad, string calle, string numeroExterno, string numeroInterno, string colonia, string ciudad, string estado, string codigoPostal, string telefono, string celular, Nullable<bool> estatus, Nullable<int> idUsuario)
         {
@@ -230,6 +231,75 @@ namespace DL
                 new ObjectParameter("IdUsuario", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_BuscarEspecialistaPorIdUsuario_Result>("sp_BuscarEspecialistaPorIdUsuario", idUsuarioParameter);
+        }
+    
+        public virtual int BlogAdd(string titulo, string nombre, string descripcion, byte[] imagen)
+        {
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("Titulo", titulo) :
+                new ObjectParameter("Titulo", typeof(string));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var imagenParameter = imagen != null ?
+                new ObjectParameter("Imagen", imagen) :
+                new ObjectParameter("Imagen", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BlogAdd", tituloParameter, nombreParameter, descripcionParameter, imagenParameter);
+        }
+    
+        public virtual ObjectResult<BlogGetAll_Result> BlogGetAll()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BlogGetAll_Result>("BlogGetAll");
+        }
+    
+        public virtual int BlogDelete(Nullable<int> idBlog)
+        {
+            var idBlogParameter = idBlog.HasValue ?
+                new ObjectParameter("IdBlog", idBlog) :
+                new ObjectParameter("IdBlog", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BlogDelete", idBlogParameter);
+        }
+    
+        public virtual ObjectResult<BlogGetById_Result> BlogGetById(Nullable<int> idBlog)
+        {
+            var idBlogParameter = idBlog.HasValue ?
+                new ObjectParameter("IdBlog", idBlog) :
+                new ObjectParameter("IdBlog", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BlogGetById_Result>("BlogGetById", idBlogParameter);
+        }
+    
+        public virtual int BlogUpdate(Nullable<int> idBlog, string titulo, string nombre, string descripcion, byte[] imagen)
+        {
+            var idBlogParameter = idBlog.HasValue ?
+                new ObjectParameter("IdBlog", idBlog) :
+                new ObjectParameter("IdBlog", typeof(int));
+    
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("Titulo", titulo) :
+                new ObjectParameter("Titulo", typeof(string));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var imagenParameter = imagen != null ?
+                new ObjectParameter("Imagen", imagen) :
+                new ObjectParameter("Imagen", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BlogUpdate", idBlogParameter, tituloParameter, nombreParameter, descripcionParameter, imagenParameter);
         }
     }
 }
