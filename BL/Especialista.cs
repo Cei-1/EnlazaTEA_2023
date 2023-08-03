@@ -1,6 +1,7 @@
 ﻿using ML;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace BL
             {
                 using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
                 {
-                    var query = context.AddEspecialista(especialista.NombreCarrera,especialista.NoCedula,especialista.Especialidad,especialista.Calle,especialista.NumeroExterno,especialista.NumeroInterno,especialista.Colonia,especialista.Ciudad,especialista.Estado,especialista.CodigoPostal,especialista.Telefono,especialista.Celular,especialista.Estatus,especialista.Usuario.IdUsuario);
+                    var query = context.AddEspecialista(especialista.NombreCarrera, especialista.NoCedula, especialista.Especialidad, especialista.Calle, especialista.NumeroExterno, especialista.NumeroInterno, especialista.Colonia, especialista.Ciudad, especialista.Estado, especialista.CodigoPostal, especialista.Telefono, especialista.Celular, especialista.Estatus, especialista.Usuario.IdUsuario);
 
                     if (query >= -1)
                     {
@@ -68,7 +69,9 @@ namespace BL
                         especialista.Estatus = especialistaDL.Estatus.Value;
                         especialista.Usuario = new ML.Usuario();
                         especialista.Usuario.IdUsuario = especialistaDL.IdUsuario.Value;
-
+                        especialista.Usuario.Nombre = especialistaDL.UsuarioNombre;
+                        especialista.Usuario.ApellidoPaterno = especialistaDL.UsuarioApellidoPaterno;
+                        especialista.Usuario.ApellidoMaterno = especialistaDL.UsuarioApellidoMaterno;
                         result.Object = especialista;
                         result.Correct = true;
                     }
@@ -85,6 +88,38 @@ namespace BL
                 result.ErrorMessage = ex.Message;
             }
 
+            return result;
+        }
+
+        public static ML.Result UpdateEF(ML.Especialista especialista)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+
+                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                {
+                    var updateResult = context.ActualizarPerfilEspecialista(especialista.Usuario.IdUsuario, especialista.Calle, especialista.NumeroExterno, especialista.NumeroInterno, especialista.Ciudad, especialista.Estado, especialista.CodigoPostal, especialista.Telefono, especialista.Colonia, especialista.Celular);
+
+                    if (updateResult >= 1)
+                    {
+                        result = GetByIdEF(especialista.Usuario.IdUsuario);
+                        ///especialista = (ML.Especialista)result.Object;
+                        //result.Object = especialista;
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = result.ErrorMessage;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+            }
             return result;
         }
 
