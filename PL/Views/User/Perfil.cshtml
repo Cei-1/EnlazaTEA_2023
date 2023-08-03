@@ -1,0 +1,155 @@
+﻿@{
+    ViewBag.Title = "Perfil";
+}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f2f5;
+    }
+
+    .user-profile {
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-image img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 20px;
+    }
+
+    .user-details {
+        display: flex;
+        flex-direction: column;
+    }
+
+        .user-details label {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+    .profile-data {
+        margin-bottom: 10px;
+    }
+
+        .profile-data label {
+            font-weight: bold;
+            display: block;
+        }
+
+        .profile-data span {
+            display: inline-block;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+    .edit-button {
+        margin-top: 10px;
+        padding: 8px 16px;
+        font-size: 16px;
+        background-color: #1877f2;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .edit-button:hover {
+            background-color: #1659b7;
+        }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual tamaño */
+        gap: 10px; /* Espacio entre las columnas */
+    }
+
+    /* Agrega una clase para los campos de datos */
+    .profile-data-item {
+        display: flex;
+        align-items: center;
+    }
+
+    .profile-data-item {
+        display: flex;
+        align-items: center;
+    }
+</style>
+
+<div class="user-profile">
+    <div class="header-image">
+        <img src="~/Image/Usuario.png" alt="Imagen de cabecera">
+        <h2>@Model.Usuario.Nombre @Model.Usuario.ApellidoPaterno @Model.Usuario.ApellidoMaterno</h2>
+    </div>
+    <hr />
+    <div class="user-details">
+
+        <div class="row d-flex text-center">
+            <div class="col-md-4 profile-data-item">
+                <label>Carrera: @Model.NombreCarrera</label>
+            </div>
+
+            <div class="col-md-4 profile-data-item">
+                <label>Especialidad: @Model.Especialidad</label>
+            </div>
+
+            <div class="col-md-4 profile-data-item">
+                <label>Cédula: @Model.NoCedula</label>
+            </div>
+        </div>
+
+        <div class="profile-data">
+            <label>Calle:</label>
+            <span>@Model.Calle</span>
+        </div>
+
+        <div class="profile-data">
+            <label>Número Externo:</label>
+            <span>@Model.NumeroExterno</span>
+        </div>
+
+        <div class="profile-data">
+            <label>Número Interno:</label>
+            <span>@Model.NumeroInterno</span>
+        </div>
+
+        <div class="profile-data">
+            <label>Colonia:</label>
+            <span>@Model.Colonia</span>
+        </div>
+
+        <div class="profile-data">
+            <label>Ciudad:</label>
+            <span>@Model.Ciudad</span>
+        </div>
+
+        <div class="profile-data">
+            <label>Estado:</label>
+            <span>@Model.Estado</span>
+        </div>
+
+        <div class="profile-data">
+            <label>Código Postal:</label>
+            <span>@Model.CodigoPostal</span>
+        </div>
+
+        <div class="profile-data">
+            <label>Teléfono:</label>
+            <span>@Model.Telefono</span>
+        </div>
+
+        <div class="profile-data">
+            <label>Celular:</label>
+            <span>@Model.Celular</span>
+        </div>
+
+        <button class="edit-button">Editar perfil</button>
+    </div>
+</div>

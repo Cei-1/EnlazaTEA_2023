@@ -6,24 +6,43 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .align-right {
+            display: flex;
+            justify-content: flex-end;
+        }
+    </style>
+    <link href="~/Content/css/SobreNosotroStyle.css" rel="stylesheet" />
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("Enlaza-TEA", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Blog", "Index", "Blog", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Sobre Nosotros", "SobreNosotros", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Privacidad", "Privacity", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Iniciar Sesíon", "Login", "Login", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Contactanos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
+                @if (Session["SessionRol"] == null & Session["SessionUsuario"] == null)
+                {
+                    <ul class="navbar-nav flex-grow-1 align-right">
+                        <li>@Html.ActionLink("Iniciar Sesíon", "Login", "Login", new { area = "" }, new { @class = "nav-link" })</li>
+                    </ul>
+
+                }
+                @if (Session["SessionRol"] != null & Session["SessionUsuario"] != null)
+                {
+                    <ul class="navbar-nav flex-grow-1 align-right">
+                        <li>@Html.ActionLink("Perfil", "Perfil", "User", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Cerrar Sesión", "CerrarSesion", "Login", new { area = "" }, new { @class = "nav-link" })</li>
+                    </ul>
+
+                }
             </div>
         </div>
     </nav>
