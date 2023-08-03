@@ -21,7 +21,7 @@ namespace PL.Controllers
 
 
         [HttpGet]
-        public ActionResult Register() 
+        public ActionResult Register()
         {
             ML.Usuario usuario = new ML.Usuario();
             ML.Result resultRol = BL.Rol.GetAll();
@@ -61,25 +61,25 @@ namespace PL.Controllers
                     ViewBag.Mensaje = "No se ha podido agregar el usuario. Error: " + result.ErrorMessage;
                 }
                 return PartialView("Modal");
-            } 
+            }
         }
 
         public string GenerateHash(string contraseña)
+        {
+            using (SHA256 sha256Hash = SHA256.Create())
             {
-                using (SHA256 sha256Hash = SHA256.Create())
-                {
                 string key = "x2";
-                    byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(contraseña));
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(contraseña));
 
-                    StringBuilder builder = new StringBuilder();
-                    for (int i = 0; i < bytes.Length; i++)
-                    {
-                        builder.Append(bytes[i].ToString(key));
-                    }
-
-                    return builder.ToString();
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString(key));
                 }
+
+                return builder.ToString();
             }
+        }
 
         public ActionResult CompletarEspecialista()
         {
@@ -109,13 +109,14 @@ namespace PL.Controllers
                     usuario.Rol.IdRol = ((ML.Usuario)result.Object).Rol.IdRol;
                     Session["SessionRol"] = usuario.Rol.IdRol;
                     Session["SessionUsuario"] = usuario.IdUsuario;
-                    if(usuario.Rol.IdRol == 1)
+                    if (usuario.Rol.IdRol == 1)
                     {
                         return RedirectToAction("CompletarEspecialista");
-                    }else if (usuario.Rol.IdRol == 2)
+                    }
+                    else if (usuario.Rol.IdRol == 2)
                     {
                         return RedirectToAction("RegistrarPaciente");
-                    }    
+                    }
                 }
                 else
                 {
@@ -130,6 +131,13 @@ namespace PL.Controllers
             return View("Form", usuario);
         }
 
+        public ActionResult CerrarSesion()
+        {
+            Session["SessionRol"] = null;
+            Session["SessionUsuario"] = null;
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpGet]
         public ActionResult CompletarEspecialista(ML.Especialista especialista)
         {
@@ -142,7 +150,7 @@ namespace PL.Controllers
             if (result.Correct && result.Object != null)
             {
                 // Si se encontró un especialista asociado al usuario, redirige al Index
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Perfil", "User");
             }
             else
             {

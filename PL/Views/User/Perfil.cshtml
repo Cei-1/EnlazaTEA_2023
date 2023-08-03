@@ -2,6 +2,7 @@
     ViewBag.Title = "Perfil";
 }
 
+
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -86,70 +87,44 @@
 <div class="user-profile">
     <div class="header-image">
         <img src="~/Image/Usuario.png" alt="Imagen de cabecera">
-        <h2>@Model.Usuario.Nombre @Model.Usuario.ApellidoPaterno @Model.Usuario.ApellidoMaterno</h2>
+        <div class="d-flex justify-content-between">
+            <h4>@Model.Usuario.Nombre @Model.Usuario.ApellidoPaterno @Model.Usuario.ApellidoMaterno</h4>
+            @Html.ActionLink("Editar", "ActualizarEspecialista", "User", null, new { @class = "btn btn-primary" })
+        </div>
     </div>
     <hr />
     <div class="user-details">
 
         <div class="row d-flex text-center">
             <div class="col-md-4 profile-data-item">
-                <label>Carrera: @Model.NombreCarrera</label>
+                <h6>Carrera: @Model.NombreCarrera</h6>
             </div>
 
             <div class="col-md-4 profile-data-item">
-                <label>Especialidad: @Model.Especialidad</label>
+                <h6>Especialidad: @Model.Especialidad</h6>
             </div>
 
             <div class="col-md-4 profile-data-item">
-                <label>Cédula: @Model.NoCedula</label>
+                <h6>Cédula: @Model.NoCedula</h6>
             </div>
         </div>
+        <img src="~/Content/Images/tea-2.jpeg" />
+        <hr />
+        <div class="row d-flex text-center">
+            <div class="col-md-6 profile-data-item">
+                <h5>Dirección: </h5>
+                <span> @Model.Calle, @Model.NumeroExterno, @Model.NumeroInterno, @Model.Colonia, @Model.Ciudad, @Model.Estado, @Model.CodigoPostal</span>
+            </div>
 
-        <div class="profile-data">
-            <label>Calle:</label>
-            <span>@Model.Calle</span>
+            <div class="col-md-3 profile-data-item">
+                <h5>Teléfono:</h5>
+                <span>@Model.Telefono</span>
+            </div>
+
+            <div class="col-md-3 profile-data-item">
+                <h5>Celular:</h5>
+                <span>@Model.Celular</span>
+            </div>
         </div>
-
-        <div class="profile-data">
-            <label>Número Externo:</label>
-            <span>@Model.NumeroExterno</span>
-        </div>
-
-        <div class="profile-data">
-            <label>Número Interno:</label>
-            <span>@Model.NumeroInterno</span>
-        </div>
-
-        <div class="profile-data">
-            <label>Colonia:</label>
-            <span>@Model.Colonia</span>
-        </div>
-
-        <div class="profile-data">
-            <label>Ciudad:</label>
-            <span>@Model.Ciudad</span>
-        </div>
-
-        <div class="profile-data">
-            <label>Estado:</label>
-            <span>@Model.Estado</span>
-        </div>
-
-        <div class="profile-data">
-            <label>Código Postal:</label>
-            <span>@Model.CodigoPostal</span>
-        </div>
-
-        <div class="profile-data">
-            <label>Teléfono:</label>
-            <span>@Model.Telefono</span>
-        </div>
-
-        <div class="profile-data">
-            <label>Celular:</label>
-            <span>@Model.Celular</span>
-        </div>
-
-        <button class="edit-button">Editar perfil</button>
     </div>
 </div>
