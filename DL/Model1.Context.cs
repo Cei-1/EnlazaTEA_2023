@@ -346,5 +346,125 @@ namespace DL
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_BuscarEspecialistaPorIdUsuario_Result>("sp_BuscarEspecialistaPorIdUsuario", idUsuarioParameter);
         }
+    
+        public virtual int UpdateUser(Nullable<int> idUsuario, string nombre, string apellidoPaterno, string apellidoMaterno, Nullable<System.DateTime> fechaNacimiento, string email, string contraseña)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apellidoPaternoParameter = apellidoPaterno != null ?
+                new ObjectParameter("ApellidoPaterno", apellidoPaterno) :
+                new ObjectParameter("ApellidoPaterno", typeof(string));
+    
+            var apellidoMaternoParameter = apellidoMaterno != null ?
+                new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
+                new ObjectParameter("ApellidoMaterno", typeof(string));
+    
+            var fechaNacimientoParameter = fechaNacimiento.HasValue ?
+                new ObjectParameter("FechaNacimiento", fechaNacimiento) :
+                new ObjectParameter("FechaNacimiento", typeof(System.DateTime));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var contraseñaParameter = contraseña != null ?
+                new ObjectParameter("Contraseña", contraseña) :
+                new ObjectParameter("Contraseña", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateUser", idUsuarioParameter, nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, fechaNacimientoParameter, emailParameter, contraseñaParameter);
+        }
+    
+        public virtual ObjectResult<GetPacienteByIdUsuario_Result> GetPacienteByIdUsuario(Nullable<int> idUsuario)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPacienteByIdUsuario_Result>("GetPacienteByIdUsuario", idUsuarioParameter);
+        }
+    
+        public virtual int UpdatePaciente(Nullable<int> idPaciente, string nombre, string apellidoPaterno, string apellidoMaterno, string parentesco, Nullable<int> nivelTDA, Nullable<bool> sexo, Nullable<int> edad, string calle, string numeroExterior, string numeroInterior, string colonia, string municipio, string estado, string cP, string escolaridad)
+        {
+            var idPacienteParameter = idPaciente.HasValue ?
+                new ObjectParameter("IdPaciente", idPaciente) :
+                new ObjectParameter("IdPaciente", typeof(int));
+    
+            var nombreParameter = nombre != null ?
+                new ObjectParameter("Nombre", nombre) :
+                new ObjectParameter("Nombre", typeof(string));
+    
+            var apellidoPaternoParameter = apellidoPaterno != null ?
+                new ObjectParameter("ApellidoPaterno", apellidoPaterno) :
+                new ObjectParameter("ApellidoPaterno", typeof(string));
+    
+            var apellidoMaternoParameter = apellidoMaterno != null ?
+                new ObjectParameter("ApellidoMaterno", apellidoMaterno) :
+                new ObjectParameter("ApellidoMaterno", typeof(string));
+    
+            var parentescoParameter = parentesco != null ?
+                new ObjectParameter("Parentesco", parentesco) :
+                new ObjectParameter("Parentesco", typeof(string));
+    
+            var nivelTDAParameter = nivelTDA.HasValue ?
+                new ObjectParameter("NivelTDA", nivelTDA) :
+                new ObjectParameter("NivelTDA", typeof(int));
+    
+            var sexoParameter = sexo.HasValue ?
+                new ObjectParameter("Sexo", sexo) :
+                new ObjectParameter("Sexo", typeof(bool));
+    
+            var edadParameter = edad.HasValue ?
+                new ObjectParameter("Edad", edad) :
+                new ObjectParameter("Edad", typeof(int));
+    
+            var calleParameter = calle != null ?
+                new ObjectParameter("Calle", calle) :
+                new ObjectParameter("Calle", typeof(string));
+    
+            var numeroExteriorParameter = numeroExterior != null ?
+                new ObjectParameter("NumeroExterior", numeroExterior) :
+                new ObjectParameter("NumeroExterior", typeof(string));
+    
+            var numeroInteriorParameter = numeroInterior != null ?
+                new ObjectParameter("NumeroInterior", numeroInterior) :
+                new ObjectParameter("NumeroInterior", typeof(string));
+    
+            var coloniaParameter = colonia != null ?
+                new ObjectParameter("Colonia", colonia) :
+                new ObjectParameter("Colonia", typeof(string));
+    
+            var municipioParameter = municipio != null ?
+                new ObjectParameter("Municipio", municipio) :
+                new ObjectParameter("Municipio", typeof(string));
+    
+            var estadoParameter = estado != null ?
+                new ObjectParameter("Estado", estado) :
+                new ObjectParameter("Estado", typeof(string));
+    
+            var cPParameter = cP != null ?
+                new ObjectParameter("CP", cP) :
+                new ObjectParameter("CP", typeof(string));
+    
+            var escolaridadParameter = escolaridad != null ?
+                new ObjectParameter("Escolaridad", escolaridad) :
+                new ObjectParameter("Escolaridad", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdatePaciente", idPacienteParameter, nombreParameter, apellidoPaternoParameter, apellidoMaternoParameter, parentescoParameter, nivelTDAParameter, sexoParameter, edadParameter, calleParameter, numeroExteriorParameter, numeroInteriorParameter, coloniaParameter, municipioParameter, estadoParameter, cPParameter, escolaridadParameter);
+        }
+    
+        public virtual ObjectResult<GetUserById_Result> GetUserById(Nullable<int> idUsuario)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserById_Result>("GetUserById", idUsuarioParameter);
+        }
     }
 }

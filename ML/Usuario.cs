@@ -18,6 +18,7 @@ namespace ML
             public string Contraseña { get; set; }
             public Rol Rol { get; set; }
             public List<object> Usuarios { get; set; }
+            public Paciente Paciente { get; set; }
 
     }
 }

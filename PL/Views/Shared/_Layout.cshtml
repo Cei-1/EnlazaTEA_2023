@@ -25,8 +25,11 @@
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
                     <li>@Html.ActionLink("Blog", "Index", "Blog", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Sobre Nosotros", "SobreNosotros", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contactanos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    @if (Session["SessionRol"] == null && Session["SessionUsuario"] == null)
+                    {
+                        <li>@Html.ActionLink("Sobre Nosotros", "SobreNosotros", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Contactanos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    }
                 </ul>
                 @if (Session["SessionRol"] == null & Session["SessionUsuario"] == null)
                 {
@@ -35,14 +38,22 @@
                     </ul>
 
                 }
-                @if (Session["SessionRol"] != null & Session["SessionUsuario"] != null)
+                @if (Session["SessionRol"] != null && Session["SessionUsuario"] != null)
                 {
+                    int rol_id = (int)Session["SessionRol"];
                     <ul class="navbar-nav flex-grow-1 align-right">
-                        <li>@Html.ActionLink("Perfil", "Perfil", "User", new { area = "" }, new { @class = "nav-link" })</li>
+                        @if (rol_id == 2)
+                        {
+                            <li>@Html.ActionLink("Perfil", "PerfilFamiliar", "User", new { area = "" }, new { @class = "nav-link" })</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Perfil", "Perfil", "User", new { area = "" }, new { @class = "nav-link" })</li>
+                        }
                         <li>@Html.ActionLink("Cerrar Sesión", "CerrarSesion", "Login", new { area = "" }, new { @class = "nav-link" })</li>
                     </ul>
-
                 }
+
             </div>
         </div>
     </nav>
