@@ -1,0 +1,72 @@
+﻿@model ML.Especialista
+
+@{
+    ViewBag.Title = "Actualizar Especialista";
+}
+
+<h2>Actualizar Especialista</h2>
+
+@using (Html.BeginForm("ActualizarEspecialista", "User", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.NombreCarrera)
+        @Html.TextBoxFor(model => model.NombreCarrera, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NoCedula)
+        @Html.TextBoxFor(model => model.NoCedula, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Especialidad)
+        @Html.TextBoxFor(model => model.Especialidad, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Calle)
+        @Html.TextBoxFor(model => model.Calle, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NumeroExterno)
+        @Html.TextBoxFor(model => model.NumeroExterno, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NumeroInterno)
+        @Html.TextBoxFor(model => model.NumeroInterno, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Colonia)
+        @Html.TextBoxFor(model => model.Colonia, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Ciudad)
+        @Html.TextBoxFor(model => model.Ciudad, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Estado)
+        @Html.TextBoxFor(model => model.Estado, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CodigoPostal)
+        @Html.TextBoxFor(model => model.CodigoPostal, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Telefono)
+        @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Celular)
+        @Html.TextBoxFor(model => model.Celular, new { @class = "form-control" })
+    </div>
+    <p></p>
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+}
