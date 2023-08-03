@@ -194,11 +194,44 @@
         </Function>
         <Function Name="ConsultarEspecialistasInactivos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetPacienteByIdUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUserById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetUsuarioByEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Email" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_BuscarEspecialistaPorIdUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdUsuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdatePaciente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdPaciente" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoPaterno" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+          <Parameter Name="Parentesco" Type="varchar" Mode="In" />
+          <Parameter Name="NivelTDA" Type="int" Mode="In" />
+          <Parameter Name="Sexo" Type="bit" Mode="In" />
+          <Parameter Name="Edad" Type="int" Mode="In" />
+          <Parameter Name="Calle" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroExterior" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroInterior" Type="varchar" Mode="In" />
+          <Parameter Name="Colonia" Type="varchar" Mode="In" />
+          <Parameter Name="Municipio" Type="varchar" Mode="In" />
+          <Parameter Name="Estado" Type="varchar" Mode="In" />
+          <Parameter Name="CP" Type="varchar" Mode="In" />
+          <Parameter Name="Escolaridad" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoPaterno" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+          <Parameter Name="FechaNacimiento" Type="date" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Contraseña" Type="varchar(max)" Mode="In" />
         </Function>
         <EntityContainer Name="EnlazaTEA2023ModelStoreContainer">
           <EntitySet Name="Blog" EntityType="Self.Blog" Schema="dbo" store:Type="Tables" />
@@ -430,6 +463,39 @@
             <Parameter Name="Celular" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_BuscarEspecialistaPorIdUsuario" ReturnType="Collection(EnlazaTEA2023Model.sp_BuscarEspecialistaPorIdUsuario_Result)">
+          <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateUser">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Contraseña" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetPacienteByIdUsuario" ReturnType="Collection(EnlazaTEA2023Model.GetPacienteByIdUsuario_Result)">
+          <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdatePaciente">
+            <Parameter Name="IdPaciente" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="Parentesco" Mode="In" Type="String" />
+            <Parameter Name="NivelTDA" Mode="In" Type="Int32" />
+            <Parameter Name="Sexo" Mode="In" Type="Boolean" />
+            <Parameter Name="Edad" Mode="In" Type="Int32" />
+            <Parameter Name="Calle" Mode="In" Type="String" />
+            <Parameter Name="NumeroExterior" Mode="In" Type="String" />
+            <Parameter Name="NumeroInterior" Mode="In" Type="String" />
+            <Parameter Name="Colonia" Mode="In" Type="String" />
+            <Parameter Name="Municipio" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="String" />
+            <Parameter Name="CP" Mode="In" Type="String" />
+            <Parameter Name="Escolaridad" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserById" ReturnType="Collection(EnlazaTEA2023Model.GetUserById_Result)">
             <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -523,6 +589,50 @@
           <Property Type="String" Name="UsuarioEmail" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="UsuarioContraseña" Nullable="true" />
           <Property Type="Int32" Name="UsuarioIdRol" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetPacienteByIdUsuario_Result">
+          <Property Type="Int32" Name="IdPaciente" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Parentesco" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="NivelTDA" Nullable="true" />
+          <Property Type="Boolean" Name="Sexo" Nullable="true" />
+          <Property Type="Int32" Name="Edad" Nullable="true" />
+          <Property Type="String" Name="Calle" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NumeroExterior" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NumeroInterior" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Colonia" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Municipio" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CP" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Escolaridad" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdUsuario" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetUserById_Result">
+          <Property Type="Int32" Name="IdUsuario" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contraseña" Nullable="true" />
+          <Property Type="Int32" Name="IdPaciente" Nullable="true" />
+          <Property Type="String" Name="NombreP" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPP" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMP" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Parentesco" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="NivelTDA" Nullable="true" />
+          <Property Type="Boolean" Name="Sexo" Nullable="true" />
+          <Property Type="Int32" Name="Edad" Nullable="true" />
+          <Property Type="String" Name="Calle" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NumeroExterior" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NumeroInterior" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Colonia" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Municipio" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CP" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Escolaridad" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -721,6 +831,60 @@
                 <ScalarProperty Name="UsuarioEmail" ColumnName="UsuarioEmail" />
                 <ScalarProperty Name="UsuarioContraseña" ColumnName="UsuarioContraseña" />
                 <ScalarProperty Name="UsuarioIdRol" ColumnName="UsuarioIdRol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateUser" FunctionName="EnlazaTEA2023Model.Store.UpdateUser" />
+          <FunctionImportMapping FunctionImportName="GetPacienteByIdUsuario" FunctionName="EnlazaTEA2023Model.Store.GetPacienteByIdUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnlazaTEA2023Model.GetPacienteByIdUsuario_Result">
+                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Parentesco" ColumnName="Parentesco" />
+                <ScalarProperty Name="NivelTDA" ColumnName="NivelTDA" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="NumeroExterior" ColumnName="NumeroExterior" />
+                <ScalarProperty Name="NumeroInterior" ColumnName="NumeroInterior" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="CP" ColumnName="CP" />
+                <ScalarProperty Name="Escolaridad" ColumnName="Escolaridad" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdatePaciente" FunctionName="EnlazaTEA2023Model.Store.UpdatePaciente" />
+          <FunctionImportMapping FunctionImportName="GetUserById" FunctionName="EnlazaTEA2023Model.Store.GetUserById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnlazaTEA2023Model.GetUserById_Result">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="IdPaciente" ColumnName="IdPaciente" />
+                <ScalarProperty Name="NombreP" ColumnName="NombreP" />
+                <ScalarProperty Name="ApellidoPP" ColumnName="ApellidoPP" />
+                <ScalarProperty Name="ApellidoMP" ColumnName="ApellidoMP" />
+                <ScalarProperty Name="Parentesco" ColumnName="Parentesco" />
+                <ScalarProperty Name="NivelTDA" ColumnName="NivelTDA" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="NumeroExterior" ColumnName="NumeroExterior" />
+                <ScalarProperty Name="NumeroInterior" ColumnName="NumeroInterior" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="Municipio" ColumnName="Municipio" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="CP" ColumnName="CP" />
+                <ScalarProperty Name="Escolaridad" ColumnName="Escolaridad" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

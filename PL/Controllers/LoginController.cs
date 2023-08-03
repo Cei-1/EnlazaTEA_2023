@@ -192,7 +192,7 @@ namespace PL.Controllers
             if (result.Correct && result.Object != null)
             {
                 // Si se encontró un especialista asociado al usuario, redirige al Index
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("PerfilFamiliar", "User");
             }
             else
             {

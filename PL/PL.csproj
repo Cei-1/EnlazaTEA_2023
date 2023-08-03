@@ -257,6 +257,9 @@
     <Content Include="Views\User\Perfil.cshtml" />
     <Content Include="Views\User\Modal.cshtml" />
     <Content Include="Views\User\ActualizarEspecialista.cshtml" />
+    <Content Include="Views\User\PerfilFamiliar.cshtml" />
+    <Content Include="Views\User\ActualizarPaciente.cshtml" />
+    <Content Include="Views\User\Modal2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

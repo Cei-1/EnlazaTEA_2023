@@ -1,0 +1,123 @@
+﻿@model ML.Paciente
+
+@{
+    ViewBag.Title = "Actualizar Paciente";
+}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f2f5;
+    }
+
+    .form-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="form-container">
+    <h2 class="text-center">Actualizar Paciente</h2>
+
+    @using (Html.BeginForm("ActualizarPaciente", "User", FormMethod.Post))
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    @Html.LabelFor(model => model.Nombre)
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control" })
+                </div>
+
+                <div class="col-md-4 form-group">
+                    @Html.LabelFor(model => model.ApellidoPaterno)
+                    @Html.TextBoxFor(model => model.ApellidoPaterno, new { @class = "form-control" })
+                </div>
+
+                <div class="col-md-4 form-group">
+                    @Html.LabelFor(model => model.ApellidoMaterno)
+                    @Html.TextBoxFor(model => model.ApellidoMaterno, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    @Html.LabelFor(model => model.Parentesco)
+                    @Html.TextBoxFor(model => model.Parentesco, new { @class = "form-control" })
+                </div>
+
+                <div class="col-md-4 form-group">
+                    @Html.LabelFor(model => model.NivelTDA)
+                    @Html.TextBoxFor(model => model.NivelTDA, new { @class = "form-control" })
+                </div>
+
+                <div class="col-md-4 form-group">
+                    @Html.LabelFor(model => model.Sexo)
+                    @Html.DropDownListFor(model => model.Sexo, new SelectList(new[]
+                                                {
+                                                    new SelectListItem { Text = "Masculino", Value = "True" },
+                                                    new SelectListItem { Text = "Femenino", Value = "False" }
+                                                }, "Value", "Text", Model.Sexo.ToString()), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    @Html.LabelFor(model => model.Edad)
+                    @Html.TextBoxFor(model => model.Edad, new { @class = "form-control" })
+                </div>
+
+                <div class="col-md-4 form-group">
+                    @Html.LabelFor(model => model.Calle)
+                    @Html.TextBoxFor(model => model.Calle, new { @class = "form-control" })
+                </div>
+
+                <div class="col-md-4 form-group">
+                    @Html.LabelFor(model => model.NumeroExterior)
+                    @Html.TextBoxFor(model => model.NumeroExterior, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    @Html.LabelFor(model => model.NumeroInterior)
+                    @Html.TextBoxFor(model => model.NumeroInterior, new { @class = "form-control" })
+                </div>
+
+                <div class="col-md-4 form-group">
+                    @Html.LabelFor(model => model.Colonia)
+                    @Html.TextBoxFor(model => model.Colonia, new { @class = "form-control" })
+                </div>
+
+                <div class="col-md-4 form-group">
+                    @Html.LabelFor(model => model.Municipio)
+                    @Html.TextBoxFor(model => model.Municipio, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    @Html.LabelFor(model => model.Estado)
+                    @Html.TextBoxFor(model => model.Estado, new { @class = "form-control" })
+                </div>
+
+                <div class="col-md-4 form-group">
+                    @Html.LabelFor(model => model.CP)
+                    @Html.TextBoxFor(model => model.CP, new { @class = "form-control" })
+                </div>
+
+                <div class="col-md-4 form-group">
+                    @Html.LabelFor(model => model.Escolaridad)
+                    @Html.TextBoxFor(model => model.Escolaridad, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <p></p>
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        @Html.ActionLink("Volver", "PerfilFamiliar", "User", new { area = "" }, new { @class = "btn btn-secondary" })
+    }
+</div>

@@ -1,0 +1,164 @@
+﻿@model ML.Usuario
+
+@{
+    ViewBag.Title = "Perfil";
+}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f2f5;
+    }
+
+    .user-profile {
+        background-color: #fff;
+        border-radius: 5px;
+        padding: 20px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-image img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 20px;
+    }
+
+    .user-details {
+        display: flex;
+        flex-direction: column;
+    }
+
+        .user-details label {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+    .profile-data {
+        margin-bottom: 10px;
+    }
+
+        .profile-data label {
+            font-weight: bold;
+            display: block;
+        }
+
+        .profile-data span {
+            display: inline-block;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+    .edit-button {
+        margin-top: 10px;
+        padding: 8px 16px;
+        font-size: 16px;
+        background-color: #1877f2;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .edit-button:hover {
+            background-color: #1659b7;
+        }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Dos columnas de igual tamaño */
+        gap: 10px; /* Espacio entre las columnas */
+    }
+
+    /* Agrega una clase para los campos de datos */
+    .profile-data-item {
+        display: flex;
+        align-items: center;
+    }
+
+    .profile-data-item {
+        display: flex;
+        align-items: center;
+    }
+</style>
+
+<div class="user-profile">
+    <div class="header-image">
+        <!-- Imagen del usuario -->
+        <!-- Reemplaza la siguiente línea con la etiqueta de imagen real con la ruta correcta -->
+        <img src="~/Image/Usuario.png" alt="Imagen de cabecera">
+        <div class="d-flex justify-content-between">
+            <!-- Nombre del usuario -->
+            <h4>@Model.Nombre @Model.ApellidoPaterno @Model.ApellidoMaterno</h4>
+            <!-- Botón para editar el perfil -->
+            @Html.ActionLink("Editar Paciente", "ActualizarPaciente", "User", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+    <hr />
+    <div class="user-details">
+        <!-- Información del usuario -->
+        <h5 style="display: none;">Datos del usuario:</h5>
+        <div class="profile-data" style="display: none;">
+            <div class="profile-data-item" style="display: none;">
+                <label>ID de usuario:</label>
+                <span>@Model.IdUsuario</span>
+            </div>
+            <div class="profile-data-item">
+                <label>Fecha de nacimiento:</label>
+                <span>@Model.FechaNacimiento.ToShortDateString()</span>
+            </div>
+            <div class="profile-data-item">
+                <label>Email:</label>
+                <span>@Model.Email</span>
+            </div>
+            <!-- Agrega aquí los demás campos de datos del usuario -->
+        </div>
+
+        <!-- Información del paciente asociado al usuario -->
+        <h5>Datos del paciente asociado:</h5>
+        @if (Model.Paciente != null)
+        {
+            <div class="profile-data">
+                <div class="profile-data-item" style="display: none;">
+                    <label>ID de paciente:</label>
+                    <span>@Model.Paciente.IdPaciente</span>
+                </div>
+                <div class="profile-data-item">
+                    <label>Nombre del paciente:</label>
+                    <span>@Model.Paciente.Nombre @Model.Paciente.ApellidoPaterno @Model.Paciente.ApellidoMaterno</span>
+                </div>
+                <div class="profile-data-item">
+                    <label>Parentesco:</label>
+                    <span>@Model.Paciente.Parentesco</span>
+                </div>
+                <div class="profile-data-item">
+                    <label>Nivel TDA:</label>
+                    <span>@Model.Paciente.NivelTDA</span>
+                </div>
+                <div class="profile-data-item">
+                    <label>Sexo:</label>
+                    <span>@(Model.Paciente.Sexo ? "Masculino" : "Femenino")</span>
+                </div>
+                <div class="profile-data-item">
+                    <label>Edad:</label>
+                    <span>@Model.Paciente.Edad</span>
+                </div>
+                <div class="profile-data-item">
+                    <label>Dirección:</label>
+                    <span>@Model.Paciente.Calle, @Model.Paciente.NumeroExterior, @Model.Paciente.NumeroInterior, @Model.Paciente.Colonia, @Model.Paciente.Municipio, @Model.Paciente.Estado, @Model.Paciente.CP</span>
+                </div>
+                <div class="profile-data-item">
+                    <label>Escolaridad:</label>
+                    <span>@Model.Paciente.Escolaridad</span>
+                </div>
+            </div>
+        }
+        else
+        {
+            <p>No hay paciente asociado.</p>
+        }
+    </div>
+</div>
