@@ -1,0 +1,118 @@
+﻿@model ML.Multimedia
+
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Multimedia Form</h2>
+
+@using (Html.BeginForm("Form", "Multimedia", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Titulo)
+        @Html.TextBoxFor(model => model.Titulo, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Titulo)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Contenido)
+        @Html.TextAreaFor(model => model.Contenido, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Contenido)
+    </div>
+
+    <div class="row-md-6">
+        <label class="mb-2">Seleccione una imagen o deje la predeterminada</label>
+
+
+        <input type="file" name="imgMultimedia" id="fuimgMultimedia" onchange="return ValidarImagen(event,this);" />
+        @Html.ValidationMessageFor(model => Model.Imagen, "", new { @class = "text-danger", @id = "lblImagenErrorMessage" })
+        <br />
+        <br />
+        @if (Model.Imagen != null)
+        {
+            @Html.HiddenFor(model => Model.Imagen)
+            <img id="imgMultimedia" src="data:image/jpg;base64,@Convert.ToBase64String(Model.Imagen)" style="width:350px; height:250px" />
+        }
+        else
+        {
+            <img id="imgMultimedia" src="~/Content/Images/bg-inicio-1.jpg" style="width:350px; height:250px" />
+        }
+    </div>
+
+
+    <div class="form-group">
+        @Html.Label("Tipo de Multimedia")
+        <br />
+        @Html.RadioButtonFor(model => model.Tipo, "Video", new { @id = "videoRadio" })
+        @Html.Label("Video")
+        <br />
+        @Html.RadioButtonFor(model => model.Tipo, "Audio", new { @id = "audioRadio" })
+        @Html.Label("Audio")
+    </div>
+
+    <div id="videoFields">
+        <div class="form-group">
+            @Html.LabelFor(model => model.VideoID)
+            @Html.TextBoxFor(model => model.VideoID, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.VideoID)
+        </div>
+    </div>
+
+    <div id="audioFields" style="display: none;">
+        <div class="form-group">
+            @Html.Label("Audio File")
+            <input type="file" name="audioFile" id="audioFile" />
+            @Html.ValidationMessageFor(model => Model.Audio, "", new { @class = "text-danger", @id = "lblAudioErrorMessage" })
+            <br />
+            <br />
+            @if (Model.Audio != null)
+            {
+                @Html.HiddenFor(model => Model.Audio)
+                <audio controls>
+                    <source  src="data:audio/mp3;base64,@Convert.ToBase64String(Model.Audio)" type="audio/mpeg">
+                    Tu navegador no soporta la reproducción de audio.
+                </audio>
+            }
+            @*else
+            {
+                <img id="imgMultimedia" src="~/Content/Images/bg-inicio-1.jpg" style="width:350px; height:250px" />
+            }*@
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+        @Html.ActionLink("Regresar", "GetAll", "Multimedia", null, new { @class = "btn btn-danger" })
+    </div>
+}
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Function to handle the radio button change event
+            $('#videoRadio, #audioRadio').change(function () {
+                var isVideo = $('#videoRadio').is(':checked');
+
+                // Show/hide the appropriate fields based on the selection
+                if (isVideo) {
+                    $('#videoFields').show();
+                    $('#audioFields').hide();
+                } else {
+                    $('#videoFields').hide();
+                    $('#audioFields').show();
+                }
+            });
+
+            // Trigger the change event on page load to initialize the fields
+            $('#videoRadio').trigger('change');
+        });
+    </script>
+}
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+<script src="~/Scripts/Blog/PreviewImage.js"></script>
+<script src="~/Scripts/Multimedia/Validaciones.js"></script>
