@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Blog.cs" />
     <Compile Include="Especialista.cs" />
+    <Compile Include="Multimedia.cs" />
     <Compile Include="Paciente.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="Rol.cs" />
