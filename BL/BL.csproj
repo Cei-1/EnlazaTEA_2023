@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Admin.cs" />
     <Compile Include="Blog.cs" />
+    <Compile Include="Cita.cs" />
     <Compile Include="Especialista.cs" />
     <Compile Include="Paciente.cs" />
     <Compile Include="Rol.cs" />

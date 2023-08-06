@@ -32,6 +32,8 @@ namespace DL
         public virtual DbSet<Rol> Rols { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
         public virtual DbSet<Blog> Blogs { get; set; }
+        public virtual DbSet<Cita> Citas { get; set; }
+        public virtual DbSet<Multimedia> Multimedias { get; set; }
     
         public virtual int AddEspecialista(string nombreCarrera, string noCedula, string especialidad, string calle, string numeroExterno, string numeroInterno, string colonia, string ciudad, string estado, string codigoPostal, string telefono, string celular, Nullable<bool> estatus, Nullable<int> idUsuario)
         {
@@ -465,6 +467,174 @@ namespace DL
                 new ObjectParameter("IdUsuario", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserById_Result>("GetUserById", idUsuarioParameter);
+        }
+    
+        public virtual ObjectResult<GetAllEspecialistas_Result> GetAllEspecialistas()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAllEspecialistas_Result>("GetAllEspecialistas");
+        }
+    
+        public virtual int ActualizarEstatusCita(Nullable<int> idCita, Nullable<int> estatus)
+        {
+            var idCitaParameter = idCita.HasValue ?
+                new ObjectParameter("IdCita", idCita) :
+                new ObjectParameter("IdCita", typeof(int));
+    
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("Estatus", estatus) :
+                new ObjectParameter("Estatus", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ActualizarEstatusCita", idCitaParameter, estatusParameter);
+        }
+    
+        public virtual int AgregarCita(Nullable<int> idUsuario, Nullable<int> idEspecialista, Nullable<System.DateTime> fecha, Nullable<System.TimeSpan> horario, Nullable<int> estatus)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            var idEspecialistaParameter = idEspecialista.HasValue ?
+                new ObjectParameter("IdEspecialista", idEspecialista) :
+                new ObjectParameter("IdEspecialista", typeof(int));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("Fecha", fecha) :
+                new ObjectParameter("Fecha", typeof(System.DateTime));
+    
+            var horarioParameter = horario.HasValue ?
+                new ObjectParameter("Horario", horario) :
+                new ObjectParameter("Horario", typeof(System.TimeSpan));
+    
+            var estatusParameter = estatus.HasValue ?
+                new ObjectParameter("Estatus", estatus) :
+                new ObjectParameter("Estatus", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("AgregarCita", idUsuarioParameter, idEspecialistaParameter, fechaParameter, horarioParameter, estatusParameter);
+        }
+    
+        public virtual ObjectResult<BuscarCitasPorIdEspecialista_Result> BuscarCitasPorIdEspecialista(Nullable<int> idEspecialista)
+        {
+            var idEspecialistaParameter = idEspecialista.HasValue ?
+                new ObjectParameter("IdEspecialista", idEspecialista) :
+                new ObjectParameter("IdEspecialista", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BuscarCitasPorIdEspecialista_Result>("BuscarCitasPorIdEspecialista", idEspecialistaParameter);
+        }
+    
+        public virtual ObjectResult<BuscarCitasPorIdUsuario_Result> BuscarCitasPorIdUsuario(Nullable<int> idUsuario)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BuscarCitasPorIdUsuario_Result>("BuscarCitasPorIdUsuario", idUsuarioParameter);
+        }
+    
+        public virtual ObjectResult<BuscarSolicitudCitasPorIdEspecialista_Result> BuscarSolicitudCitasPorIdEspecialista(Nullable<int> idEspecialista)
+        {
+            var idEspecialistaParameter = idEspecialista.HasValue ?
+                new ObjectParameter("IdEspecialista", idEspecialista) :
+                new ObjectParameter("IdEspecialista", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<BuscarSolicitudCitasPorIdEspecialista_Result>("BuscarSolicitudCitasPorIdEspecialista", idEspecialistaParameter);
+        }
+    
+        public virtual int MultimediaAdd(string titulo, string contenido, byte[] imagen, string tipo, string videoID, byte[] audio, Nullable<int> idUsuario)
+        {
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("Titulo", titulo) :
+                new ObjectParameter("Titulo", typeof(string));
+    
+            var contenidoParameter = contenido != null ?
+                new ObjectParameter("Contenido", contenido) :
+                new ObjectParameter("Contenido", typeof(string));
+    
+            var imagenParameter = imagen != null ?
+                new ObjectParameter("Imagen", imagen) :
+                new ObjectParameter("Imagen", typeof(byte[]));
+    
+            var tipoParameter = tipo != null ?
+                new ObjectParameter("Tipo", tipo) :
+                new ObjectParameter("Tipo", typeof(string));
+    
+            var videoIDParameter = videoID != null ?
+                new ObjectParameter("VideoID", videoID) :
+                new ObjectParameter("VideoID", typeof(string));
+    
+            var audioParameter = audio != null ?
+                new ObjectParameter("Audio", audio) :
+                new ObjectParameter("Audio", typeof(byte[]));
+    
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MultimediaAdd", tituloParameter, contenidoParameter, imagenParameter, tipoParameter, videoIDParameter, audioParameter, idUsuarioParameter);
+        }
+    
+        public virtual int MultimediaDelete(Nullable<int> idMultimedia)
+        {
+            var idMultimediaParameter = idMultimedia.HasValue ?
+                new ObjectParameter("IdMultimedia", idMultimedia) :
+                new ObjectParameter("IdMultimedia", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MultimediaDelete", idMultimediaParameter);
+        }
+    
+        public virtual ObjectResult<MultimediaGetAll_Result> MultimediaGetAll()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MultimediaGetAll_Result>("MultimediaGetAll");
+        }
+    
+        public virtual ObjectResult<MultimediaGetById_Result> MultimediaGetById(Nullable<int> idMultimedia)
+        {
+            var idMultimediaParameter = idMultimedia.HasValue ?
+                new ObjectParameter("IdMultimedia", idMultimedia) :
+                new ObjectParameter("IdMultimedia", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MultimediaGetById_Result>("MultimediaGetById", idMultimediaParameter);
+        }
+    
+        public virtual ObjectResult<MultimediaGetByUser_Result> MultimediaGetByUser(Nullable<int> idUsuario)
+        {
+            var idUsuarioParameter = idUsuario.HasValue ?
+                new ObjectParameter("IdUsuario", idUsuario) :
+                new ObjectParameter("IdUsuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<MultimediaGetByUser_Result>("MultimediaGetByUser", idUsuarioParameter);
+        }
+    
+        public virtual int MultimediaUpdate(Nullable<int> idMultimedia, string titulo, string contenido, byte[] imagen, string tipo, string videoID, byte[] audio)
+        {
+            var idMultimediaParameter = idMultimedia.HasValue ?
+                new ObjectParameter("IdMultimedia", idMultimedia) :
+                new ObjectParameter("IdMultimedia", typeof(int));
+    
+            var tituloParameter = titulo != null ?
+                new ObjectParameter("Titulo", titulo) :
+                new ObjectParameter("Titulo", typeof(string));
+    
+            var contenidoParameter = contenido != null ?
+                new ObjectParameter("Contenido", contenido) :
+                new ObjectParameter("Contenido", typeof(string));
+    
+            var imagenParameter = imagen != null ?
+                new ObjectParameter("Imagen", imagen) :
+                new ObjectParameter("Imagen", typeof(byte[]));
+    
+            var tipoParameter = tipo != null ?
+                new ObjectParameter("Tipo", tipo) :
+                new ObjectParameter("Tipo", typeof(string));
+    
+            var videoIDParameter = videoID != null ?
+                new ObjectParameter("VideoID", videoID) :
+                new ObjectParameter("VideoID", typeof(string));
+    
+            var audioParameter = audio != null ?
+                new ObjectParameter("Audio", audio) :
+                new ObjectParameter("Audio", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("MultimediaUpdate", idMultimediaParameter, tituloParameter, contenidoParameter, imagenParameter, tipoParameter, videoIDParameter, audioParameter);
         }
     }
 }
