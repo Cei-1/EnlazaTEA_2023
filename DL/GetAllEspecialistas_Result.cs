@@ -10,16 +10,9 @@
 namespace DL
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Especialista
+    public partial class GetAllEspecialistas_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Especialista()
-        {
-            this.Citas = new HashSet<Cita>();
-        }
-    
         public int IdEspecialista { get; set; }
         public string NombreCarrera { get; set; }
         public string NoCedula { get; set; }
@@ -32,12 +25,16 @@ namespace DL
         public string CodigoPostal { get; set; }
         public string Telefono { get; set; }
         public Nullable<bool> Estatus { get; set; }
-        public Nullable<int> IdUsuario { get; set; }
         public string Colonia { get; set; }
         public string Celular { get; set; }
-    
-        public virtual Usuario Usuario { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cita> Citas { get; set; }
+        public int IdUsuario { get; set; }
+        public string Nombre { get; set; }
+        public string ApellidoPaterno { get; set; }
+        public string ApellidoMaterno { get; set; }
+        public Nullable<System.DateTime> FechaNacimiento { get; set; }
+        public string Fotografia { get; set; }
+        public string Email { get; set; }
+        public string Contraseña { get; set; }
+        public Nullable<int> IdRol { get; set; }
     }
 }

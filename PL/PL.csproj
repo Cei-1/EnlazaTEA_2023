@@ -262,6 +262,8 @@
     <Content Include="Views\User\PerfilFamiliar.cshtml" />
     <Content Include="Views\User\ActualizarPaciente.cshtml" />
     <Content Include="Views\User\Modal2.cshtml" />
+    <Content Include="Views\User\Agendar.cshtml" />
+    <Content Include="Views\User\Especialistas.cshtml" />
     <Content Include="Views\Multimedia\Index.cshtml" />
     <Content Include="Views\Multimedia\GetAll.cshtml" />
     <Content Include="Views\Multimedia\Form.cshtml" />

@@ -89,7 +89,18 @@
         <img src="~/Image/Usuario.png" alt="Imagen de cabecera">
         <div class="d-flex justify-content-between">
             <h4>@Model.Usuario.Nombre @Model.Usuario.ApellidoPaterno @Model.Usuario.ApellidoMaterno</h4>
-            @Html.ActionLink("Editar", "ActualizarEspecialista", "User", null, new { @class = "btn btn-primary" })
+            @if (Session["SessionRol"] != null && Session["SessionUsuario"] != null)
+            {
+                int rol_id = (int)Session["SessionRol"];
+                if (rol_id == 1)
+                {
+                    @Html.ActionLink("Editar", "ActualizarEspecialista", "User", null, new { @class = "btn btn-primary" })
+                }
+                if (rol_id == 2)
+                {
+                    @Html.ActionLink("Agendar", "Agendar", "User", new { idEspecialista = Model.IdEspecialista }, new { @class = "btn btn-primary" })
+                }
+            }
         </div>
     </div>
     <hr />

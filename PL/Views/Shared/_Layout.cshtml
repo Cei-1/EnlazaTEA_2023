@@ -30,6 +30,14 @@
                         <li>@Html.ActionLink("Sobre Nosotros", "SobreNosotros", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Contactanos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     }
+                    @if (Session["SessionRol"] != null && Session["SessionUsuario"] != null)
+                    {
+                        int rol_id = (int)Session["SessionRol"];
+                        if (rol_id == 2)
+                        {
+                            <li>@Html.ActionLink("Especialistas", "Especialistas", "User", new { area = "" }, new { @class = "nav-link" })</li>
+                        }
+                    }
                 </ul>
                 @if (Session["SessionRol"] == null & Session["SessionUsuario"] == null)
                 {

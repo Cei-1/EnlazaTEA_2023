@@ -123,5 +123,55 @@ namespace BL
             return result;
         }
 
+        public static ML.Result GetAll()
+        {
+            ML.Result result = new ML.Result();
+            result.Objects = new List<object>();
+            try
+            {
+                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                {
+                    var query = context.GetAllEspecialistas();
+
+                    foreach (var item in query)
+                    {
+                        ML.Especialista especialista = new ML.Especialista();
+                        especialista.IdEspecialista = item.IdEspecialista;
+                        especialista.NombreCarrera = item.NombreCarrera;
+                        especialista.NoCedula = item.NoCedula;
+                        especialista.Especialidad = item.Especialidad;
+                        especialista.Calle = item.Calle;
+                        especialista.NumeroExterno = item.NumeroExterno;
+                        especialista.NumeroInterno = item.NumeroInterno;
+                        especialista.Colonia = item.Colonia;
+                        especialista.Ciudad = item.Ciudad;
+                        especialista.Estado = item.Estado;
+                        especialista.CodigoPostal = item.CodigoPostal;
+                        especialista.Telefono = item.Telefono;
+                        especialista.Celular = item.Celular;
+
+                        especialista.Usuario = new ML.Usuario();
+                        especialista.Usuario.IdUsuario = item.IdUsuario;
+                        especialista.Usuario.Nombre = item.Nombre;
+                        especialista.Usuario.ApellidoPaterno = item.ApellidoPaterno;
+                        especialista.Usuario.ApellidoMaterno = item.ApellidoMaterno;
+                        especialista.Usuario.Email = item.Email;
+                        especialista.Usuario.Contraseña = item.Contraseña;
+
+                        result.Objects.Add(especialista);
+                    }
+
+                    result.Correct = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
     }
 }

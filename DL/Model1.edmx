@@ -15,6 +15,17 @@
           <Property Name="Descripcion" Type="varchar" MaxLength="900" />
           <Property Name="Imagen" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="Cita">
+          <Key>
+            <PropertyRef Name="IdCita" />
+          </Key>
+          <Property Name="IdCita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdUsuario" Type="int" />
+          <Property Name="IdEspecialista" Type="int" />
+          <Property Name="Fecha" Type="date" />
+          <Property Name="Horario" Type="time" Precision="7" />
+          <Property Name="Estatus" Type="int" />
+        </EntityType>
         <EntityType Name="Especialista">
           <Key>
             <PropertyRef Name="IdEspecialista" />
@@ -34,6 +45,19 @@
           <Property Name="IdUsuario" Type="int" />
           <Property Name="Colonia" Type="varchar" MaxLength="100" />
           <Property Name="Celular" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Multimedia">
+          <Key>
+            <PropertyRef Name="IdMultimedia" />
+          </Key>
+          <Property Name="IdMultimedia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="150" />
+          <Property Name="Contenido" Type="varchar" MaxLength="900" />
+          <Property Name="Imagen" Type="varbinary(max)" />
+          <Property Name="Tipo" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="VideoID" Type="varchar" MaxLength="12" />
+          <Property Name="Audio" Type="varbinary(max)" />
+          <Property Name="IdUsuario" Type="int" />
         </EntityType>
         <EntityType Name="Paciente">
           <Key>
@@ -78,6 +102,30 @@
           <Property Name="Contraseña" Type="varchar(max)" />
           <Property Name="IdRol" Type="int" />
         </EntityType>
+        <Association Name="FK__Cita__IdEspecial__498EEC8D">
+          <End Role="Especialista" Type="Self.Especialista" Multiplicity="0..1" />
+          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialista">
+              <PropertyRef Name="IdEspecialista" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="IdEspecialista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cita__IdUsuario__489AC854">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Especiali__IdUsu__74AE54BC">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Especialista" Type="Self.Especialista" Multiplicity="*" />
@@ -86,6 +134,18 @@
               <PropertyRef Name="IdUsuario" />
             </Principal>
             <Dependent Role="Especialista">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Multimedi__IdUsu__4D5F7D71">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Multimedia" Type="Self.Multimedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Multimedia">
               <PropertyRef Name="IdUsuario" />
             </Dependent>
           </ReferentialConstraint>
@@ -114,6 +174,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="ActualizarEstatusCita" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCita" Type="int" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="In" />
+        </Function>
         <Function Name="ActualizarPerfilEspecialista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdUsuario" Type="int" Mode="In" />
           <Parameter Name="Calle" Type="varchar" Mode="In" />
@@ -150,6 +214,13 @@
           <Parameter Name="Email" Type="varchar" Mode="In" />
           <Parameter Name="Contraseña" Type="varchar(max)" Mode="In" />
           <Parameter Name="IdRol" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AgregarCita" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="int" Mode="In" />
+          <Parameter Name="IdEspecialista" Type="int" Mode="In" />
+          <Parameter Name="Fecha" Type="date" Mode="In" />
+          <Parameter Name="Horario" Type="time" Mode="In" />
+          <Parameter Name="Estatus" Type="int" Mode="In" />
         </Function>
         <Function Name="AgregarPaciente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Nombre" Type="varchar" Mode="In" />
@@ -189,10 +260,20 @@
           <Parameter Name="Descripcion" Type="varchar" Mode="In" />
           <Parameter Name="Imagen" Type="varbinary(max)" Mode="In" />
         </Function>
+        <Function Name="BuscarCitasPorIdEspecialista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEspecialista" Type="int" Mode="In" />
+        </Function>
+        <Function Name="BuscarCitasPorIdUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="int" Mode="In" />
+        </Function>
         <Function Name="BuscarPacientePorIdUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdUsuario" Type="int" Mode="In" />
         </Function>
+        <Function Name="BuscarSolicitudCitasPorIdEspecialista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdEspecialista" Type="int" Mode="In" />
+        </Function>
         <Function Name="ConsultarEspecialistasInactivos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllEspecialistas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetAllRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="GetPacienteByIdUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdUsuario" Type="int" Mode="In" />
@@ -202,6 +283,34 @@
         </Function>
         <Function Name="GetUsuarioByEmail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Email" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="MultimediaAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Titulo" Type="varchar" Mode="In" />
+          <Parameter Name="Contenido" Type="varchar" Mode="In" />
+          <Parameter Name="Imagen" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="Tipo" Type="varchar" Mode="In" />
+          <Parameter Name="VideoID" Type="varchar" Mode="In" />
+          <Parameter Name="Audio" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="IdUsuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MultimediaDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdMultimedia" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MultimediaGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="MultimediaGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdMultimedia" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MultimediaGetByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="MultimediaUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdMultimedia" Type="int" Mode="In" />
+          <Parameter Name="Titulo" Type="varchar" Mode="In" />
+          <Parameter Name="Contenido" Type="varchar" Mode="In" />
+          <Parameter Name="Imagen" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="Tipo" Type="varchar" Mode="In" />
+          <Parameter Name="VideoID" Type="varchar" Mode="In" />
+          <Parameter Name="Audio" Type="varbinary(max)" Mode="In" />
         </Function>
         <Function Name="sp_BuscarEspecialistaPorIdUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="IdUsuario" Type="int" Mode="In" />
@@ -235,13 +344,27 @@
         </Function>
         <EntityContainer Name="EnlazaTEA2023ModelStoreContainer">
           <EntitySet Name="Blog" EntityType="Self.Blog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cita" EntityType="Self.Cita" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Especialista" EntityType="Self.Especialista" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Multimedia" EntityType="Self.Multimedia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Paciente" EntityType="Self.Paciente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cita__IdEspecial__498EEC8D" Association="Self.FK__Cita__IdEspecial__498EEC8D">
+            <End Role="Especialista" EntitySet="Especialista" />
+            <End Role="Cita" EntitySet="Cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cita__IdUsuario__489AC854" Association="Self.FK__Cita__IdUsuario__489AC854">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cita" EntitySet="Cita" />
+          </AssociationSet>
           <AssociationSet Name="FK__Especiali__IdUsu__74AE54BC" Association="Self.FK__Especiali__IdUsu__74AE54BC">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Especialista" EntitySet="Especialista" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Multimedi__IdUsu__4D5F7D71" Association="Self.FK__Multimedi__IdUsu__4D5F7D71">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Multimedia" EntitySet="Multimedia" />
           </AssociationSet>
           <AssociationSet Name="FK__Paciente__IdUsua__02FC7413" Association="Self.FK__Paciente__IdUsua__02FC7413">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -276,6 +399,7 @@
           <Property Name="Colonia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Celular" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK__Especiali__IdUsu__3E52440B" FromRole="Especialista" ToRole="Usuario" />
+          <NavigationProperty Name="Citas" Relationship="EnlazaTEA2023Model.FK__Cita__IdEspecial__498EEC8D" FromRole="Especialista" ToRole="Cita" />
         </EntityType>
         <EntityType Name="Paciente">
           <Key>
@@ -324,6 +448,8 @@
           <NavigationProperty Name="Especialistas" Relationship="Self.FK__Especiali__IdUsu__3E52440B" FromRole="Usuario" ToRole="Especialista" />
           <NavigationProperty Name="Pacientes" Relationship="Self.FK__Paciente__IdUsua__4316F928" FromRole="Usuario" ToRole="Paciente" />
           <NavigationProperty Name="Rol" Relationship="Self.FK__Usuario__IdRol__38996AB5" FromRole="Usuario" ToRole="Rol" />
+          <NavigationProperty Name="Citas" Relationship="EnlazaTEA2023Model.FK__Cita__IdUsuario__489AC854" FromRole="Usuario" ToRole="Cita" />
+          <NavigationProperty Name="Multimedias" Relationship="EnlazaTEA2023Model.FK__Multimedi__IdUsu__4D5F7D71" FromRole="Usuario" ToRole="Multimedia" />
         </EntityType>
         <Association Name="FK__Especiali__IdUsu__3E52440B">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
@@ -496,7 +622,70 @@
             <Parameter Name="Escolaridad" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetUserById" ReturnType="Collection(EnlazaTEA2023Model.GetUserById_Result)">
+          <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllEspecialistas" ReturnType="Collection(EnlazaTEA2023Model.GetAllEspecialistas_Result)" />
+          <EntitySet Name="Citas" EntityType="EnlazaTEA2023Model.Cita" />
+          <AssociationSet Name="FK__Cita__IdEspecial__498EEC8D" Association="EnlazaTEA2023Model.FK__Cita__IdEspecial__498EEC8D">
+            <End Role="Especialista" EntitySet="Especialistas" />
+            <End Role="Cita" EntitySet="Citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cita__IdUsuario__489AC854" Association="EnlazaTEA2023Model.FK__Cita__IdUsuario__489AC854">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Cita" EntitySet="Citas" />
+          </AssociationSet>
+          <FunctionImport Name="ActualizarEstatusCita">
+            <Parameter Name="IdCita" Mode="In" Type="Int32" />
+            <Parameter Name="Estatus" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AgregarCita">
             <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="IdEspecialista" Mode="In" Type="Int32" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Horario" Mode="In" Type="Time" />
+            <Parameter Name="Estatus" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Multimedias" EntityType="EnlazaTEA2023Model.Multimedia" />
+          <AssociationSet Name="FK__Multimedi__IdUsu__4D5F7D71" Association="EnlazaTEA2023Model.FK__Multimedi__IdUsu__4D5F7D71">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Multimedia" EntitySet="Multimedias" />
+          </AssociationSet>
+          <FunctionImport Name="BuscarCitasPorIdEspecialista" ReturnType="Collection(EnlazaTEA2023Model.BuscarCitasPorIdEspecialista_Result)">
+            <Parameter Name="IdEspecialista" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BuscarCitasPorIdUsuario" ReturnType="Collection(EnlazaTEA2023Model.BuscarCitasPorIdUsuario_Result)">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="BuscarSolicitudCitasPorIdEspecialista" ReturnType="Collection(EnlazaTEA2023Model.BuscarSolicitudCitasPorIdEspecialista_Result)">
+            <Parameter Name="IdEspecialista" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MultimediaAdd">
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="Contenido" Mode="In" Type="String" />
+            <Parameter Name="Imagen" Mode="In" Type="Binary" />
+            <Parameter Name="Tipo" Mode="In" Type="String" />
+            <Parameter Name="VideoID" Mode="In" Type="String" />
+            <Parameter Name="Audio" Mode="In" Type="Binary" />
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MultimediaDelete">
+            <Parameter Name="IdMultimedia" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MultimediaGetAll" ReturnType="Collection(EnlazaTEA2023Model.MultimediaGetAll_Result)" />
+          <FunctionImport Name="MultimediaGetById" ReturnType="Collection(EnlazaTEA2023Model.MultimediaGetById_Result)">
+            <Parameter Name="IdMultimedia" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MultimediaGetByUser" ReturnType="Collection(EnlazaTEA2023Model.MultimediaGetByUser_Result)">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MultimediaUpdate">
+            <Parameter Name="IdMultimedia" Mode="In" Type="Int32" />
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="Contenido" Mode="In" Type="String" />
+            <Parameter Name="Imagen" Mode="In" Type="Binary" />
+            <Parameter Name="Tipo" Mode="In" Type="String" />
+            <Parameter Name="VideoID" Mode="In" Type="String" />
+            <Parameter Name="Audio" Mode="In" Type="Binary" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BuscarPacientePorIdUsuario_Result">
@@ -633,6 +822,160 @@
           <Property Type="String" Name="Estado" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="CP" Nullable="true" MaxLength="10" />
           <Property Type="String" Name="Escolaridad" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllEspecialistas_Result">
+          <Property Type="Int32" Name="IdEspecialista" Nullable="false" />
+          <Property Type="String" Name="NombreCarrera" Nullable="true" />
+          <Property Type="String" Name="NoCedula" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Especialidad" Nullable="true" />
+          <Property Type="String" Name="Calle" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="NumeroExterno" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="NumeroInterno" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Estado" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CodigoPostal" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="20" />
+          <Property Type="Boolean" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="Colonia" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Celular" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="IdUsuario" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="true" />
+          <Property Type="String" Name="Fotografia" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Contraseña" Nullable="true" />
+          <Property Type="Int32" Name="IdRol" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Cita">
+          <Key>
+            <PropertyRef Name="IdCita" />
+          </Key>
+          <Property Name="IdCita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="IdEspecialista" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="Horario" Type="Time" Precision="7" />
+          <Property Name="Estatus" Type="Int32" />
+          <NavigationProperty Name="Especialista" Relationship="EnlazaTEA2023Model.FK__Cita__IdEspecial__498EEC8D" FromRole="Cita" ToRole="Especialista" />
+          <NavigationProperty Name="Usuario" Relationship="EnlazaTEA2023Model.FK__Cita__IdUsuario__489AC854" FromRole="Cita" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK__Cita__IdEspecial__498EEC8D">
+          <End Type="EnlazaTEA2023Model.Especialista" Role="Especialista" Multiplicity="0..1" />
+          <End Type="EnlazaTEA2023Model.Cita" Role="Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialista">
+              <PropertyRef Name="IdEspecialista" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="IdEspecialista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cita__IdUsuario__489AC854">
+          <End Type="EnlazaTEA2023Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="EnlazaTEA2023Model.Cita" Role="Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Multimedia">
+          <Key>
+            <PropertyRef Name="IdMultimedia" />
+          </Key>
+          <Property Name="IdMultimedia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Contenido" Type="String" MaxLength="900" FixedLength="false" Unicode="false" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="VideoID" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Audio" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="EnlazaTEA2023Model.FK__Multimedi__IdUsu__4D5F7D71" FromRole="Multimedia" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK__Multimedi__IdUsu__4D5F7D71">
+          <End Type="EnlazaTEA2023Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="EnlazaTEA2023Model.Multimedia" Role="Multimedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Multimedia">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="BuscarCitasPorIdEspecialista_Result">
+          <Property Type="Int32" Name="IdCita" Nullable="false" />
+          <Property Type="Int32" Name="IdUsuario" Nullable="true" />
+          <Property Type="Int32" Name="IdEspecialista" Nullable="true" />
+          <Property Type="DateTime" Name="Fecha" Nullable="true" />
+          <Property Type="Time" Name="Horario" Nullable="true" />
+          <Property Type="Int32" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="BuscarCitasPorIdUsuario_Result">
+          <Property Type="Int32" Name="IdCita" Nullable="false" />
+          <Property Type="Int32" Name="IdUsuario" Nullable="true" />
+          <Property Type="Int32" Name="IdEspecialista" Nullable="true" />
+          <Property Type="DateTime" Name="Fecha" Nullable="true" />
+          <Property Type="Time" Name="Horario" Nullable="true" />
+          <Property Type="Int32" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="NombreCarrera" Nullable="true" />
+          <Property Type="String" Name="NoCedula" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Especialidad" Nullable="true" />
+          <Property Type="String" Name="NombreUsuario" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaternoUsuario" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaternoUsuario" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="BuscarSolicitudCitasPorIdEspecialista_Result">
+          <Property Type="Int32" Name="IdCita" Nullable="false" />
+          <Property Type="Int32" Name="IdUsuario" Nullable="true" />
+          <Property Type="Int32" Name="IdEspecialista" Nullable="true" />
+          <Property Type="DateTime" Name="Fecha" Nullable="true" />
+          <Property Type="Time" Name="Horario" Nullable="true" />
+          <Property Type="Int32" Name="Estatus" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="MultimediaGetAll_Result">
+          <Property Type="Int32" Name="IdMultimedia" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Contenido" Nullable="true" MaxLength="900" />
+          <Property Type="Binary" Name="Imagen" Nullable="true" />
+          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="VideoID" Nullable="true" MaxLength="12" />
+          <Property Type="Binary" Name="Audio" Nullable="true" />
+          <Property Type="Int32" Name="IdUsuario" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="MultimediaGetById_Result">
+          <Property Type="Int32" Name="IdMultimedia" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Contenido" Nullable="true" MaxLength="900" />
+          <Property Type="Binary" Name="Imagen" Nullable="true" />
+          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="VideoID" Nullable="true" MaxLength="12" />
+          <Property Type="Binary" Name="Audio" Nullable="true" />
+          <Property Type="Int32" Name="IdUsuario" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="MultimediaGetByUser_Result">
+          <Property Type="Int32" Name="IdMultimedia" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Contenido" Nullable="true" MaxLength="900" />
+          <Property Type="Binary" Name="Imagen" Nullable="true" />
+          <Property Type="String" Name="Tipo" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="VideoID" Nullable="true" MaxLength="12" />
+          <Property Type="Binary" Name="Audio" Nullable="true" />
+          <Property Type="Int32" Name="IdUsuario" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -888,6 +1231,156 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAllEspecialistas" FunctionName="EnlazaTEA2023Model.Store.GetAllEspecialistas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnlazaTEA2023Model.GetAllEspecialistas_Result">
+                <ScalarProperty Name="IdEspecialista" ColumnName="IdEspecialista" />
+                <ScalarProperty Name="NombreCarrera" ColumnName="NombreCarrera" />
+                <ScalarProperty Name="NoCedula" ColumnName="NoCedula" />
+                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="NumeroExterno" ColumnName="NumeroExterno" />
+                <ScalarProperty Name="NumeroInterno" ColumnName="NumeroInterno" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Fotografia" ColumnName="Fotografia" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="IdRol" ColumnName="IdRol" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Citas">
+            <EntityTypeMapping TypeName="EnlazaTEA2023Model.Cita">
+              <MappingFragment StoreEntitySet="Cita">
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Horario" ColumnName="Horario" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdEspecialista" ColumnName="IdEspecialista" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdCita" ColumnName="IdCita" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ActualizarEstatusCita" FunctionName="EnlazaTEA2023Model.Store.ActualizarEstatusCita" />
+          <FunctionImportMapping FunctionImportName="AgregarCita" FunctionName="EnlazaTEA2023Model.Store.AgregarCita" />
+          <EntitySetMapping Name="Multimedias">
+            <EntityTypeMapping TypeName="EnlazaTEA2023Model.Multimedia">
+              <MappingFragment StoreEntitySet="Multimedia">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Audio" ColumnName="Audio" />
+                <ScalarProperty Name="VideoID" ColumnName="VideoID" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="IdMultimedia" ColumnName="IdMultimedia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="BuscarCitasPorIdEspecialista" FunctionName="EnlazaTEA2023Model.Store.BuscarCitasPorIdEspecialista">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnlazaTEA2023Model.BuscarCitasPorIdEspecialista_Result">
+                <ScalarProperty Name="IdCita" ColumnName="IdCita" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdEspecialista" ColumnName="IdEspecialista" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Horario" ColumnName="Horario" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BuscarCitasPorIdUsuario" FunctionName="EnlazaTEA2023Model.Store.BuscarCitasPorIdUsuario">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnlazaTEA2023Model.BuscarCitasPorIdUsuario_Result">
+                <ScalarProperty Name="IdCita" ColumnName="IdCita" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdEspecialista" ColumnName="IdEspecialista" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Horario" ColumnName="Horario" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="NombreCarrera" ColumnName="NombreCarrera" />
+                <ScalarProperty Name="NoCedula" ColumnName="NoCedula" />
+                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="ApellidoPaternoUsuario" ColumnName="ApellidoPaternoUsuario" />
+                <ScalarProperty Name="ApellidoMaternoUsuario" ColumnName="ApellidoMaternoUsuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BuscarSolicitudCitasPorIdEspecialista" FunctionName="EnlazaTEA2023Model.Store.BuscarSolicitudCitasPorIdEspecialista">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnlazaTEA2023Model.BuscarSolicitudCitasPorIdEspecialista_Result">
+                <ScalarProperty Name="IdCita" ColumnName="IdCita" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdEspecialista" ColumnName="IdEspecialista" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Horario" ColumnName="Horario" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MultimediaAdd" FunctionName="EnlazaTEA2023Model.Store.MultimediaAdd" />
+          <FunctionImportMapping FunctionImportName="MultimediaDelete" FunctionName="EnlazaTEA2023Model.Store.MultimediaDelete" />
+          <FunctionImportMapping FunctionImportName="MultimediaGetAll" FunctionName="EnlazaTEA2023Model.Store.MultimediaGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnlazaTEA2023Model.MultimediaGetAll_Result">
+                <ScalarProperty Name="IdMultimedia" ColumnName="IdMultimedia" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="VideoID" ColumnName="VideoID" />
+                <ScalarProperty Name="Audio" ColumnName="Audio" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MultimediaGetById" FunctionName="EnlazaTEA2023Model.Store.MultimediaGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnlazaTEA2023Model.MultimediaGetById_Result">
+                <ScalarProperty Name="IdMultimedia" ColumnName="IdMultimedia" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="VideoID" ColumnName="VideoID" />
+                <ScalarProperty Name="Audio" ColumnName="Audio" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MultimediaGetByUser" FunctionName="EnlazaTEA2023Model.Store.MultimediaGetByUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="EnlazaTEA2023Model.MultimediaGetByUser_Result">
+                <ScalarProperty Name="IdMultimedia" ColumnName="IdMultimedia" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Contenido" ColumnName="Contenido" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="VideoID" ColumnName="VideoID" />
+                <ScalarProperty Name="Audio" ColumnName="Audio" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MultimediaUpdate" FunctionName="EnlazaTEA2023Model.Store.MultimediaUpdate" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

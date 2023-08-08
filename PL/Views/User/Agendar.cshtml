@@ -1,0 +1,77 @@
+﻿@model ML.Cita
+
+<h2>Agendar Cita</h2>
+
+@using (Html.BeginForm("AgregarCita", "User", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="text" id="fechaPicker" name="Fecha" class="form-control" />
+            @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Horario, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select id="horarioSelect" name="Horario" class="form-control">
+                @for (int hour = 10; hour <= 18; hour++)
+                {
+                    <option value="@hour:00">@hour:00</option>
+                }
+            </select>
+            @Html.ValidationMessageFor(model => model.Horario, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @Html.HiddenFor(model => model.Especialista.IdEspecialista)
+    @Html.HiddenFor(model => model.Usuario.IdUsuario)
+    <p></p>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Agregar Cita" class="btn btn-primary" />
+        </div>
+    </div>
+}
+
+
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-UVfoMO8l27BUC2G+VRDp6S6LkjsR1vFI8EL8HUJXeOENXA9KM2tVzQTSmYi5JnF" crossorigin="anonymous">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap Datepicker -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" integrity="sha384-14y8Hu8XYsf3vs9AxxF7roBC0oMV27zHDH+TkUCu3IvcQoCA6Zy2L0RxzxCJmdSk" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/js/bootstrap-datepicker.min.js" integrity="sha384-vP9SyNYiVSOF7lrCDf5Qxskp78X5i3aUhV98JFJdAaxf8Y4kE3Rxilv/T9Nh6j4l" crossorigin="anonymous"></script>
+
+
+<script>
+    $(function () {
+        // Configuración del datepicker
+        $("#fechaPicker").datepicker({
+            minDate: 0,  // Impide seleccionar fechas pasadas
+            dateFormat: "yy-mm-dd" // Formato de la fecha
+        });
+
+        // Restringir el rango de horas seleccionables en el select
+        var now = new Date();
+        var minHour = 10;
+        var maxHour = 18;
+        var currentHour = now.getHours();
+
+        // Si es después de las 6:00 pm, la hora mínima será 10:00 am del día siguiente
+        if (currentHour >= maxHour) {
+            minHour = 10;
+        } else { // Si es antes de las 6:00 pm, la hora mínima será la siguiente hora
+            minHour = currentHour + 1;
+        }
+
+        // Actualizar el rango de horas en el select
+        for (var hour = minHour; hour <= maxHour; hour++) {
+            $("#horarioSelect").append('<option value="' + hour + ':00">' + hour + ':00</option>');
+        }
+    });
+</script>

@@ -13,6 +13,11 @@
         <AssociationConnector Association="EnlazaTEA2023Model.FK__Paciente__IdUsua__4316F928" ManuallyRouted="false" />
         <AssociationConnector Association="EnlazaTEA2023Model.FK__Usuario__IdRol__38996AB5" ManuallyRouted="false" />
         <EntityTypeShape EntityType="EnlazaTEA2023Model.Blog" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EnlazaTEA2023Model.Cita" Width="1.5" PointX="7.5" PointY="3.25" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Cita__IdEspecial__498EEC8D" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Cita__IdUsuario__489AC854" />
+        <EntityTypeShape EntityType="EnlazaTEA2023Model.Multimedia" Width="1.5" PointX="5.25" PointY="11.75" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Multimedi__IdUsu__4D5F7D71" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
