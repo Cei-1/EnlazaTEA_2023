@@ -131,6 +131,7 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MultimediaController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -226,6 +227,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Multimedia\Validaciones.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -262,6 +264,11 @@
     <Content Include="Views\User\Modal2.cshtml" />
     <Content Include="Views\User\Agendar.cshtml" />
     <Content Include="Views\User\Especialistas.cshtml" />
+    <Content Include="Views\Multimedia\Index.cshtml" />
+    <Content Include="Views\Multimedia\GetAll.cshtml" />
+    <Content Include="Views\Multimedia\Form.cshtml" />
+    <Content Include="Views\Multimedia\Modal.cshtml" />
+    <Content Include="Views\Multimedia\ModalMultimedia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

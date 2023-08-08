@@ -1,0 +1,39 @@
+﻿@model ML.Multimedia
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+@if (Model.Multimedias.Count > 0)
+{
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (ML.Multimedia multimedias in Model.Multimedias)
+        {
+            <div class="col">
+                <div class="card h-100">
+                    @if (multimedias.Imagen != null)
+                    {
+                        <img src="data:image/jpg;base64,@Convert.ToBase64String(multimedias.Imagen)" class="card-img-top" alt="..." />
+                    }
+                    else
+                    {
+                        <img id="imgProducto" src="~/Content/Images/bg-inicio-1.jpg" class="card-img-top" alt="..." />
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@multimedias.Titulo</h5>
+                        <p class="card-text">@multimedias.Contenido</p>
+                        <a class="btn btn-primary" href="@Url.Action("GetMultimediaById", "Multimedia", new { IdMultimedia = multimedias.IdMultimedia })">Leer Más</a>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="alert alert-danger" role="alert">No hay productos registrados. Da click en + para agregar un nuevo producto.</div>
+}
