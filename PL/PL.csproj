@@ -157,6 +157,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\css\Blog\StyleBlog.css" />
     <Content Include="Content\css\InicioStyle.css" />
+    <Content Include="Content\css\RegisterStyle.css" />
     <Content Include="Content\css\site.css" />
     <Content Include="Content\css\SobreNosotroStyle.css" />
     <Content Include="Content\css\StyleLogin.css" />
@@ -226,6 +227,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\LoginRegister\Validaciones.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Multimedia\Validaciones.js" />
     <Content Include="Web.config" />

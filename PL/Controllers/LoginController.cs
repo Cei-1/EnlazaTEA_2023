@@ -88,47 +88,57 @@ namespace PL.Controllers
 
         public ActionResult Validacion(string email, string Contraseña)
         {
-            string hashedPassword = GenerateHash(Contraseña);
-
-            string pass = hashedPassword;
             ML.Usuario usuario = new ML.Usuario();
-            usuario.Rol = new ML.Rol();
 
-            ML.Result result = BL.Usuario.Validar(email);
-
-
-            if (result.Correct)
+            if (email == null)
             {
-                usuario.IdUsuario = ((ML.Usuario)result.Object).IdUsuario;
-                usuario.Email = ((ML.Usuario)result.Object).Email;
-                usuario.Contraseña = ((ML.Usuario)result.Object).Contraseña;
+                return View(usuario);
+            }
+            else
+            {
+                string hashedPassword = GenerateHash(Contraseña);
+                string pass = hashedPassword;
 
-                if (usuario.Contraseña == pass)
+                ML.Result result = BL.Usuario.Validar(email);
+
+
+                if (result.Correct)
                 {
-                    usuario.Rol = new ML.Rol();
-                    usuario.Rol.IdRol = ((ML.Usuario)result.Object).Rol.IdRol;
-                    Session["SessionRol"] = usuario.Rol.IdRol;
-                    Session["SessionUsuario"] = usuario.IdUsuario;
-                    if (usuario.Rol.IdRol == 1)
+                    usuario.IdUsuario = ((ML.Usuario)result.Object).IdUsuario;
+                    usuario.Email = ((ML.Usuario)result.Object).Email;
+                    usuario.Contraseña = ((ML.Usuario)result.Object).Contraseña;
+
+                    if (usuario.Contraseña == pass)
                     {
-                        return RedirectToAction("CompletarEspecialista");
+                        usuario.Rol = new ML.Rol();
+                        usuario.Rol.IdRol = ((ML.Usuario)result.Object).Rol.IdRol;
+                        Session["SessionRol"] = usuario.Rol.IdRol;
+                        Session["SessionUsuario"] = usuario.IdUsuario;
+                        if (usuario.Rol.IdRol == 1)
+                        {
+                            return RedirectToAction("CompletarEspecialista");
+                        }
+                        else if (usuario.Rol.IdRol == 2)
+                        {
+                            return RedirectToAction("RegistrarPaciente");
+                        }
+                        else
+                        {
+                            return View("Login", usuario);
+                        }
                     }
-                    else if (usuario.Rol.IdRol == 2)
+                    else
                     {
-                        return RedirectToAction("RegistrarPaciente");
+                        ViewBag.Mensaje = "Contraseña incorrecta";
+                        return View("Login", usuario);
                     }
                 }
                 else
                 {
-                    ViewBag.Mensaje2 = "Contraseña incorrecta";
+                    ViewBag.Mensaje = "No se ha podido iniciar sesion. " + result.ErrorMessage;
+                    return View("Login", usuario);
                 }
             }
-            else
-            {
-                ViewBag.Mensaje1 = "Email no registrado";
-            }
-            usuario.Contraseña = Contraseña;
-            return View("Form", usuario);
         }
 
         public ActionResult CerrarSesion()
