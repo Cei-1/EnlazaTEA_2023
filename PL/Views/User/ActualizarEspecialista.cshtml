@@ -12,7 +12,7 @@
 
     .form-container {
         max-width: 800px;
-        margin: 0 auto;
+        margin: 50px auto;
         padding: 20px;
         background-color: #fff;
         border-radius: 5px;
@@ -22,78 +22,96 @@
     .form-group {
         margin-bottom: 20px;
     }
+
+    .form-label {
+        font-weight: bold;
+    }
 </style>
+<link rel="stylesheet" href="~/Content/css/RegisterStyle.css" />
 
 <div class="form-container">
-    <h2 class="text-center">Actualizar Especialista</h2>
+    <h2 class="text-center m-4">Actualizar Especialista</h2>
 
     @using (Html.BeginForm("ActualizarEspecialista", "User", FormMethod.Post))
     {
         <div class="container">
             <div class="row">
                 <div class="col-md-4 form-group" style="display: none;">
-                    @Html.LabelFor(model => model.NombreCarrera)
+                    @Html.LabelFor(model => model.NombreCarrera, new { @class = "form-label" })
                     @Html.TextBoxFor(model => model.NombreCarrera, new { @class = "form-control" })
                 </div>
 
                 <div class="col-md-4 form-group" style="display: none;">
-                    @Html.LabelFor(model => model.NoCedula)
+                    @Html.LabelFor(model => model.NoCedula, new { @class = "form-label" })
                     @Html.TextBoxFor(model => model.NoCedula, new { @class = "form-control" })
                 </div>
 
                 <div class="col-md-4 form-group" style="display: none;">
-                    @Html.LabelFor(model => model.Especialidad)
+                    @Html.LabelFor(model => model.Especialidad, new { @class = "form-label" })
                     @Html.TextBoxFor(model => model.Especialidad, new { @class = "form-control" })
                 </div>
 
                 <div class="col-md-4 form-group">
-                    @Html.LabelFor(model => model.Calle)
-                    @Html.TextBoxFor(model => model.Calle, new { @class = "form-control" })
+                    @Html.LabelFor(model => model.Calle, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.Calle, new { @class = "form-control", onkeypress = "return NumerosLetras(event,this)", @id = "txtCalle" })
+                    @Html.ValidationMessageFor(model => Model.Calle, "", new { @class = "text-danger", @id = "lblCalleErrorMessage" })
                 </div>
 
                 <div class="col-md-4 form-group">
-                    @Html.LabelFor(model => model.NumeroExterno)
-                    @Html.TextBoxFor(model => model.NumeroExterno, new { @class = "form-control" })
+                    @Html.LabelFor(model => model.NumeroExterno, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.NumeroExterno, new { @class = "form-control", onkeypress = "return NumerosLetras(event,this)", @id = "txtNumeroExterior" })
+                    @Html.ValidationMessageFor(model => Model.NumeroExterno, "", new { @class = "text-danger", @id = "lblNumeroExteriorErrorMessage" })
                 </div>
 
                 <div class="col-md-4 form-group">
-                    @Html.LabelFor(model => model.NumeroInterno)
-                    @Html.TextBoxFor(model => model.NumeroInterno, new { @class = "form-control" })
+                    @Html.LabelFor(model => model.NumeroInterno, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.NumeroInterno, new { @class = "form-control", onkeypress = "return NumerosLetras(event,this)", @id = "txtNumeroInterior" })
+                    @Html.ValidationMessageFor(model => Model.NumeroInterno, "", new { @class = "text-danger", @id = "lblNumeroInteriorErrorMessage" })
                 </div>
 
                 <div class="col-md-4 form-group">
-                    @Html.LabelFor(model => model.Colonia)
-                    @Html.TextBoxFor(model => model.Colonia, new { @class = "form-control" })
+                    @Html.LabelFor(model => model.Colonia, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.Colonia, new { @class = "form-control", onkeypress = "return SoloLetras(event,this)", @id = "txtColonia" })
+                    @Html.ValidationMessageFor(model => Model.Colonia, "", new { @class = "text-danger", @id = "lblColoniaErrorMessage" })
                 </div>
 
                 <div class="col-md-4 form-group">
-                    @Html.LabelFor(model => model.Ciudad)
-                    @Html.TextBoxFor(model => model.Ciudad, new { @class = "form-control" })
+                    @Html.LabelFor(model => model.Ciudad, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.Ciudad, new { @class = "form-control", onkeypress = "return SoloLetras(event,this)", @id = "txtMunicipio" })
+                    @Html.ValidationMessageFor(model => Model.Ciudad, "", new { @class = "text-danger", @id = "lblMunicipioErrorMessage" })
                 </div>
 
                 <div class="col-md-4 form-group">
-                    @Html.LabelFor(model => model.Estado)
-                    @Html.TextBoxFor(model => model.Estado, new { @class = "form-control" })
+                    @Html.LabelFor(model => model.Estado, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.Estado, new { @class = "form-control", onkeypress = "return SoloLetras(event,this)", @id = "txtEstado" })
+                    @Html.ValidationMessageFor(model => Model.Estado, "", new { @class = "text-danger", @id = "lblEstadoErrorMessage" })
                 </div>
 
                 <div class="col-md-4 form-group">
-                    @Html.LabelFor(model => model.CodigoPostal)
-                    @Html.TextBoxFor(model => model.CodigoPostal, new { @class = "form-control" })
+                    @Html.LabelFor(model => model.CodigoPostal, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.CodigoPostal, new { @class = "form-control", onkeypress = "return SoloNumeros(event,this)", @id = "txtCP" })
+                    @Html.ValidationMessageFor(model => Model.CodigoPostal, "", new { @class = "text-danger", @id = "lblCPErrorMessage" })
                 </div>
 
                 <div class="col-md-4 form-group">
-                    @Html.LabelFor(model => model.Telefono)
-                    @Html.TextBoxFor(model => model.Telefono, new { @class = "form-control" })
+                    @Html.LabelFor(model => model.Telefono, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control", onkeypress = "return SoloNumeros(event,this)", @id = "txtTelefono" })
+                    @Html.ValidationMessageFor(model => Model.Telefono, "", new { @class = "text-danger", @id = "lblTelefonoErrorMessage" })
                 </div>
 
                 <div class="col-md-4 form-group">
-                    @Html.LabelFor(model => model.Celular)
-                    @Html.TextBoxFor(model => model.Celular, new { @class = "form-control" })
+                    @Html.LabelFor(model => model.Celular, new { @class = "form-label" })
+                    @Html.TextBoxFor(m => m.Celular, new { @class = "form-control", onkeypress = "return SoloNumeros(event,this)", @id = "txtCelular" })
+                    @Html.ValidationMessageFor(model => Model.Celular, "", new { @class = "text-danger", @id = "lblCelularErrorMessage" })
                 </div>
             </div>
         </div>
+        <center>
+            <input type="submit" value="Guardar" class="w-100 btn btn-lg btn-primary m-3" />
+        </center>
 
-        <p></p>
-        <button type="submit" class="btn btn-primary">Guardar cambios</button>
     }
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="~/Scripts/LoginRegister/Validaciones.js"></script>
