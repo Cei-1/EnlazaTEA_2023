@@ -99,7 +99,7 @@ namespace PL.Controllers
 
         public ActionResult Delete(int IdMultimedia)
         {
-            ML.Result result = BL.Blog.Delete(IdMultimedia);
+            ML.Result result = BL.Multimedia.Delete(IdMultimedia);
 
             if (result.Correct)
             {

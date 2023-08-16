@@ -4,9 +4,6 @@
     ViewBag.Title = "GetAll";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>GetAll</h2>
-
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -15,7 +12,7 @@
     </div>
 
     <div class="row">
-       
+
         <div class="col-md-1 col-md-offset-11">
             @Html.ActionLink("+", "Form", "Blog", htmlAttributes: new { @class = "btn btn-success" })
         </div>
@@ -70,6 +67,7 @@
     }
     else
     {
-        <div class="alert alert-danger" role="alert">No hay productos registrados. Da click en + para agregar un nuevo producto.</div>
+        <br />
+        <div class="alert alert-danger" role="alert">No hay existen registros.</div>
     }
 </div>

@@ -24,18 +24,26 @@
             </button>
             <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Blog", "Index", "Blog", new { area = "" }, new { @class = "nav-link" })</li>
                     @if (Session["SessionRol"] == null && Session["SessionUsuario"] == null)
                     {
+                        <li>@Html.ActionLink("Blog", "Index", "Blog", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Sobre Nosotros", "SobreNosotros", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                         <li>@Html.ActionLink("Contactanos", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     }
-                    @if (Session["SessionRol"] != null && Session["SessionUsuario"] != null)
+                    else
                     {
                         int rol_id = (int)Session["SessionRol"];
+                        if (rol_id == 1)
+                        {
+                            <li>@Html.ActionLink("Blog", "GetAll", "Blog", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Multimedia", "GetAll", "Multimedia", new { area = "" }, new { @class = "nav-link" })</li>
+
+                        }
                         if (rol_id == 2)
                         {
+                            <li>@Html.ActionLink("Blog", "Index", "Blog", new { area = "" }, new { @class = "nav-link" })</li>
                             <li>@Html.ActionLink("Especialistas", "Especialistas", "User", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Citas", "GetAllCitas", "User", new { area = "" }, new { @class = "nav-link" })</li>
                         }
                     }
                 </ul>

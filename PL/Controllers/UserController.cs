@@ -184,5 +184,25 @@ namespace PL.Controllers
             }
         }
 
+        public ActionResult GetAllCitas()
+        {
+            int usuario_id = (int)Session["SessionUsuario"];
+            var result = BL.Cita.GetCitasByUsuario(usuario_id);
+
+            if (result.Correct)
+            {
+                ML.Cita cita = new ML.Cita();
+                cita.Citas = result.Objects; // Asegúrate de usar el tipo ML.Especialista aquí
+
+
+                // Enviar el modelo Especialista a la vista
+                return View(cita);
+            }
+            else
+            {
+                ViewBag.ErrorMessage = result.ErrorMessage;
+                return View();
+            }
+        }
     }
 }
