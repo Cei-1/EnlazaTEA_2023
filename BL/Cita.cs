@@ -90,7 +90,10 @@ namespace BL
                         cita.Usuario.IdUsuario = item.IdUsuario.Value;
                         cita.Especialista = new ML.Especialista();
                         cita.Especialista.IdEspecialista = item.IdEspecialista.Value;
-                        cita.Fecha = item.Fecha.Value;
+
+                        // Obtener solo la fecha de DateTime y asignarla
+                        cita.Fecha = item.Fecha.Value.Date;
+
                         cita.Horario = item.Horario.Value;
                         cita.Estatus = item.Estatus.Value;
                         citas.Add(cita);
@@ -107,6 +110,7 @@ namespace BL
             }
             return result;
         }
+
 
         public static Result UpdateStatus(int idCita, int estatus)
         {

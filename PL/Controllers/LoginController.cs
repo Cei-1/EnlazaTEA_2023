@@ -187,7 +187,7 @@ namespace PL.Controllers
                 ViewBag.Mensaje = "No se ha podido completar el usuario. Error: " + result.ErrorMessage;
             }
 
-            return PartialView("Modal2");
+            return PartialView("Modal");
         }
 
         [HttpGet]

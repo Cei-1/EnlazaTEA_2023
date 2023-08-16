@@ -1,19 +1,75 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Contactanos";
 }
-<main aria-labelledby="title">
-    <h2 id="title">@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        h3 {
+            color: #666;
+            text-decoration: none;
+            /*color: inherit;*/
+        }
+
+        address {
+            margin-top: 10px;
+        }
+
+        img {
+            width: 25px;
+            height: 25px;
+            margin-right: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #666;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body>
+    <h2>@ViewBag.Title</h2>
+    <h3>Por medio de nuestras redes sociales</h3>
 
     <address>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr>
-        425.555.0100
+        <img src="~/Image/facebook.png" alt="Facebook" /> <a href="https://www.facebook.com/profile.php?id=100090376787729&locale=es_LA">Enlaza Tea</a>
+        @*<br />
+        <p></p>
+        <img src="~/Image/gmail.png" alt="Gmail" /> <a href="mailto:consultoriacei7@gmail.com">Enlaza Tea</a>
+        <br />
+        <p></p>
+        <img src="~/Image/instagram.png" alt="Instagram" />  <a href="mailto:consultoriacei7@gmail.com">Enlaza Tea</a>*@
     </address>
-
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <address>
-        <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+        <strong>Para reportar problemas o errores:</strong><br />
+        <a href="mailto:consultoriacei7@gmail.com">Consultoria Eterna Innovación</a>
     </address>
-</main>
+</body>
+</html>

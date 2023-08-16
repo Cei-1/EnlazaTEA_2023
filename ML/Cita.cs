@@ -14,5 +14,6 @@ namespace ML
         public DateTime Fecha { get; set; }
         public TimeSpan Horario { get; set; }
         public int Estatus { get; set; }
+        public List<object> Citas { get; set; }
     }
 }
