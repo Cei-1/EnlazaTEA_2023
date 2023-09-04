@@ -32,8 +32,9 @@ namespace DL
         public virtual DbSet<Rol> Rols { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
         public virtual DbSet<Blog> Blogs { get; set; }
-        public virtual DbSet<Cita> Citas { get; set; }
         public virtual DbSet<Multimedia> Multimedias { get; set; }
+        public virtual DbSet<Cita> Citas { get; set; }
+        public virtual DbSet<DetallesCita> DetallesCitas { get; set; }
     
         public virtual int AddEspecialista(string nombreCarrera, string noCedula, string especialidad, string calle, string numeroExterno, string numeroInterno, string colonia, string ciudad, string estado, string codigoPostal, string telefono, string celular, Nullable<bool> estatus, Nullable<int> idUsuario)
         {

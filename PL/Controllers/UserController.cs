@@ -58,6 +58,7 @@ namespace PL.Controllers
                 especialista.Usuario = new ML.Usuario();
                 especialista.Usuario.IdUsuario = (int)Session["SessionUsuario"];
                 ML.Result result = BL.Especialista.UpdateEF(especialista);
+
                 if (result.Correct)
                 {
                     ViewBag.Mensaje = "Perfil actualizado correctamente";
@@ -155,12 +156,10 @@ namespace PL.Controllers
         public ActionResult AgregarCita(ML.Cita cita)
         {
             cita.Estatus = 1;
+            cita.Observacion = "Ninguna";
             try
             {
-                // Aquí puedes realizar validaciones adicionales si es necesario
-                // Por ejemplo, verificar que la fecha y el horario sean válidos
 
-                // Llamar al método para agregar la cita en la capa de negocios
                 ML.Result result = BL.Cita.Add(cita);
 
                 if (result.Correct)
@@ -171,10 +170,9 @@ namespace PL.Controllers
                 {
                     ViewBag.Mensaje = "No se ha podido agendar. Error: " + result.ErrorMessage;
                 }
+
                 return PartialView("Modal2");
-                
-                    // La cita se agregó correctamente, redirige a la página de perfil
-         
+                // La cita se agregó correctamente, redirige a la página de perfil
             }
             catch (Exception ex)
             {
@@ -204,5 +202,183 @@ namespace PL.Controllers
                 return View();
             }
         }
+
+        public ActionResult CancelarCita(int idcita)
+        {
+            var result = BL.Cita.CancelarCitasByUsuario(idcita);
+
+            if (result.Correct)
+            {
+                TempData["SuccessMessage"] = "Citas canceladas exitosamente.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Error al cancelar citas: " + result.ErrorMessage;
+            }
+
+            return RedirectToAction("GetAllCitas"); // Redireccionar a la acción GetAllCitas
+        }
+
+        public ActionResult CancelarCitaEspecialista(int idcita)
+        {
+            var result = BL.Cita.CancelarCitasByUsuario(idcita);
+
+            if (result.Correct)
+            {
+                TempData["SuccessMessage"] = "Citas canceladas exitosamente.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Error al cancelar citas: " + result.ErrorMessage;
+            }
+
+            return RedirectToAction("GetAllCitasEspecilistas"); // Redireccionar a la acción GetAllCitas
+        }
+
+        public ActionResult EliminarCita(int idcita)
+        {
+            var result = BL.Cita.EliminarCitasByUsuario(idcita);
+
+            if (result.Correct)
+            {
+                TempData["SuccessMessage"] = "Citas canceladas exitosamente.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Error al cancelar citas: " + result.ErrorMessage;
+            }
+
+            return RedirectToAction("GetAllCitasEspecilistas"); // Redireccionar a la acción GetAllCitas
+        }
+
+        public ActionResult EliminarCitaPaciente(int idcita)
+        {
+            var result = BL.Cita.EliminarCitasByUsuario(idcita);
+
+            if (result.Correct)
+            {
+                TempData["SuccessMessage"] = "Citas canceladas exitosamente.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Error al cancelar citas: " + result.ErrorMessage;
+            }
+
+            return RedirectToAction("GetAllCitas"); // Redireccionar a la acción GetAllCitas
+        }
+
+        public ActionResult Rechazar(int idcita)
+        {
+            var result = BL.Cita.RechazarCitasByUsuario(idcita);
+
+            if (result.Correct)
+            {
+                TempData["SuccessMessage"] = "Citas canceladas exitosamente.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Error al cancelar citas: " + result.ErrorMessage;
+            }
+
+            return RedirectToAction("GetAllCitasEspecilistas"); // Redireccionar a la acción GetAllCitas
+        }
+
+        public ActionResult Aceptar(int idcita)
+        {
+            var result = BL.Cita.AceptarCitasByUsuario(idcita);
+
+            if (result.Correct)
+            {
+                TempData["SuccessMessage"] = "Citas canceladas exitosamente.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Error al cancelar citas: " + result.ErrorMessage;
+            }
+
+            return RedirectToAction("GetAllCitasEspecilistas"); // Redireccionar a la acción GetAllCitas
+        }
+
+        public ActionResult LLamada(int idCita, string url)
+        {
+            // Llama al método en la capa de lógica de negocio para realizar la acción necesaria
+            var result = BL.Cita.LLamada(idCita, url);
+
+            if (result.Correct)
+            {
+                TempData["SuccessMessage"] = "Llamada realizada exitosamente.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Error al realizar la llamada: " + result.ErrorMessage;
+            }
+
+            return RedirectToAction("GetAllCitasEspecilistas"); // Redireccionar a la acción GetAllCitasEspecilistas
+        }
+
+
+        public ActionResult GetAllCitasEspecilistas()
+        {
+            int usuario_id = (int)Session["SessionUsuario"];
+            var resultespceialista = BL.Especialista.GetByIdEF(usuario_id);
+            ML.Especialista especialista = new ML.Especialista();
+            especialista = (ML.Especialista)resultespceialista.Object;
+            var result = BL.Cita.GetCitasByEspecialista(especialista.IdEspecialista);
+
+            if (result.Correct)
+            {
+                ML.Cita cita = new ML.Cita();
+                cita.Citas = result.Objects; // Asegúrate de usar el tipo ML.Especialista aquí
+
+
+                // Enviar el modelo Especialista a la vista
+                return View(cita);
+            }
+            else
+            {
+                ViewBag.ErrorMessage = result.ErrorMessage;
+                return View();
+            }
+        }
+
+        public ActionResult VerCita(int idCita)
+        {
+            Session["SessionCita"] = idCita;
+            var resultCita = BL.Cita.GetCitaById(idCita);
+
+            if (resultCita.Correct)
+            {
+                ML.Cita cita = (ML.Cita)resultCita.Object;
+
+                // Pasar el objeto Cita a la vista
+                return View(cita);
+            }
+            else
+            {
+                ViewBag.ErrorMessage = resultCita.ErrorMessage;
+                return View();
+            }
+        }
+        [HttpPost]
+        public ActionResult AddDetalles(int IdCita, string Observaciones)
+        {
+
+                // Llamar al método de la capa de negocios para actualizar los detalles de la cita
+                var resultUpdateDetalles = BL.Cita.AddDetalles(IdCita, Observaciones);
+
+                if (resultUpdateDetalles.Correct)
+                {
+                var result = BL.Cita.CompletarCitasByUsuario(IdCita);
+                    TempData["SuccessMessage"] = "Observaciones guardadas exitosamente.";
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Error al guardar observaciones: " + resultUpdateDetalles.ErrorMessage;
+                }
+
+                return RedirectToAction("GetAllCitasEspecilistas");
+            
+        }
+
     }
 }

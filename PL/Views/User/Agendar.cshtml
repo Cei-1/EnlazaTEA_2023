@@ -7,7 +7,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            <input type="text" id="fechaPicker" name="Fecha" class="form-control" />
+            @Html.TextBoxFor(model => model.Fecha, "{0:yyyy-MM-dd}", new { type = "date", id = "fechaPicker", @Value = DateTime.Now.ToString("yyyy-MM-dd"), @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -18,7 +18,9 @@
             <select id="horarioSelect" name="Horario" class="form-control">
                 @for (int hour = 10; hour <= 18; hour++)
                 {
-                    <option value="@hour:00">@hour:00</option>
+                    string amPm = hour < 12 ? "am" : "pm";
+                    int displayHour = hour > 12 ? hour - 12 : hour;
+                    <option value="@hour:00">@displayHour:00 @amPm</option>
                 }
             </select>
             @Html.ValidationMessageFor(model => model.Horario, "", new { @class = "text-danger" })
@@ -28,6 +30,12 @@
     @Html.HiddenFor(model => model.Especialista.IdEspecialista)
     @Html.HiddenFor(model => model.Usuario.IdUsuario)
     <p></p>
+    <div class="form-check">
+        @Html.CheckBoxFor(model => model.Virtual, new { @class = "form-check-input", id = "virtualCheckbox" })
+        @Html.LabelFor(model => model.Virtual, "Virtual", new { @class = "form-check-label" })
+    </div>
+
+
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Agregar Cita" class="btn btn-primary" />
@@ -46,7 +54,6 @@
 <!-- Bootstrap Datepicker -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/css/bootstrap-datepicker.min.css" rel="stylesheet" integrity="sha384-14y8Hu8XYsf3vs9AxxF7roBC0oMV27zHDH+TkUCu3IvcQoCA6Zy2L0RxzxCJmdSk" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/js/bootstrap-datepicker.min.js" integrity="sha384-vP9SyNYiVSOF7lrCDf5Qxskp78X5i3aUhV98JFJdAaxf8Y4kE3Rxilv/T9Nh6j4l" crossorigin="anonymous"></script>
-
 
 <script>
     $(function () {
@@ -73,5 +80,21 @@
         for (var hour = minHour; hour <= maxHour; hour++) {
             $("#horarioSelect").append('<option value="' + hour + ':00">' + hour + ':00</option>');
         }
+
+        // Validar la fecha y hora al enviar el formulario
+        $("form").submit(function (event) {
+            var selectedDate = $("#fechaPicker").datepicker("getDate");
+            var selectedHour = $("#horarioSelect").val();
+
+            var currentDate = new Date();
+            currentDate.setHours(selectedHour.split(":")[0]); // Configura solo la hora, los minutos no importan
+            currentDate.setMinutes(0); // Establece los minutos en cero
+
+            if (selectedDate < currentDate) {
+                alert("La fecha y hora seleccionadas son anteriores a la fecha y hora actual.");
+                event.preventDefault(); // Evita que el formulario se envíe
+            }
+        });
     });
 </script>
+

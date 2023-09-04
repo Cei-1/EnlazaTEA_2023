@@ -19,8 +19,8 @@ namespace DL
         {
             this.Especialistas = new HashSet<Especialista>();
             this.Pacientes = new HashSet<Paciente>();
-            this.Citas = new HashSet<Cita>();
             this.Multimedias = new HashSet<Multimedia>();
+            this.Citas = new HashSet<Cita>();
         }
     
         public int IdUsuario { get; set; }
@@ -39,8 +39,8 @@ namespace DL
         public virtual ICollection<Paciente> Pacientes { get; set; }
         public virtual Rol Rol { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cita> Citas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Multimedia> Multimedias { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cita> Citas { get; set; }
     }
 }

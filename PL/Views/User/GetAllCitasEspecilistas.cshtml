@@ -1,0 +1,183 @@
+﻿@model ML.Cita
+
+@{
+    ViewBag.Title = "GetALLCitas";
+}
+
+<h2>Citas</h2>
+
+<div class="container">
+
+    @if (Model.Citas.Count > 0)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <center>
+                    <table class="table table-striped table-hover table-responsive" id="myTable">
+                        <thead>
+                            <tr>
+                                @*<th>Número Cita</th>*@
+                                <th class="text-center">Fecha</th>
+                                <th class="text-center">Hora</th>
+                                <th class="text-center">Paciente</th>
+                                <th class="text-center">Tipo</th>
+                                <th class="text-center">Estatus</th>
+                                <th class="text-center">Validar</th>
+                                <th class="text-center">Ver</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (ML.Cita cita in Model.Citas)
+                            {
+                                <tr>
+                                    @*<td>@cita.IdCita</td>*@
+                                    <td class="text-center">@cita.Fecha.ToString("dd/MM/yyyy")</td>
+                                    <td class="text-center">@cita.Horario</td>
+                                    <td class="text-center">@cita.Usuario.Paciente.Nombre @cita.Usuario.Paciente.ApellidoPaterno @cita.Usuario.Paciente.ApellidoMaterno</td>
+                                    <td class="text-center">
+                                        @if (cita.Virtual)
+                                        {
+                                            @Html.Raw("Virtual")
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw("Presencial")
+                                        }
+                                    </td>
+                                    <td class="text-center">
+                                        @switch (cita.Estatus)
+                                        {
+                                            case 1:
+                                                @Html.Raw("Pendiente")
+                                                break;
+                                            case 2:
+                                                @Html.Raw("Aceptada")
+                                                break;
+                                            case 3:
+                                                @Html.Raw("Rechazada")
+                                                break;
+                                            case 4:
+                                                @Html.Raw("Cancelada")
+                                                break;
+                                            case 5:
+                                                @Html.Raw("Completada")
+                                                break;
+                                        }
+                                    </td>
+                                    <td class="text-center">
+                                        @if (cita.Estatus == 1)
+                                        {
+                                            <button type="button" class="btn btn-warning" onclick="location.href='@Url.Action("Rechazar", "User", new { idCita = cita.IdCita })'">Rechazar</button>
+                                            <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("Aceptar", "User", new { idCita = cita.IdCita })'">Aceptar</button>
+                                        }
+                                        else if (cita.Estatus == 2 && cita.Estatus != 5)
+                                        {
+                                            if (!string.IsNullOrEmpty(cita.Link))
+                                            {
+                                                <a class="btn btn-secondary llamada-btn" href="#" data-idcita="@cita.IdCita">Editar Llamada</a>
+                                                <button type="button" class="btn btn-primary" onclick="window.open('@cita.Link', '_blank')">
+                                                    Entrar
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-danger" href="@Url.Action("CancelarCitaEspecialista", "User", new { idCita = cita.IdCita })">Cancelar</a>
+                                                <a class="btn btn-secondary llamada-btn" href="#" data-idcita="@cita.IdCita">Llamada</a>
+                                            }
+                                        }
+
+                                        else if (cita.Estatus == 4 || cita.Estatus == 3 || cita.Estatus == 5)
+                                        {
+                                            <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("EliminarCita", "User", new { idCita = cita.IdCita })'">Eliminar</button>
+                                        }
+                                    </td>
+                                    <td class="text-center">
+                                        @if (cita.Estatus == 2)
+                                        {
+                                            <a class="btn btn-primary" href="@Url.Action("VerCita", "User", new { idCita = cita.IdCita })">Ver</a>
+                                        }
+                                    </td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </center>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">No se encontraron registros. Da click en + para agregar un nuevo registro</div>
+    }
+</div>
+<div class="modal fade" id="llamadaModal" tabindex="-1" role="dialog" aria-labelledby="llamadaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="llamadaModalLabel">Accede a Meet</h5>
+            </div>
+            <div class="modal-body">
+                <label for="urlInput">Copia el link de la reunión:</label>
+                <input type="text" id="urlInput" class="form-control" placeholder="Ingresa el link aquí">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="window.open('https://meet.google.com', '_blank')">
+                    Crear llamada
+                </button>
+                <button type="button" class="btn btn-secondary" id="cancelarLlamada" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="guardarLlamada">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $('#myTable').DataTable();
+</script>
+<!-- Agrega este script después del script anterior en tu vista -->
+<script>
+    $(document).ready(function () {
+        $('.llamada-btn').click(function () {
+            var button = $(this);
+            var idCita = button.data('idcita'); // Obtiene el valor del atributo data-idcita
+
+            // Abre el modal
+            $('#llamadaModal').modal('show');
+
+            // Configura el clic del botón "Guardar" en el modal
+            $('#guardarLlamada').click(function () {
+                var url = $('#urlInput').val();
+
+                // Realiza la solicitud AJAX al controlador
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("LLamada", "User")',
+                    data: { url: url, idCita: idCita },
+                    success: function (data) {
+                        // Hacer algo con la respuesta, si es necesario
+                        // Por ejemplo, puedes recargar la página para actualizar los datos
+                        location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        // Manejar el error, si es necesario
+                        console.error(error);
+                    }
+                });
+
+                // Cierra el modal
+                $('#llamadaModal').modal('hide');
+            });
+
+            // Configura el clic del botón "Cancelar" en el modal
+            $('#cancelarLlamada').click(function () {
+                $('#urlInput').val(''); // Limpia el campo de entrada
+                $('#llamadaModal').modal('hide'); // Cierra el modal
+            });
+        });
+    });
+</script>
+
