@@ -14,6 +14,14 @@ namespace ML
         public DateTime Fecha { get; set; }
         public TimeSpan Horario { get; set; }
         public int Estatus { get; set; }
+        public bool Virtual { get; set; }
+        public string Link { get; set; } // Nuevo campo Link
+        public string Observacion { get; set; } // Nuevo campo Observacion
         public List<object> Citas { get; set; }
+        public ML.DetallesCita Detalles { get; set; }
+        public Cita()
+        {
+            Detalles = new DetallesCita(); // Inicialización del objeto Detalles
+        }
     }
 }

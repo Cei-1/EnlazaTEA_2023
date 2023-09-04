@@ -297,6 +297,8 @@
     <Content Include="Views\Multimedia\Modal.cshtml" />
     <Content Include="Views\Multimedia\ModalMultimedia.cshtml" />
     <Content Include="Views\User\GetAllCitas.cshtml" />
+    <Content Include="Views\User\GetAllCitasEspecilistas.cshtml" />
+    <Content Include="Views\User\VerCita.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

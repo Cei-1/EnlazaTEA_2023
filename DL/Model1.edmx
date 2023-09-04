@@ -25,6 +25,17 @@
           <Property Name="Fecha" Type="date" />
           <Property Name="Horario" Type="time" Precision="7" />
           <Property Name="Estatus" Type="int" />
+          <Property Name="Virtual" Type="bit" />
+          <Property Name="Link" Type="varchar" MaxLength="100" />
+          <Property Name="Observacion" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="DetallesCita">
+          <Key>
+            <PropertyRef Name="IdDetallesCita" />
+          </Key>
+          <Property Name="IdDetallesCita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Observaciones" Type="varchar(max)" />
+          <Property Name="IdCita" Type="int" />
         </EntityType>
         <EntityType Name="Especialista">
           <Key>
@@ -123,6 +134,18 @@
             </Principal>
             <Dependent Role="Cita">
               <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetallesC__IdCit__681373AD">
+          <End Role="Cita" Type="Self.Cita" Multiplicity="0..1" />
+          <End Role="DetallesCita" Type="Self.DetallesCita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cita">
+              <PropertyRef Name="IdCita" />
+            </Principal>
+            <Dependent Role="DetallesCita">
+              <PropertyRef Name="IdCita" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -345,6 +368,7 @@
         <EntityContainer Name="EnlazaTEA2023ModelStoreContainer">
           <EntitySet Name="Blog" EntityType="Self.Blog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cita" EntityType="Self.Cita" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetallesCita" EntityType="Self.DetallesCita" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Especialista" EntityType="Self.Especialista" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Multimedia" EntityType="Self.Multimedia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Paciente" EntityType="Self.Paciente" Schema="dbo" store:Type="Tables" />
@@ -357,6 +381,10 @@
           <AssociationSet Name="FK__Cita__IdUsuario__489AC854" Association="Self.FK__Cita__IdUsuario__489AC854">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Cita" EntitySet="Cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetallesC__IdCit__681373AD" Association="Self.FK__DetallesC__IdCit__681373AD">
+            <End Role="Cita" EntitySet="Cita" />
+            <End Role="DetallesCita" EntitySet="DetallesCita" />
           </AssociationSet>
           <AssociationSet Name="FK__Especiali__IdUsu__74AE54BC" Association="Self.FK__Especiali__IdUsu__74AE54BC">
             <End Role="Usuario" EntitySet="Usuario" />
@@ -448,8 +476,8 @@
           <NavigationProperty Name="Especialistas" Relationship="Self.FK__Especiali__IdUsu__3E52440B" FromRole="Usuario" ToRole="Especialista" />
           <NavigationProperty Name="Pacientes" Relationship="Self.FK__Paciente__IdUsua__4316F928" FromRole="Usuario" ToRole="Paciente" />
           <NavigationProperty Name="Rol" Relationship="Self.FK__Usuario__IdRol__38996AB5" FromRole="Usuario" ToRole="Rol" />
-          <NavigationProperty Name="Citas" Relationship="EnlazaTEA2023Model.FK__Cita__IdUsuario__489AC854" FromRole="Usuario" ToRole="Cita" />
           <NavigationProperty Name="Multimedias" Relationship="EnlazaTEA2023Model.FK__Multimedi__IdUsu__4D5F7D71" FromRole="Usuario" ToRole="Multimedia" />
+          <NavigationProperty Name="Citas" Relationship="EnlazaTEA2023Model.FK__Cita__IdUsuario__489AC854" FromRole="Usuario" ToRole="Cita" />
         </EntityType>
         <Association Name="FK__Especiali__IdUsu__3E52440B">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
@@ -625,15 +653,6 @@
           <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetAllEspecialistas" ReturnType="Collection(EnlazaTEA2023Model.GetAllEspecialistas_Result)" />
-          <EntitySet Name="Citas" EntityType="EnlazaTEA2023Model.Cita" />
-          <AssociationSet Name="FK__Cita__IdEspecial__498EEC8D" Association="EnlazaTEA2023Model.FK__Cita__IdEspecial__498EEC8D">
-            <End Role="Especialista" EntitySet="Especialistas" />
-            <End Role="Cita" EntitySet="Citas" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Cita__IdUsuario__489AC854" Association="EnlazaTEA2023Model.FK__Cita__IdUsuario__489AC854">
-            <End Role="Usuario" EntitySet="Usuarios" />
-            <End Role="Cita" EntitySet="Citas" />
-          </AssociationSet>
           <FunctionImport Name="ActualizarEstatusCita">
             <Parameter Name="IdCita" Mode="In" Type="Int32" />
             <Parameter Name="Estatus" Mode="In" Type="Int32" />
@@ -651,13 +670,13 @@
             <End Role="Multimedia" EntitySet="Multimedias" />
           </AssociationSet>
           <FunctionImport Name="BuscarCitasPorIdEspecialista" ReturnType="Collection(EnlazaTEA2023Model.BuscarCitasPorIdEspecialista_Result)">
-            <Parameter Name="IdEspecialista" Mode="In" Type="Int32" />
+          <Parameter Name="IdEspecialista" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="BuscarCitasPorIdUsuario" ReturnType="Collection(EnlazaTEA2023Model.BuscarCitasPorIdUsuario_Result)">
-            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="BuscarSolicitudCitasPorIdEspecialista" ReturnType="Collection(EnlazaTEA2023Model.BuscarSolicitudCitasPorIdEspecialista_Result)">
-            <Parameter Name="IdEspecialista" Mode="In" Type="Int32" />
+          <Parameter Name="IdEspecialista" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="MultimediaAdd">
             <Parameter Name="Titulo" Mode="In" Type="String" />
@@ -669,14 +688,14 @@
             <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="MultimediaDelete">
-            <Parameter Name="IdMultimedia" Mode="In" Type="Int32" />
+          <Parameter Name="IdMultimedia" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="MultimediaGetAll" ReturnType="Collection(EnlazaTEA2023Model.MultimediaGetAll_Result)" />
           <FunctionImport Name="MultimediaGetById" ReturnType="Collection(EnlazaTEA2023Model.MultimediaGetById_Result)">
-            <Parameter Name="IdMultimedia" Mode="In" Type="Int32" />
+          <Parameter Name="IdMultimedia" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="MultimediaGetByUser" ReturnType="Collection(EnlazaTEA2023Model.MultimediaGetByUser_Result)">
-            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="MultimediaUpdate">
             <Parameter Name="IdMultimedia" Mode="In" Type="Int32" />
@@ -687,7 +706,21 @@
             <Parameter Name="VideoID" Mode="In" Type="String" />
             <Parameter Name="Audio" Mode="In" Type="Binary" />
           </FunctionImport>
-        </EntityContainer>
+          <EntitySet Name="Citas" EntityType="EnlazaTEA2023Model.Cita" />
+          <EntitySet Name="DetallesCitas" EntityType="EnlazaTEA2023Model.DetallesCita" />
+          <AssociationSet Name="FK__Cita__IdEspecial__498EEC8D" Association="EnlazaTEA2023Model.FK__Cita__IdEspecial__498EEC8D">
+            <End Role="Especialista" EntitySet="Especialistas" />
+            <End Role="Cita" EntitySet="Citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cita__IdUsuario__489AC854" Association="EnlazaTEA2023Model.FK__Cita__IdUsuario__489AC854">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Cita" EntitySet="Citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DetallesC__IdCit__681373AD" Association="EnlazaTEA2023Model.FK__DetallesC__IdCit__681373AD">
+            <End Role="Cita" EntitySet="Citas" />
+            <End Role="DetallesCita" EntitySet="DetallesCitas" />
+          </AssociationSet>
+          </EntityContainer>
         <ComplexType Name="BuscarPacientePorIdUsuario_Result">
           <Property Type="Int32" Name="IdPaciente" Nullable="false" />
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
@@ -848,43 +881,6 @@
           <Property Type="String" Name="Contraseña" Nullable="true" />
           <Property Type="Int32" Name="IdRol" Nullable="true" />
         </ComplexType>
-        <EntityType Name="Cita">
-          <Key>
-            <PropertyRef Name="IdCita" />
-          </Key>
-          <Property Name="IdCita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <Property Name="IdEspecialista" Type="Int32" />
-          <Property Name="Fecha" Type="DateTime" Precision="0" />
-          <Property Name="Horario" Type="Time" Precision="7" />
-          <Property Name="Estatus" Type="Int32" />
-          <NavigationProperty Name="Especialista" Relationship="EnlazaTEA2023Model.FK__Cita__IdEspecial__498EEC8D" FromRole="Cita" ToRole="Especialista" />
-          <NavigationProperty Name="Usuario" Relationship="EnlazaTEA2023Model.FK__Cita__IdUsuario__489AC854" FromRole="Cita" ToRole="Usuario" />
-        </EntityType>
-        <Association Name="FK__Cita__IdEspecial__498EEC8D">
-          <End Type="EnlazaTEA2023Model.Especialista" Role="Especialista" Multiplicity="0..1" />
-          <End Type="EnlazaTEA2023Model.Cita" Role="Cita" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Especialista">
-              <PropertyRef Name="IdEspecialista" />
-            </Principal>
-            <Dependent Role="Cita">
-              <PropertyRef Name="IdEspecialista" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Cita__IdUsuario__489AC854">
-          <End Type="EnlazaTEA2023Model.Usuario" Role="Usuario" Multiplicity="0..1" />
-          <End Type="EnlazaTEA2023Model.Cita" Role="Cita" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="IdUsuario" />
-            </Principal>
-            <Dependent Role="Cita">
-              <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Multimedia">
           <Key>
             <PropertyRef Name="IdMultimedia" />
@@ -977,7 +973,69 @@
           <Property Type="Binary" Name="Audio" Nullable="true" />
           <Property Type="Int32" Name="IdUsuario" Nullable="true" />
         </ComplexType>
-      </Schema>
+        <EntityType Name="Cita">
+          <Key>
+            <PropertyRef Name="IdCita" />
+          </Key>
+          <Property Name="IdCita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="IdEspecialista" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <Property Name="Horario" Type="Time" Precision="7" />
+          <Property Name="Estatus" Type="Int32" />
+          <Property Name="Virtual" Type="Boolean" />
+          <Property Name="Link" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Especialista" Relationship="EnlazaTEA2023Model.FK__Cita__IdEspecial__498EEC8D" FromRole="Cita" ToRole="Especialista" />
+          <NavigationProperty Name="Usuario" Relationship="EnlazaTEA2023Model.FK__Cita__IdUsuario__489AC854" FromRole="Cita" ToRole="Usuario" />
+          <NavigationProperty Name="DetallesCitas" Relationship="EnlazaTEA2023Model.FK__DetallesC__IdCit__681373AD" FromRole="Cita" ToRole="DetallesCita" />
+        </EntityType>
+        <EntityType Name="DetallesCita">
+          <Key>
+            <PropertyRef Name="IdDetallesCita" />
+          </Key>
+          <Property Name="IdDetallesCita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IdCita" Type="Int32" />
+          <NavigationProperty Name="Cita" Relationship="EnlazaTEA2023Model.FK__DetallesC__IdCit__681373AD" FromRole="DetallesCita" ToRole="Cita" />
+        </EntityType>
+        <Association Name="FK__Cita__IdEspecial__498EEC8D">
+          <End Type="EnlazaTEA2023Model.Especialista" Role="Especialista" Multiplicity="0..1" />
+          <End Type="EnlazaTEA2023Model.Cita" Role="Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialista">
+              <PropertyRef Name="IdEspecialista" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="IdEspecialista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cita__IdUsuario__489AC854">
+          <End Type="EnlazaTEA2023Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="EnlazaTEA2023Model.Cita" Role="Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DetallesC__IdCit__681373AD">
+          <End Type="EnlazaTEA2023Model.Cita" Role="Cita" Multiplicity="0..1" />
+          <End Type="EnlazaTEA2023Model.DetallesCita" Role="DetallesCita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cita">
+              <PropertyRef Name="IdCita" />
+            </Principal>
+            <Dependent Role="DetallesCita">
+              <PropertyRef Name="IdCita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1260,18 +1318,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="Citas">
-            <EntityTypeMapping TypeName="EnlazaTEA2023Model.Cita">
-              <MappingFragment StoreEntitySet="Cita">
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="Horario" ColumnName="Horario" />
-                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="IdEspecialista" ColumnName="IdEspecialista" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="IdCita" ColumnName="IdCita" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="ActualizarEstatusCita" FunctionName="EnlazaTEA2023Model.Store.ActualizarEstatusCita" />
           <FunctionImportMapping FunctionImportName="AgregarCita" FunctionName="EnlazaTEA2023Model.Store.AgregarCita" />
           <EntitySetMapping Name="Multimedias">
@@ -1381,6 +1427,30 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="MultimediaUpdate" FunctionName="EnlazaTEA2023Model.Store.MultimediaUpdate" />
+          <EntitySetMapping Name="Citas">
+            <EntityTypeMapping TypeName="EnlazaTEA2023Model.Cita">
+              <MappingFragment StoreEntitySet="Cita">
+                <ScalarProperty Name="Observacion" ColumnName="Observacion" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="Virtual" ColumnName="Virtual" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Horario" ColumnName="Horario" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="IdEspecialista" ColumnName="IdEspecialista" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="IdCita" ColumnName="IdCita" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetallesCitas">
+            <EntityTypeMapping TypeName="EnlazaTEA2023Model.DetallesCita">
+              <MappingFragment StoreEntitySet="DetallesCita">
+                <ScalarProperty Name="IdCita" ColumnName="IdCita" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="IdDetallesCita" ColumnName="IdDetallesCita" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

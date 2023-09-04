@@ -16,18 +16,76 @@
                     <table class="table table-striped table-hover table-responsive" id="myTable">
                         <thead>
                             <tr>
-                                <th>Número Cita</th>
+                                @*<th>Número Cita</th>*@
                                 <th>Fecha</th>
                                 <th>Hora</th>
+                                <th>Especialista</th>
+                                <th>Tipo</th>
+                                <th>Estatus</th>
+                                <th>Observación</th>
+                                <th>LLamada</th>
+                                <th>Cancelar</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (ML.Cita cita in Model.Citas)
                             {
                                 <tr>
-                                    <td>@cita.IdCita</td>
-                                    <td>@cita.Fecha</td>
+                                    @*<td>@cita.IdCita</td>*@
+                                    <td>@cita.Fecha.ToString("dd/MM/yyyy")</td>
                                     <td>@cita.Horario</td>
+                                    <td>@cita.Especialista.Usuario.Nombre @cita.Especialista.Usuario.ApellidoPaterno @cita.Especialista.Usuario.ApellidoMaterno</td>
+                                    <td>
+                                        @if (cita.Virtual)
+                                        {
+                                            @Html.Raw("Virtual")
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw("Presencial")
+                                        }
+                                    </td>
+                                    <td>
+                                        @switch (cita.Estatus)
+                                        {
+                                            case 1:
+                                                @Html.Raw("Pendiente")
+                                                break;
+                                            case 2:
+                                                @Html.Raw("Aceptada")
+                                                break;
+                                            case 3:
+                                                @Html.Raw("Rechazada")
+                                                break;
+                                            case 4:
+                                                @Html.Raw("Cancelada")
+                                                break;
+                                            case 5:
+                                                @Html.Raw("Completada")
+                                                break;
+                                        }
+                                    </td>
+                                    <td>@cita.Observacion</td>
+                                    <td>
+                                        @if (cita.Virtual && !string.IsNullOrEmpty(cita.Link))
+                                        {
+
+                                            <button type="button" class="btn btn-primary" onclick="window.open('@cita.Link', '_blank')">
+                                                Entrar
+                                            </button>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (cita.Estatus == 2 || cita.Estatus == 1)
+                                        {
+                                            <a class="btn btn-danger" href="@Url.Action("CancelarCita", "User", new { idCita = cita.IdCita })">Cancelar</a>
+                                        }
+                                        else if (cita.Estatus == 4 || cita.Estatus == 3)
+                                        {
+                                            <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("EliminarCitaPaciente", "User", new { idCita = cita.IdCita })'">Eliminar</button>
+                                        }
+                                    </td>
+
                                 </tr>
                             }
                         </tbody>
