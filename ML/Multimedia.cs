@@ -19,6 +19,7 @@ namespace ML
 
         public ML.Usuario Usuario { get; set; }
 
-        public List<Object> Multimedias { get; set; }
+        public ML.Like Like { get; set; }
+        public List<object> Multimedias { get; set; }
     }
 }

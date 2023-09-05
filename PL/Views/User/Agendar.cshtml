@@ -7,7 +7,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Fecha, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextBoxFor(model => model.Fecha, "{0:yyyy-MM-dd}", new { type = "date", id = "fechaPicker", @Value = DateTime.Now.ToString("yyyy-MM-dd"), @class = "form-control" })
+            @Html.TextBoxFor(m => m.Fecha, "{0:yyyy-MM-dd}", new { type = "date", @Value = DateTime.Now.ToString("yyyy-MM-dd"), @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Fecha, "", new { @class = "text-danger" })
         </div>
     </div>

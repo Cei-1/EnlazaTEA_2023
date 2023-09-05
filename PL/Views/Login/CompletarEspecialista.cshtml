@@ -48,7 +48,6 @@
                             @Html.TextBoxFor(m => m.Especialidad, new { @class = "form-control", onkeypress = "return SoloLetras(event,this)", @id = "txtEspecialidad" })
                             @Html.ValidationMessageFor(model => Model.Especialidad, "", new { @class = "text-danger", @id = "lblEspecialidadErrorMessage" })
                         </div>
-
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.Calle, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.Calle, new { @class = "form-control", onkeypress = "return NumerosLetras(event,this)", @id = "txtCalle" })
@@ -112,6 +111,11 @@
                     <center>
                         <input type="submit" value="Guardar" class="w-100 btn btn-lg btn-primary" />
                     </center>
+                    <div class="row mt-4">
+                        <div class="col">
+                            <h6><span class="fw-bold">Nota: </span>La direccion es del lugar donde atiendes normalmente.</h6>
+                        </div>
+                    </div>
                 }
 
             </div>

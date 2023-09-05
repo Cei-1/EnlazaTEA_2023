@@ -179,6 +179,8 @@
     <Content Include="Content\Images\ivana-square.jpg" />
     <Content Include="Content\Images\ivancik.jpg" />
     <Content Include="Content\Images\kal-visuals-square.jpg" />
+    <Content Include="Content\Images\Like-b.png" />
+    <Content Include="Content\Images\Like-w.png" />
     <Content Include="Content\Images\Like.png" />
     <Content Include="Content\Images\logo-ct-dark.png" />
     <Content Include="Content\Images\marie.jpg" />
@@ -208,7 +210,9 @@
     <Content Include="Image\facebook.png" />
     <Content Include="Image\gmail.png" />
     <Content Include="Image\instagram.png" />
+    <Content Include="Image\tiktok.png" />
     <Content Include="Image\Usuario.png" />
+    <Content Include="Image\YouTube.png" />
     <Content Include="Scripts\Blog\PreviewImage.js" />
     <Content Include="Scripts\Blog\Validaciones.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -240,6 +244,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Scripts\Imagen\PreviewImage.js" />
+    <Content Include="Content\Archivos\Instructivo.pdf" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -299,6 +304,7 @@
     <Content Include="Views\User\GetAllCitas.cshtml" />
     <Content Include="Views\User\GetAllCitasEspecilistas.cshtml" />
     <Content Include="Views\User\VerCita.cshtml" />
+    <Content Include="Views\Error\SinPermisos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
