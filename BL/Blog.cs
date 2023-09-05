@@ -103,6 +103,7 @@ namespace BL
                     DLBlog.Nombre = blog.Nombre;
                     DLBlog.Descripcion = blog.Descripcion;
                     DLBlog.Imagen = blog.Imagen;
+                    DLBlog.IdUsuario = blog.Usuario.IdUsuario;
 
                     context.Blogs.Add(DLBlog);
                     int RowsAffected = context.SaveChanges();
@@ -191,5 +192,49 @@ namespace BL
 
             return result;
         }
+        public static ML.Result GetByUser(int IdUsuario)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                {
+                    var query = context.BlogGetByUser(IdUsuario).ToList();
+                    result.Objects = new List<object>();
+
+                    if (query != null)
+                    {
+                        foreach (var obj in query)
+                        {
+                            ML.Blog blog = new ML.Blog();
+                            blog.IdBlog = obj.IdBlog;
+                            blog.Titulo = obj.Titulo;
+                            blog.Nombre = obj.Nombre;
+                            blog.Descripcion = obj.Descripcion;
+                            blog.Imagen = obj.Imagen;
+                            blog.Usuario = new ML.Usuario();
+                            blog.Usuario.IdUsuario = obj.IdUsuario.Value;
+
+
+                            result.Objects.Add(blog);
+                        }
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "Error al mostrar el blog";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+
     }
 }

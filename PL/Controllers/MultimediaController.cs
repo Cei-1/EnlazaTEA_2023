@@ -13,9 +13,8 @@ namespace PL.Controllers
         public ActionResult Index()
         {
             ML.Multimedia multimedia = new ML.Multimedia();
-            
-            ML.Result resultMultimedia = BL.Multimedia.GetAll();
-
+            int usuarioId = (int)Session["SessionUsuario"];
+            ML.Result resultMultimedia = BL.Multimedia.GetAllWithLikes(usuarioId);
             multimedia.Multimedias = resultMultimedia.Objects;
 
             return View(multimedia);
@@ -24,12 +23,15 @@ namespace PL.Controllers
         public ActionResult GetAll()
         {
             ML.Multimedia multimedia = new ML.Multimedia();
+            int usuarioId = (int)Session["SessionUsuario"];
 
-            ML.Result resultMultimedia = BL.Multimedia.GetAll();
+
+            ML.Result resultMultimedia = BL.Multimedia.GetByUser(usuarioId);
 
             multimedia.Multimedias = resultMultimedia.Objects;
 
             return View(multimedia);
+
         }
 
         [HttpGet]
@@ -67,7 +69,8 @@ namespace PL.Controllers
             {
                 multimedia.Audio = ConvertToBytes(audioFile);
             }
-
+            multimedia.Usuario = new ML.Usuario();
+            multimedia.Usuario.IdUsuario = (int)Session["SessionUsuario"];
             if (multimedia.IdMultimedia == 0)//add
             {
                 ML.Result result = BL.Multimedia.Add(multimedia);
@@ -140,8 +143,8 @@ namespace PL.Controllers
                 // Ruta de la imagen por defecto si no hay imagen
                 ViewBag.Imagen = Url.Content("~/Content/Images/bg-inicio-1.jpg");
             }
-            
-            if(multimedia.Tipo == "Video")
+
+            if (multimedia.Tipo == "Video")
             {
                 ViewBag.VideoID = multimedia.VideoID;
             }
@@ -169,6 +172,38 @@ namespace PL.Controllers
             BinaryReader reader = new BinaryReader(image.InputStream);
             imageBytes = reader.ReadBytes((int)image.ContentLength);
             return imageBytes;
+        }
+        /**Likes*/
+        public ActionResult AgregarLike(int IdMultimedia, bool esLike, int IdLike)
+        {
+            int usuarioId = (int)Session["SessionUsuario"];
+
+            if (IdLike == 0)//add
+            {
+                ML.Result result = BL.Multimedia.AgregarLike(IdMultimedia, esLike, usuarioId);
+                if (result.Correct)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+
+                    return RedirectToAction("Ver", new { id = IdMultimedia });
+                }
+            }
+            else//else
+            {
+                ML.Result result = BL.Multimedia.UpdateLike(IdMultimedia, esLike, usuarioId);
+                if (result.Correct)
+                {
+                    return RedirectToAction("Index", new { id = IdMultimedia });
+                }
+                else
+                {
+                    // Manejar el caso de error
+                    return RedirectToAction("Ver", new { id = IdMultimedia });
+                }
+            }
         }
 
     }

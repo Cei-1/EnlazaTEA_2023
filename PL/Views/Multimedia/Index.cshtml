@@ -4,36 +4,95 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
-
-@if (Model.Multimedias.Count > 0)
+@if (Session["SessionRol"] == null)
 {
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        @foreach (ML.Multimedia multimedias in Model.Multimedias)
-        {
-            <div class="col">
-                <div class="card h-100">
-                    @if (multimedias.Imagen != null)
-                    {
-                        <img src="data:image/jpg;base64,@Convert.ToBase64String(multimedias.Imagen)" class="card-img-top" alt="..." />
-                    }
-                    else
-                    {
-                        <img id="imgProducto" src="~/Content/Images/bg-inicio-1.jpg" class="card-img-top" alt="..." />
-                    }
-                    <div class="card-body">
-                        <h5 class="card-title">@multimedias.Titulo</h5>
-                        <p class="card-text">@multimedias.Contenido</p>
-                        <a class="btn btn-primary" href="@Url.Action("GetMultimediaById", "Multimedia", new { IdMultimedia = multimedias.IdMultimedia })">Leer Más</a>
+    @*<div class="alert alert-danger" role="alert">No tienes permitido ver esta pagina Inicia sesion</div>*@
+    <li>@Html.ActionLink("Login", "Login", "Login", new { area = "" }, new { @class = "nav-link" })</li>
 
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
 }
 else
 {
-    <div class="alert alert-danger" role="alert">No hay productos registrados. Da click en + para agregar un nuevo producto.</div>
+    int IdRol = Convert.ToInt32(Session["SessionRol"]);
+
+    if (IdRol == 1 || IdRol == 2)
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Multimedia</h2>
+                </div>
+            </div>
+            @if (Model.Multimedias.Count > 0)
+            {
+                <div class="row row-cols-1 row-cols-md-3 g-4">
+                    @foreach (ML.Multimedia multimedias in Model.Multimedias)
+                    {
+                        <div class="col">
+                            <div class="card h-100">
+                                @if (multimedias.Imagen != null)
+                                {
+                                    <img src="data:image/jpg;base64,@Convert.ToBase64String(multimedias.Imagen)" class="card-img-top" alt="..." />
+                                }
+                                else
+                                {
+                                    <img id="imgProducto" src="~/Content/Images/bg-inicio-1.jpg" class="card-img-top" alt="..." />
+                                }
+                                <div class="card-body">
+                                    <h5 class="card-title">@multimedias.Titulo</h5>
+                                    @*<p class="card-text">@multimedias.Contenido</p>*@
+
+                                    @*<p class="card-text">@multimedias.Like.UsuarioDioLike</p>*@
+
+                                    <p class="card-text">
+                                        @if (multimedias.Like.UsuarioDioLike)
+                                        {
+                                            if (multimedias.Like.IsLike)
+                                            {
+                                                <button class="btn btn-outline-light" onclick="location.href='@Url.Action("AgregarLike", "Multimedia", new { IdMultimedia = multimedias.IdMultimedia, esLike = !multimedias.Like.IsLike, IdLike = multimedias.Like.IdLike })'">
+                                                    @*<span>Quitar Like</span>*@
+                                                    <img src="~/Content/Images/Like-b.png" class="img-fluid rounded" alt="Imagen like" style="width: 30px; height: 30px;">
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <button class="btn btn-outline-light" onclick="location.href='@Url.Action("AgregarLike", "Multimedia", new { IdMultimedia = multimedias.IdMultimedia, esLike = !multimedias.Like.IsLike, IdLike = multimedias.Like.IdLike })'">
+                                                    @*<span>Dar Like</span>*@
+                                                    <img src="~/Content/Images/Like-w.png" class="img-fluid rounded" alt="Imagen like" style="width: 30px; height: 30px;">
+                                                </button>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            @*<span>No le has dado like</span>*@
+                                            <button class="btn btn-outline-light" onclick="location.href='@Url.Action("AgregarLike", "Multimedia", new { IdMultimedia = multimedias.IdMultimedia, esLike = !multimedias.Like.IsLike, IdLike = multimedias.Like.IdLike })'">
+                                                @*<span>Dar Like</span>*@
+                                                <img src="~/Content/Images/Like-w.png" class="img-fluid rounded" alt="Imagen like" style="width: 30px; height: 30px;">
+
+                                            </button>
+                                        }
+                                    </p>
+
+                                    <!-- Mostrar la cantidad total de likes -->
+                                    <p class="card-text">Total Likes: @multimedias.Like.CantidadLikes</p>
+
+                                    <a class="btn btn-primary" href="@Url.Action("GetMultimediaById", "Multimedia", new { IdMultimedia = multimedias.IdMultimedia })">Leer Más</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger" role="alert">No hay productos registrados. Da click en + para agregar un nuevo producto.</div>
+            }
+        </div>
+
+    }
+    else
+    {
+        @*<div class="alert alert-danger" role="alert">No tienes los permisos necesarios para ver esta pagina</div>*@
+        @Html.Partial("~/Views/Error/SinPermisos.cshtml");
+    }
 }

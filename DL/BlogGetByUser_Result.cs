@@ -10,14 +10,14 @@
 namespace DL
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class DetallesCita
+    public partial class BlogGetByUser_Result
     {
-        public int IdDetallesCita { get; set; }
-        public string Observaciones { get; set; }
-        public Nullable<int> IdCita { get; set; }
-    
-        public virtual Cita Cita { get; set; }
+        public int IdBlog { get; set; }
+        public string Titulo { get; set; }
+        public string Nombre { get; set; }
+        public string Descripcion { get; set; }
+        public byte[] Imagen { get; set; }
+        public Nullable<int> IdUsuario { get; set; }
     }
 }

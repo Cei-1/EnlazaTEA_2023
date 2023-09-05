@@ -17,6 +17,7 @@ namespace ML
         public string Descripcion { get; set; }
 
         public byte[] Imagen { get; set; }
+        public ML.Usuario Usuario { get; set; }
 
         public List<Object> Blogs { get; set; }
     }

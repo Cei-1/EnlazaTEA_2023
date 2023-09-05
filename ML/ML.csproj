@@ -46,6 +46,7 @@
     <Compile Include="Cita.cs" />
     <Compile Include="DetallesCita.cs" />
     <Compile Include="Especialista.cs" />
+    <Compile Include="Like.cs" />
     <Compile Include="Multimedia.cs" />
     <Compile Include="Paciente.cs" />
     <Compile Include="Result.cs" />

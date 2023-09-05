@@ -24,8 +24,9 @@ namespace PL.Controllers
         public ActionResult GetAll()
         {
             ML.Blog blog = new ML.Blog();
+            int usuarioId = (int)Session["SessionUsuario"];
 
-            ML.Result resultBlog = BL.Blog.GetAll();
+            ML.Result resultBlog = BL.Blog.GetByUser(usuarioId);
 
             blog.Blogs = resultBlog.Objects;
 
@@ -63,6 +64,8 @@ namespace PL.Controllers
                 blog.Imagen = ConvertToBytes(imgBlog);
             }
 
+            blog.Usuario = new ML.Usuario();
+            blog.Usuario.IdUsuario = (int)Session["SessionUsuario"];
             if (blog.IdBlog == 0)//add
             {
                 ML.Result result = BL.Blog.Add(blog);

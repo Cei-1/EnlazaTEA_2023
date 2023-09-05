@@ -10,36 +10,29 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">@ViewBag.Titulo</h3>
-
+                <h3 class="modal-title "><strong>@ViewBag.Titulo</strong></h3>
             </div>
             <div class="modal-body">
 
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <h3>@ViewBag.Nombre</h3>
-                    </div>
-                </div>
-                <div class="row">
+                @*<div class="row">
 
-                    <div class="col-md-12 text-center">
-                        @if (!string.IsNullOrEmpty(ViewBag.Imagen))
-                        {
-                            <img src="@ViewBag.Imagen" class="img-fluid rounded" alt="Imagen del Artículo" style="width: 300px; height: 250px;">
-                        }
-                        else
-                        {
-                            <img src="~/Content/Images/default-image.jpg" class="img-fluid rounded" alt="Imagen por defecto" style="width: 200px; height: 200px;">
-                        }
-                    </div>
-                </div>
+                        <div class="col-md-12 text-center">
+                            @if (!string.IsNullOrEmpty(ViewBag.Imagen))
+                            {
+                                <img src="@ViewBag.Imagen" class="img-fluid rounded" alt="Imagen del Artículo" style="width: 300px; height: 250px;">
+                            }
+                            else
+                            {
+                                <img src="~/Content/Images/default-image.jpg" class="img-fluid rounded" alt="Imagen por defecto" style="width: 200px; height: 200px;">
+                            }
+                        </div>
+                    </div>*@
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <hr>
 
                         <p class="lead">@ViewBag.Descripcion</p>
 
-                        @if (!string.IsNullOrEmpty(ViewBag.VideoID) && ViewBag.VideoID !="false")
+                        @if (!string.IsNullOrEmpty(ViewBag.VideoID) && ViewBag.VideoID != "false")
                         {
                             <iframe width="560" height="315" src="https://www.youtube.com/embed/@ViewBag.VideoID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         }
@@ -52,6 +45,13 @@
                         }
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <hr>
+
+                        <h3>@ViewBag.Nombre</h3>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 @Html.ActionLink("Regresar", "Index", "Multimedia", new { @class = "btn btn-primary" })
@@ -59,8 +59,6 @@
         </div>
     </div>
 </div>
-
-
 
 <script>
     $('#modalValidacion').modal('show');
