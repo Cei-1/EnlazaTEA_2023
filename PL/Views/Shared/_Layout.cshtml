@@ -47,6 +47,11 @@
                             <li>@Html.ActionLink("Especialistas", "Especialistas", "User", new { area = "" }, new { @class = "nav-link" })</li>
                             <li>@Html.ActionLink("Citas", "GetAllCitas", "User", new { area = "" }, new { @class = "nav-link" })</li>
                         }
+                        if (rol_id == 3)
+                        {
+                            <li>@Html.ActionLink("Especialistas", "Especialistas", "Admin", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Pacientes", "Pacientes", "Admin", new { area = "" }, new { @class = "nav-link" })</li>
+                        }
                     }
                 </ul>
                 @if (Session["SessionRol"] == null & Session["SessionUsuario"] == null)
@@ -63,12 +68,18 @@
                         @if (rol_id == 2)
                         {
                             <li>@Html.ActionLink("Perfil", "PerfilFamiliar", "User", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Cerrar Sesión", "CerrarSesion", "Login", new { area = "" }, new { @class = "nav-link" })</li>
+
+                        }
+                        else if (rol_id == 1)
+                        {
+                            <li>@Html.ActionLink("Perfil", "Perfil", "User", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Cerrar Sesión", "CerrarSesion", "Login", new { area = "" }, new { @class = "nav-link" })</li>
                         }
                         else
                         {
-                            <li>@Html.ActionLink("Perfil", "Perfil", "User", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Cerrar Sesión", "Login", "Admin", new { area = "" }, new { @class = "nav-link" })</li>
                         }
-                        <li>@Html.ActionLink("Cerrar Sesión", "CerrarSesion", "Login", new { area = "" }, new { @class = "nav-link" })</li>
                     </ul>
                 }
 
