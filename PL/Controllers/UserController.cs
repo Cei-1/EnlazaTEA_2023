@@ -360,11 +360,12 @@ namespace PL.Controllers
             }
         }
         [HttpPost]
-        public ActionResult AddDetalles(int IdCita, string Observaciones)
+        public ActionResult AddDetalles(int IdCita, string Observaciones, int Nivel, int IdFamiliar)
         {
 
                 // Llamar al método de la capa de negocios para actualizar los detalles de la cita
                 var resultUpdateDetalles = BL.Cita.AddDetalles(IdCita, Observaciones);
+            var resultUpdateNTDA = BL.Paciente.UpdateNivel(IdFamiliar, Nivel);
 
                 if (resultUpdateDetalles.Correct)
                 {
@@ -378,6 +379,19 @@ namespace PL.Controllers
 
                 return RedirectToAction("GetAllCitasEspecilistas");
             
+        }
+        public ActionResult Evaluacion()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddEvaluacion(int Calificacion)
+        {
+            int usuario_id = (int)Session["SessionUsuario"];
+            ML.Result result = new ML.Result();
+            result = BL.Paciente.AddEvaluacion(usuario_id, Calificacion);
+            return Json(new { success = true });
         }
 
     }

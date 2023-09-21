@@ -9,6 +9,8 @@
         <img src="~/Image/Usuario.png" alt="Imagen de cabecera" style="width:150px; height:150px;">
         <div class="d-flex justify-content-between">
             <h3>@Model.Nombre @Model.ApellidoPaterno @Model.ApellidoMaterno</h3>
+            @if (Model.Paciente.Evaluacion == 0)
+            {@Html.ActionLink("Evaluacion", "Evaluacion", "User", null, new { @class = "btn btn-primary" })}
             @Html.ActionLink("Editar Paciente", "ActualizarPaciente", "User", null, new { @class = "btn btn-primary" })
         </div>
     </div>

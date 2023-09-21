@@ -16,7 +16,7 @@ namespace BL
             Result result = new Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     //DateTime dt = DateTime.ParseExact(usuario.FechaNacimiento, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                     var query = context.AddUsuario(usuario.Nombre, usuario.ApellidoPaterno, usuario.ApellidoMaterno,usuario.FechaNacimiento,usuario.Email,usuario.Contraseña,usuario.Rol.IdRol);
@@ -46,7 +46,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = context.GetUsuarioByEmail(email).SingleOrDefault();
 
@@ -81,7 +81,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var usuarioQuery = context.GetUserById(idUsuario).SingleOrDefault();
 
@@ -112,6 +112,7 @@ namespace BL
                         usuario.Paciente.Estado = usuarioQuery.Estado;
                         usuario.Paciente.CP = usuarioQuery.CP;
                         usuario.Paciente.Escolaridad = usuarioQuery.Escolaridad;
+                        usuario.Paciente.Evaluacion = usuarioQuery.Evaluacion.Value;
 
                         result.Object = usuario;
                         result.Correct = true;
@@ -136,7 +137,7 @@ namespace BL
             Result result = new Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = context.UpdateUser(
                         usuario.IdUsuario,
@@ -172,7 +173,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var pacienteQuery = context.GetPacienteByIdUsuario(idUsuario).SingleOrDefault();
 
@@ -219,7 +220,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var parameters = new SqlParameter[]
                     {

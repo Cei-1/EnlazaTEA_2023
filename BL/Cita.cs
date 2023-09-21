@@ -16,7 +16,7 @@ namespace BL
             Result result = new Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var newCita = new DL.Cita
                     {
@@ -56,7 +56,7 @@ namespace BL
             Result result = new Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = from cita in context.Citas
                                 join paciente in context.Pacientes on cita.Usuario.IdUsuario equals paciente.Usuario.IdUsuario
@@ -73,8 +73,8 @@ namespace BL
                                     cita.Link,
                                     paciente.Nombre,
                                     paciente.ApellidoPaterno,
-                                    paciente.ApellidoMaterno
-
+                                    paciente.ApellidoMaterno,
+                                    paciente.Evaluacion
                                 };
 
                     List<object> citas = new List<object>();
@@ -90,6 +90,7 @@ namespace BL
                         cita.Usuario.Paciente.Nombre = item.Nombre;
                         cita.Usuario.Paciente.ApellidoPaterno = item.ApellidoPaterno;
                         cita.Usuario.Paciente.ApellidoMaterno = item.ApellidoMaterno;
+                        cita.Usuario.Paciente.Evaluacion = item.Evaluacion.Value;
                         cita.Especialista = new ML.Especialista();
                         cita.Especialista.IdEspecialista = item.IdEspecialista.Value;
                         cita.Fecha = item.Fecha.Value;
@@ -115,7 +116,7 @@ namespace BL
             Result result = new Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = from cita in context.Citas
                                 join especialista in context.Especialistas on cita.IdEspecialista equals especialista.IdEspecialista
@@ -177,7 +178,7 @@ namespace BL
             Result result = new Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = context.ActualizarEstatusCita(idCita, estatus);
                     if (query >= 1)
@@ -204,7 +205,7 @@ namespace BL
             Result result = new Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var citas = context.Citas.Where(cita => cita.IdCita == idCita); // Obtener citas no canceladas del usuario
 
@@ -230,7 +231,7 @@ namespace BL
             Result result = new Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var cita = context.Citas.FirstOrDefault(c => c.IdCita == idCita); // Buscar la cita por su IdCita
 
@@ -260,7 +261,7 @@ namespace BL
             Result result = new Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var citas = context.Citas.Where(cita => cita.IdCita == idCita); // Obtener citas no canceladas del usuario
 
@@ -286,7 +287,7 @@ namespace BL
             Result result = new Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var citas = context.Citas.Where(cita => cita.IdCita == idCita); // Obtener citas no canceladas del usuario
 
@@ -312,7 +313,7 @@ namespace BL
             Result result = new Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var citas = context.Citas.Where(cita => cita.IdCita == idCita); // Obtener citas no canceladas del usuario
 
@@ -339,7 +340,7 @@ namespace BL
 
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     // Actualiza la URL en la base de datos
                     var cita = context.Citas.FirstOrDefault(c => c.IdCita == idCita);
@@ -366,7 +367,7 @@ namespace BL
             Result result = new Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = from cita in context.Citas
                                 join especialista in context.Especialistas on cita.IdEspecialista equals especialista.IdEspecialista
@@ -388,7 +389,9 @@ namespace BL
                                     ApellidoMaternoEspecialista = especialista.Usuario.ApellidoMaterno,
                                     NombrePaciente = paciente.Nombre,
                                     ApellidoPaternoPaciente = paciente.ApellidoPaterno,
-                                    ApellidoMaternoPaciente = paciente.ApellidoMaterno
+                                    ApellidoMaternoPaciente = paciente.ApellidoMaterno,
+                                    Nivel = paciente.NivelTDA,
+                                    Familiar = paciente.IdUsuario
                                 };
 
 
@@ -410,6 +413,9 @@ namespace BL
                         cita.Usuario.Paciente.Nombre = item.NombrePaciente;
                         cita.Usuario.Paciente.ApellidoPaterno = item.ApellidoPaternoPaciente;
                         cita.Usuario.Paciente.ApellidoMaterno = item.ApellidoMaternoPaciente;
+                        cita.Usuario.Paciente.NivelTDA = item.Nivel.Value;
+                        cita.Usuario.Paciente.Usuario = new ML.Usuario();
+                        cita.Usuario.Paciente.Usuario.IdUsuario = item.Familiar.Value;
                         cita.Virtual = item.Virtual.Value;
                         cita.Observacion = item.Observacion;
                         cita.Link = item.Link;
@@ -441,7 +447,7 @@ namespace BL
             Result result = new Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var cita = context.Citas.FirstOrDefault(c => c.IdCita == idcita);
                     if (cita != null)

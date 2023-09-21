@@ -15,7 +15,7 @@ namespace BL
             Result result = new Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = context.AddEspecialista(especialista.NombreCarrera, especialista.NoCedula, especialista.Especialidad, especialista.Calle, especialista.NumeroExterno, especialista.NumeroInterno, especialista.Colonia, especialista.Ciudad, especialista.Estado, especialista.CodigoPostal, especialista.Telefono, especialista.Celular, especialista.Estatus, especialista.Usuario.IdUsuario);
 
@@ -45,7 +45,7 @@ namespace BL
 
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     // Obtener los datos del especialista mediante el procedimiento almacenado
                     var especialistaDL = context.sp_BuscarEspecialistaPorIdUsuario(IdUsuario).SingleOrDefault();
@@ -97,7 +97,7 @@ namespace BL
             try
             {
 
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var updateResult = context.ActualizarPerfilEspecialista(especialista.Usuario.IdUsuario, especialista.Calle, especialista.NumeroExterno, especialista.NumeroInterno, especialista.Ciudad, especialista.Estado, especialista.CodigoPostal, especialista.Telefono, especialista.Colonia, especialista.Celular);
 
@@ -129,7 +129,7 @@ namespace BL
             result.Objects = new List<object>();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = context.GetAllEspecialistas();
 
@@ -170,6 +170,37 @@ namespace BL
                 result.ErrorMessage = ex.Message;
             }
 
+            return result;
+        }
+        public static ML.Result UpdateEstatus(int Id, bool estatus)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
+                {
+                    // Buscar el paciente por su ID
+                    var especialista = context.Especialistas.SingleOrDefault(p => p.IdEspecialista == Id);
+
+                    if (especialista != null)
+                    {
+                        // Actualizar el campo Evaluacion
+                        especialista.Estatus = estatus;
+                        context.SaveChanges(); // Guardar los cambios en la base de datos
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "Paciente no encontrado";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+            }
             return result;
         }
 
