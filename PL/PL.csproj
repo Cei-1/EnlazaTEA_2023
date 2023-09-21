@@ -305,6 +305,11 @@
     <Content Include="Views\User\GetAllCitasEspecilistas.cshtml" />
     <Content Include="Views\User\VerCita.cshtml" />
     <Content Include="Views\Error\SinPermisos.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Admin\Especialistas.cshtml" />
+    <Content Include="Views\Admin\Pacientes.cshtml" />
+    <Content Include="Views\Admin\Modal.cshtml" />
+    <Content Include="Views\Admin\Modal2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

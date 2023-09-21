@@ -83,6 +83,63 @@ namespace BL
             }
             return result;
         }
+        public static ML.Result GetAll()
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                {
+                    // Obtener todos los registros de la tabla Paciente
+                    var pacientesDL = context.Pacientes.ToList();
+
+                    if (pacientesDL != null && pacientesDL.Count > 0)
+                    {
+                        List<ML.Paciente> pacientes = new List<ML.Paciente>();
+
+                        foreach (var pacienteDL in pacientesDL)
+                        {
+                            ML.Paciente paciente = new ML.Paciente();
+                            paciente.IdPaciente = pacienteDL.IdPaciente;
+                            paciente.Nombre = pacienteDL.Nombre;
+                            paciente.ApellidoPaterno = pacienteDL.ApellidoPaterno;
+                            paciente.ApellidoMaterno = pacienteDL.ApellidoMaterno;
+                            paciente.Parentesco = pacienteDL.Parentesco;
+                            paciente.NivelTDA = pacienteDL.NivelTDA.Value;
+                            paciente.Sexo = pacienteDL.Sexo.Value;
+                            paciente.Edad = pacienteDL.Edad.Value;
+                            paciente.Calle = pacienteDL.Calle;
+                            paciente.NumeroExterior = pacienteDL.NumeroExterior;
+                            paciente.NumeroInterior = pacienteDL.NumeroInterior;
+                            paciente.Colonia = pacienteDL.Colonia;
+                            paciente.Municipio = pacienteDL.Municipio;
+                            paciente.Estado = pacienteDL.Estado;
+                            paciente.CP = pacienteDL.CP;
+                            paciente.Escolaridad = pacienteDL.Escolaridad;
+                            paciente.Usuario = new ML.Usuario();
+                            paciente.Usuario.IdUsuario = pacienteDL.IdUsuario.Value;
+
+                            pacientes.Add(paciente);
+                        }
+
+                        result.Objects = result.Objects = pacientes.Cast<object>().ToList();
+                        ;
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "No se encontraron registros.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
 
     }
 }

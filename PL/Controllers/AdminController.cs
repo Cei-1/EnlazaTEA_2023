@@ -9,6 +9,61 @@ namespace PL.Controllers
     public class AdminController : Controller
     {
         // GET: Admin
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        public ActionResult Validacion(string email, string Contraseña)
+        {
+            if (email == "enlaza_tea_admi@enlaza.com" && Contraseña == "enlaza2023tea")
+            {
+                Session["SessionRol"] = 3;
+                Session["SessionUsuario"] = 0;
+                return View("Modal");
+            }
+            else
+            {
+                return View("Modal2");
+            }
+
+        }
+
+        public ActionResult Especialistas()
+        {
+            var result = BL.Especialista.GetAll();
+
+            if (result.Correct)
+            {
+                ML.Especialista especialista = new ML.Especialista();
+                especialista.Especialistas = result.Objects;
+                return View(especialista);
+            }
+            else
+            {
+                ViewBag.ErrorMessage = result.ErrorMessage;
+                return View();
+            }
+        }
+
+        public ActionResult Pacientes()
+        {
+            var result = BL.Paciente.GetAll();
+
+            if (result.Correct)
+            {
+                ML.Paciente paciente = new ML.Paciente();
+                paciente.Pacientes = result.Objects.Cast<ML.Paciente>().ToList();
+                return View(paciente);
+            }
+            else
+            {
+                ViewBag.ErrorMessage = result.ErrorMessage;
+                return View();
+            }
+        }
+
+
         public ActionResult ValidarCuentas()
         {
             ML.Result result = BL.Admin.GetAll();
