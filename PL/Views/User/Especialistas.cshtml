@@ -18,6 +18,8 @@
                             <tr>
                                 <th>Nombre Completo</th>
                                 <th>Especialidad</th>
+                                <th>Municipio</th>
+
                                 <th>Ver Perfil</th>
                             </tr>
                         </thead>
@@ -27,6 +29,7 @@
                                 <tr>
                                     <td>@(especialista.Usuario?.Nombre) @(especialista.Usuario?.ApellidoPaterno) @(especialista.Usuario?.ApellidoMaterno)</td>
                                     <td>@especialista.Especialidad</td>
+                                    <td>@especialista.Ciudad</td>
                                     <td>
                                         <a href="@Url.Action("Perfil", "User", new { IdUsuario = especialista.Usuario?.IdUsuario })">Ver Perfil</a>
                                     </td>

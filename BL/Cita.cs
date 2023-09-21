@@ -1,4 +1,5 @@
-﻿using ML;
+﻿using DL;
+using ML;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,6 +68,7 @@ namespace BL
                                     cita.Fecha,
                                     cita.Horario,
                                     cita.Estatus,
+                                    cita.Virtual,
                                     cita.Link,
                                     paciente.Nombre,
                                     paciente.ApellidoPaterno,
@@ -81,6 +83,7 @@ namespace BL
                         cita.IdCita = item.IdCita;
                         cita.Usuario = new ML.Usuario();
                         cita.Link = item.Link;
+                        cita.Virtual = item.Virtual.Value;
                         cita.Usuario.IdUsuario = item.IdUsuario.Value;
                         cita.Usuario.Paciente = new ML.Paciente();
                         cita.Usuario.Paciente.Nombre = item.Nombre;
@@ -116,6 +119,7 @@ namespace BL
                 {
                     var query = from cita in context.Citas
                                 join especialista in context.Especialistas on cita.IdEspecialista equals especialista.IdEspecialista
+                                join DetallesCitas in context.DetallesCitas on cita.IdCita equals DetallesCitas.IdCita
                                 where cita.IdUsuario == idUsuario
                                 select new
                                 {
@@ -127,7 +131,7 @@ namespace BL
                                     cita.Estatus,
                                     cita.Virtual, // Agregado el campo Virtual
                                     cita.Link,
-                                    cita.Observacion,
+                                    DetallesCitas.Observaciones,
                                     especialista.Usuario.Nombre,
                                     especialista.Usuario.ApellidoPaterno,
                                     especialista.Usuario.ApellidoMaterno
@@ -147,8 +151,8 @@ namespace BL
                         cita.Especialista.Usuario.ApellidoPaterno = item.ApellidoPaterno;
                         cita.Especialista.Usuario.ApellidoMaterno = item.ApellidoMaterno;
                         cita.Virtual = item.Virtual.Value; // Asignar el valor del campo Virtual
-
-                        cita.Observacion = item.Observacion;
+                        cita.Detalles = new ML.DetallesCita();
+                        cita.Detalles.Observaciones = item.Observaciones;
                         cita.Link = item.Link;
                         cita.Fecha = item.Fecha.Value.Date;
 
