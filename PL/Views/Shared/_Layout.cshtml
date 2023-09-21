@@ -51,6 +51,7 @@
                         {
                             <li>@Html.ActionLink("Especialistas", "Especialistas", "Admin", new { area = "" }, new { @class = "nav-link" })</li>
                             <li>@Html.ActionLink("Pacientes", "Pacientes", "Admin", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Cedulas", "ValidarCuentas", "Admin", new { area = "" }, new { @class = "nav-link" })</li>
                         }
                     }
                 </ul>
@@ -78,7 +79,7 @@
                         }
                         else
                         {
-                            <li>@Html.ActionLink("Cerrar Sesión", "Login", "Admin", new { area = "" }, new { @class = "nav-link" })</li>
+                            <li>@Html.ActionLink("Cerrar Sesión", "CerrarSesion", "Admin", new { area = "" }, new { @class = "nav-link" })</li>
                         }
                     </ul>
                 }

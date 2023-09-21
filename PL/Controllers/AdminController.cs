@@ -63,6 +63,12 @@ namespace PL.Controllers
             }
         }
 
+        public ActionResult CerrarSesion()
+        {
+            Session["SessionRol"] = null;
+            Session["SessionUsuario"] = null;
+            return RedirectToAction("Index", "Home");
+        }
 
         public ActionResult ValidarCuentas()
         {

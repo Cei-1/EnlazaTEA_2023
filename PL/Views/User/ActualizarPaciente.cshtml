@@ -35,6 +35,13 @@
     {
         <div class="container">
             <div class="row">
+
+                <div class="col-md-4 form-group" style="display:none;">
+                    @Html.LabelFor(model => model.IdPaciente, new { @class = "form-label" })
+                    @Html.TextBoxFor(model => model.IdPaciente, new { @class = "form-control", @id = "txtid" })
+                    @Html.ValidationMessageFor(model => Model.IdPaciente, "", new { @class = "text-danger", @id = "lblidErrorMessage" })
+                </div>
+
                 <div class="col-md-4 form-group">
                     @Html.LabelFor(model => model.Nombre, new { @class = "form-label" })
                     @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", onkeypress = "return SoloLetras(event,this)", @id = "txtNombre" })
