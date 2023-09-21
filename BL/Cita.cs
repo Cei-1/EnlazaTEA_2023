@@ -2,6 +2,7 @@
 using ML;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -109,7 +110,6 @@ namespace BL
             return result;
         }
 
-
         public static Result GetCitasByUsuario(int idUsuario)
         {
             Result result = new Result();
@@ -119,7 +119,6 @@ namespace BL
                 {
                     var query = from cita in context.Citas
                                 join especialista in context.Especialistas on cita.IdEspecialista equals especialista.IdEspecialista
-                                join DetallesCitas in context.DetallesCitas on cita.IdCita equals DetallesCitas.IdCita
                                 where cita.IdUsuario == idUsuario
                                 select new
                                 {
@@ -129,9 +128,9 @@ namespace BL
                                     cita.Fecha,
                                     cita.Horario,
                                     cita.Estatus,
-                                    cita.Virtual, // Agregado el campo Virtual
+                                    cita.Virtual, 
                                     cita.Link,
-                                    DetallesCitas.Observaciones,
+                                    cita.Observacion,
                                     especialista.Usuario.Nombre,
                                     especialista.Usuario.ApellidoPaterno,
                                     especialista.Usuario.ApellidoMaterno
@@ -150,9 +149,9 @@ namespace BL
                         cita.Especialista.Usuario.Nombre = item.Nombre;
                         cita.Especialista.Usuario.ApellidoPaterno = item.ApellidoPaterno;
                         cita.Especialista.Usuario.ApellidoMaterno = item.ApellidoMaterno;
-                        cita.Virtual = item.Virtual.Value; // Asignar el valor del campo Virtual
+                        cita.Virtual = item.Virtual.Value;
                         cita.Detalles = new ML.DetallesCita();
-                        cita.Detalles.Observaciones = item.Observaciones;
+                        cita.Observacion = item.Observacion;
                         cita.Link = item.Link;
                         cita.Fecha = item.Fecha.Value.Date;
 
@@ -444,23 +443,26 @@ namespace BL
             {
                 using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
                 {
-                    var newCita = new DL.DetallesCita
+                    var cita = context.Citas.FirstOrDefault(c => c.IdCita == idcita);
+                    if (cita != null)
                     {
-                        Observaciones = observaciones,
-                        IdCita = idcita,
-                    };
+                        cita.Observacion = observaciones;
+                        int rowsAffected = context.SaveChanges();
 
-                    context.DetallesCitas.Add(newCita);
-                    int rowsAffected = context.SaveChanges();
-
-                    if (rowsAffected > 0)
-                    {
-                        result.Correct = true;
+                        if (rowsAffected > 0)
+                        {
+                            result.Correct = true;
+                        }
+                        else
+                        {
+                            result.Correct = false;
+                            result.ErrorMessage = "No se pudo actualizar la observación de la cita.";
+                        }
                     }
                     else
                     {
                         result.Correct = false;
-                        result.ErrorMessage = "No se pudo agregar la cita.";
+                        result.ErrorMessage = "No se encontró la cita con el ID especificado.";
                     }
                 }
             }
@@ -471,6 +473,7 @@ namespace BL
             }
             return result;
         }
+
 
     }
 }
