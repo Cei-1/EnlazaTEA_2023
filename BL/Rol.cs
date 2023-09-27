@@ -14,7 +14,7 @@ namespace BL
 
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
 
                     var query = context.GetAllRol().ToList();

@@ -20,6 +20,7 @@
                                 <th class="text-center">Fecha</th>
                                 <th class="text-center">Hora</th>
                                 <th class="text-center">Paciente</th>
+                                <th class="text-center">Puntaje Nivel TDA</th>
                                 <th class="text-center">Tipo</th>
                                 <th class="text-center">Estatus</th>
                                 <th class="text-center">Validar</th>
@@ -34,6 +35,7 @@
                                     <td class="text-center">@cita.Fecha.ToString("dd/MM/yyyy")</td>
                                     <td class="text-center">@cita.Horario</td>
                                     <td class="text-center">@cita.Usuario.Paciente.Nombre @cita.Usuario.Paciente.ApellidoPaterno @cita.Usuario.Paciente.ApellidoMaterno</td>
+                                    <td class="text-center">@cita.Usuario.Paciente.Evaluacion</td>
                                     <td class="text-center">
                                         @if (cita.Virtual)
                                         {
@@ -72,17 +74,24 @@
                                         }
                                         else if (cita.Estatus == 2 && cita.Estatus != 5)
                                         {
-                                            if (!string.IsNullOrEmpty(cita.Link))
+                                            if (cita.Virtual == true)
                                             {
-                                                <a class="btn btn-secondary llamada-btn" href="#" data-idcita="@cita.IdCita">Editar Llamada</a>
-                                                <button type="button" class="btn btn-primary" onclick="window.open('@cita.Link', '_blank')">
-                                                    Entrar
-                                                </button>
+                                                if (!string.IsNullOrEmpty(cita.Link))
+                                                {
+                                                    <a class="btn btn-secondary llamada-btn" href="#" data-idcita="@cita.IdCita">Editar Llamada</a>
+                                                    <button type="button" class="btn btn-primary" onclick="window.open('@cita.Link', '_blank')">
+                                                        Entrar
+                                                    </button>
+                                                }
+                                                else
+                                                {
+                                                    <a class="btn btn-danger" href="@Url.Action("CancelarCitaEspecialista", "User", new { idCita = cita.IdCita })">Cancelar</a>
+                                                    <a class="btn btn-secondary llamada-btn" href="#" data-idcita="@cita.IdCita">Llamada</a>
+                                                }
                                             }
                                             else
                                             {
                                                 <a class="btn btn-danger" href="@Url.Action("CancelarCitaEspecialista", "User", new { idCita = cita.IdCita })">Cancelar</a>
-                                                <a class="btn btn-secondary llamada-btn" href="#" data-idcita="@cita.IdCita">Llamada</a>
                                             }
                                         }
 

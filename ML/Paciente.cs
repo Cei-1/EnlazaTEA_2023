@@ -24,6 +24,7 @@ namespace ML
         public string Estado { get; set; }
         public string CP { get; set; }
         public string Escolaridad { get; set; }
+        public int Evaluacion { get; set; }
         public ML.Usuario Usuario { get; set; }
         public List<Paciente> Pacientes { get; set; }
     }

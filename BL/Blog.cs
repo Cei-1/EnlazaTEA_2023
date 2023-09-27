@@ -13,7 +13,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = context.BlogGetAll().ToList();
 
@@ -56,7 +56,7 @@ namespace BL
 
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = context.BlogGetById(IdBlog).FirstOrDefault();
 
@@ -94,7 +94,7 @@ namespace BL
 
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
 
                     DL.Blog DLBlog = new DL.Blog();
@@ -134,7 +134,7 @@ namespace BL
 
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = context.BlogUpdate(
                         blog.IdBlog,
@@ -168,7 +168,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = context.BlogDelete(IdBlog);
 
@@ -198,7 +198,7 @@ namespace BL
 
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = context.BlogGetByUser(IdUsuario).ToList();
                     result.Objects = new List<object>();

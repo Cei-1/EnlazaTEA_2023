@@ -15,7 +15,7 @@ namespace BL
             Result result = new Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = context.AgregarPaciente(paciente.Nombre,paciente.ApellidoPaterno, paciente.ApellidoMaterno, paciente.Parentesco, paciente.NivelTDA, paciente.Sexo, paciente.Edad, paciente.Calle, paciente.NumeroExterior,paciente.NumeroInterior,paciente.Colonia,paciente.Municipio,paciente.Estado,paciente.CP,paciente.Escolaridad,paciente.Usuario.IdUsuario);
                     if (query > 0)
@@ -41,7 +41,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     // Obtener los datos del paciente mediante el procedimiento almacenado
                     var pacienteDL = context.BuscarPacientePorIdUsuario(IdUsuario).SingleOrDefault();
@@ -88,7 +88,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     // Obtener todos los registros de la tabla Paciente
                     var pacientesDL = context.Pacientes.ToList();
@@ -130,6 +130,70 @@ namespace BL
                     {
                         result.Correct = false;
                         result.ErrorMessage = "No se encontraron registros.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+
+        public static ML.Result AddEvaluacion(int Id, int nuevaEvaluacion)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
+                {
+                    // Buscar el paciente por su ID
+                    var paciente = context.Pacientes.SingleOrDefault(p => p.IdUsuario == Id);
+
+                    if (paciente != null)
+                    {
+                        // Actualizar el campo Evaluacion
+                        paciente.Evaluacion = nuevaEvaluacion;
+                        context.SaveChanges(); // Guardar los cambios en la base de datos
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "Paciente no encontrado";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+            }
+            return result;
+        }
+
+        public static ML.Result UpdateNivel(int Id, int nuevaEvaluacion)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
+                {
+                    // Buscar el paciente por su ID
+                    var paciente = context.Pacientes.SingleOrDefault(p => p.IdUsuario == Id);
+
+                    if (paciente != null)
+                    {
+                        // Actualizar el campo Evaluacion
+                        paciente.NivelTDA = nuevaEvaluacion;
+                        context.SaveChanges(); // Guardar los cambios en la base de datos
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "Paciente no encontrado";
                     }
                 }
             }

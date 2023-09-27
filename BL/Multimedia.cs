@@ -13,7 +13,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     result.Objects = new List<object>();
 
@@ -76,7 +76,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     //var query = context.MultimediaGetAll().ToList();
                     var query = (from multi in context.Multimedias
@@ -146,7 +146,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = context.MultimediaGetAll().ToList();
 
@@ -191,7 +191,7 @@ namespace BL
 
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = context.MultimediaGetById(IdMultimedia).FirstOrDefault();
 
@@ -233,7 +233,7 @@ namespace BL
 
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
 
                     DL.Multimedia DLMultimedia = new DL.Multimedia();
@@ -275,7 +275,7 @@ namespace BL
 
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = context.MultimediaUpdate(
                         multimedia.IdMultimedia,
@@ -311,7 +311,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = context.MultimediaDelete(IdMultimedia);
 
@@ -342,7 +342,7 @@ namespace BL
 
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = context.MultimediaGetByUser(IdUsuario).ToList();
                     result.Objects = new List<object>();
@@ -404,7 +404,7 @@ namespace BL
 
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
 
                     DL.Like DLLike = new DL.Like();
@@ -440,7 +440,7 @@ namespace BL
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = (from likeDL in context.Likes
                                      //where likeDL.IdLike ==  likeUp.IdLike &&
@@ -475,7 +475,7 @@ namespace BL
 
             try
             {
-                using (DL.EnlazaTEA2023Entities1 context = new DL.EnlazaTEA2023Entities1())
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
                     var query = (from likeDL in context.Likes
                                  where likeDL.IdMultimedia == IdMultimedia

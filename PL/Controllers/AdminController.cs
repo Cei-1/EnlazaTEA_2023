@@ -85,5 +85,13 @@ namespace PL.Controllers
 
             return View(especialista);
         }
+
+        public ActionResult CuentaValidada(int Id)
+        {
+            bool estatus = true;
+            ML.Result result = new ML.Result();
+            result = BL.Especialista.UpdateEstatus(Id, estatus);
+            return View("Modal3");
+        }
     }
 }

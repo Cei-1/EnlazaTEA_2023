@@ -1,0 +1,525 @@
+﻿@{
+    ViewBag.Title = "Evaluacion";
+}
+
+<h2>Evaluacion</h2>
+
+<form method="post" id="evaluacion-form">
+    <div class="form-group">
+        <label for="pregunta1">1. El niño se comporta de forma anticuada o parece un niño precoz</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta1" id="pregunta1-si" value="2">
+            <label class="form-check-label" for="pregunta1-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta1" id="pregunta1-no" value="0">
+            <label class="form-check-label" for="pregunta1-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta1" id="pregunta1-algo" value="1">
+            <label class="form-check-label" for="pregunta1-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta2">2. Es percibido como un "profesor excéntrico" por los otros niños</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta2" id="pregunta2-si" value="2">
+            <label class="form-check-label" for="pregunta2-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta2" id="pregunta2-no" value="0">
+            <label class="form-check-label" for="pregunta2-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta2" id="pregunta2-algo" value="1">
+            <label class="form-check-label" for="pregunta2-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta3">3. Vive en cierto sentido en su propio mundo con sus intereses intelectuales restringidos e idiosincrásicos.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta3" id="pregunta3-si" value="2">
+            <label class="form-check-label" for="pregunta3-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta3" id="pregunta3-no" value="0">
+            <label class="form-check-label" for="pregunta3-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta3" id="pregunta3-algo" value="1">
+            <label class="form-check-label" for="pregunta3-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta4">4. El niño acumula datos sobre ciertos temas (buena memoria mecánica) pero realmente no entiende el significado de la información.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta4" id="pregunta4-si" value="2">
+            <label class="form-check-label" for="pregunta4-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta4" id="pregunta4-no" value="0">
+            <label class="form-check-label" for="pregunta4-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta4" id="pregunta4-algo" value="1">
+            <label class="form-check-label" for="pregunta4-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta5">5. El niño muestra una comprensión literal del lenguaje metafórico y ambiguo.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta5" id="pregunta5-si" value="2">
+            <label class="form-check-label" for="pregunta5-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta5" id="pregunta5-no" value="0">
+            <label class="form-check-label" for="pregunta5-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta5" id="pregunta5-algo" value="1">
+            <label class="form-check-label" for="pregunta5-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta6">6. Tiene un estilo de comunicación que se desvía de los patrones normales, con un lenguaje formal, adornado, pasado de moda o mecánico.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta6" id="pregunta6-si" value="2">
+            <label class="form-check-label" for="pregunta6-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta6" id="pregunta6-no" value="0">
+            <label class="form-check-label" for="pregunta6-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta6" id="pregunta6-algo" value="1">
+            <label class="form-check-label" for="pregunta6-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta7">7. Inventa palabras y expresiones idiosincrásicas.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta7" id="pregunta7-si" value="2">
+            <label class="form-check-label" for="pregunta7-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta7" id="pregunta7-no" value="0">
+            <label class="form-check-label" for="pregunta7-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta7" id="pregunta7-algo" value="1">
+            <label class="form-check-label" for="pregunta7-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta8">8. Tiene una voz o forma de hablar diferente.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta8" id="pregunta8-si" value="2">
+            <label class="form-check-label" for="pregunta8-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta8" id="pregunta8-no" value="0">
+            <label class="form-check-label" for="pregunta8-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta8" id="pregunta8-algo" value="1">
+            <label class="form-check-label" for="pregunta8-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta9">9. Emite sonidos de forma involuntaria; se aclara la garganta, gruñe, se da manotadas, llora, grita.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta9" id="pregunta9-si" value="2">
+            <label class="form-check-label" for="pregunta9-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta9" id="pregunta9-no" value="0">
+            <label class="form-check-label" for="pregunta9-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta9" id="pregunta9-algo" value="1">
+            <label class="form-check-label" for="pregunta9-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta10">10. Su actuación en algunas tareas es sorprendentemente buena, mientras que es sorprendentemente ineficaz en otras.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta10" id="pregunta10-si" value="2">
+            <label class="form-check-label" for="pregunta10-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta10" id="pregunta10-no" value="0">
+            <label class="form-check-label" for="pregunta10-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta10" id="pregunta10-algo" value="1">
+            <label class="form-check-label" for="pregunta10-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta11">11. Usa el lenguaje con fluidez pero fracasa en acomodar su lenguaje al contexto social o las necesidades de sus interlocutores.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta11" id="pregunta11-si" value="2">
+            <label class="form-check-label" for="pregunta11-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta11" id="pregunta11-no" value="0">
+            <label class="form-check-label" for="pregunta11-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta11" id="pregunta11-algo" value="1">
+            <label class="form-check-label" for="pregunta11-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta12">12. Carece de empatía.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta12" id="pregunta12-si" value="2">
+            <label class="form-check-label" for="pregunta12-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta12" id="pregunta12-no" value="0">
+            <label class="form-check-label" for="pregunta12-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta12" id="pregunta12-algo" value="1">
+            <label class="form-check-label" for="pregunta12-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta13">13. Hace comentarios embarazosos e inocentes.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta13" id="pregunta13-si" value="2">
+            <label class="form-check-label" for="pregunta13-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta13" id="pregunta13-no" value="0">
+            <label class="form-check-label" for="pregunta13-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta13" id="pregunta13-algo" value="1">
+            <label class="form-check-label" for="pregunta13-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta14">14. Tiene un estilo idiosincrásico de mirar a otros.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta14" id="pregunta14-si" value="2">
+            <label class="form-check-label" for="pregunta14-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta14" id="pregunta14-no" value="0">
+            <label class="form-check-label" for="pregunta14-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta14" id="pregunta14-algo" value="1">
+            <label class="form-check-label" for="pregunta14-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta15">15. Desea ser sociable pero fracasa en el desarrollo de relaciones de amistad con sus iguales.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta15" id="pregunta15-si" value="2">
+            <label class="form-check-label" for="pregunta15-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta15" id="pregunta15-no" value="0">
+            <label class="form-check-label" for="pregunta15-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta15" id="pregunta15-algo" value="1">
+            <label class="form-check-label" for="pregunta15-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta16">16. Puede estar con otros niños pero sólo cuando las cosas se hacen a su manera.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta16" id="pregunta16-si" value="2">
+            <label class="form-check-label" for="pregunta16-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta16" id="pregunta16-no" value="0">
+            <label class="form-check-label" for="pregunta16-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta16" id="pregunta16-algo" value="1">
+            <label class="form-check-label" for="pregunta16-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta17">17. Carece de un amigo íntimo.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta17" id="pregunta17-si" value="2">
+            <label class="form-check-label" for="pregunta17-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta17" id="pregunta17-no" value="0">
+            <label class="form-check-label" for="pregunta17-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta17" id="pregunta17-algo" value="1">
+            <label class="form-check-label" for="pregunta17-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta18">18. Carece de sentido común.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta18" id="pregunta18-si" value="2">
+            <label class="form-check-label" for="pregunta18-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta18" id="pregunta18-no" value="0">
+            <label class="form-check-label" for="pregunta18-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta18" id="pregunta18-algo" value="1">
+            <label class="form-check-label" for="pregunta18-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta19">19. Es poco habilidoso para los juegos: no tiene un sentido de la cooperación en equipo, marca sus "propios goles".</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta19" id="pregunta19-si" value="2">
+            <label class="form-check-label" for="pregunta19-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta19" id="pregunta19-no" value="0">
+            <label class="form-check-label" for="pregunta19-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta19" id="pregunta19-algo" value="1">
+            <label class="form-check-label" for="pregunta19-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta20">20. Manifiesta movimientos y gestos desgarbados, mal coordinados, torpes y desmañados.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta20" id="pregunta20-si" value="2">
+            <label class="form-check-label" for="pregunta20-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta20" id="pregunta20-no" value="0">
+            <label class="form-check-label" for="pregunta20-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta20" id="pregunta20-algo" value="1">
+            <label class="form-check-label" for="pregunta20-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta21">21. Manifiesta movimientos corporales y faciales involuntarios.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta21" id="pregunta21-si" value="2">
+            <label class="form-check-label" for="pregunta21-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta21" id="pregunta21-no" value="0">
+            <label class="form-check-label" for="pregunta21-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta21" id="pregunta21-algo" value="1">
+            <label class="form-check-label" for="pregunta21-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta22">22. Tiene dificultades para completar actividades diarias sencillas debido a la necesidad de repetir de forma compulsiva ciertas acciones o pensamientos.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta22" id="pregunta22-si" value="2">
+            <label class="form-check-label" for="pregunta22-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta22" id="pregunta22-no" value="0">
+            <label class="form-check-label" for="pregunta22-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta22" id="pregunta22-algo" value="1">
+            <label class="form-check-label" for="pregunta22-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta23">23. Tiene rutinas especiales: resiste el cambio.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta23" id="pregunta23-si" value="2">
+            <label class="form-check-label" for="pregunta23-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta23" id="pregunta23-no" value="0">
+            <label class="form-check-label" for="pregunta23-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta23" id="pregunta23-algo" value="1">
+            <label class="form-check-label" for="pregunta23-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta24">24. Muestra un apego idiosincrásico a objetos.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta24" id="pregunta24-si" value="2">
+            <label class="form-check-label" for="pregunta24-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta24" id="pregunta24-no" value="0">
+            <label class="form-check-label" for="pregunta24-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta24" id="pregunta24-algo" value="1">
+            <label class="form-check-label" for="pregunta24-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta25">25. Los demás niños se burlan de él y lo intimidan.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta25" id="pregunta25-si" value="2">
+            <label class="form-check-label" for="pregunta25-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta25" id="pregunta25-no" value="0">
+            <label class="form-check-label" for="pregunta25-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta25" id="pregunta25-algo" value="1">
+            <label class="form-check-label" for="pregunta25-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta26">26. Sus expresiones faciales son notablemente inusuales.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta26" id="pregunta26-si" value="2">
+            <label class="form-check-label" for="pregunta26-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta26" id="pregunta26-no" value="0">
+            <label class="form-check-label" for="pregunta26-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta26" id="pregunta26-algo" value="1">
+            <label class="form-check-label" for="pregunta26-algo">Algo</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="pregunta27">27. Su postura corporal es inusual de forma obvia.</label>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta27" id="pregunta27-si" value="2">
+            <label class="form-check-label" for="pregunta27-si">Si</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta27" id="pregunta27-no" value="0">
+            <label class="form-check-label" for="pregunta27-no">No</label>
+        </div>
+        <div class="form-check">
+            <input type="radio" class="form-check-input" name="pregunta27" id="pregunta27-algo" value="1">
+            <label class="form-check-label" for="pregunta27-algo">Algo</label>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obtener el formulario
+        var formulario = document.querySelector("form");
+
+        // Manejar el evento de envío del formulario
+        formulario.addEventListener("submit", function (event) {
+            event.preventDefault(); // Evitar que el formulario se envíe normalmente
+
+            // Variable para rastrear si todas las preguntas tienen respuesta
+            var todasLasPreguntasRespondidas = true;
+
+            // Obtener todos los elementos de radio buttons del formulario agrupados por nombre
+            var gruposDeRadioButtons = {};
+
+            var radioButtons = document.querySelectorAll("input[type='radio']");
+
+            radioButtons.forEach(function (radioButton) {
+                var nombrePregunta = radioButton.name;
+                if (!gruposDeRadioButtons[nombrePregunta]) {
+                    gruposDeRadioButtons[nombrePregunta] = [];
+                }
+                gruposDeRadioButtons[nombrePregunta].push(radioButton);
+            });
+
+            // Verificar si al menos un radio button está seleccionado en cada grupo
+            for (var nombrePregunta in gruposDeRadioButtons) {
+                var grupo = gruposDeRadioButtons[nombrePregunta];
+                var alMenosUnoSeleccionado = false;
+
+                grupo.forEach(function (radioButton) {
+                    if (radioButton.checked) {
+                        alMenosUnoSeleccionado = true;
+                    }
+                });
+
+                if (!alMenosUnoSeleccionado) {
+                    todasLasPreguntasRespondidas = false;
+                    break; // No es necesario seguir verificando si una pregunta no tiene respuesta
+                }
+            }
+
+            // Validar si todas las preguntas tienen respuesta
+            if (todasLasPreguntasRespondidas) {
+                // Realizar la suma de puntuación total y mostrarla en una alerta
+                var puntuacionTotal = 0;
+                radioButtons.forEach(function (radioButton) {
+                    if (radioButton.checked) {
+                        puntuacionTotal += parseInt(radioButton.value);
+                    }
+                });
+
+                // Enviar la puntuación total al controlador User y método AddEvaluacion
+                var formData = new FormData();
+                formData.append("Calificacion", puntuacionTotal);
+
+                fetch("/User/AddEvaluacion", {
+                    method: "POST",
+                    body: formData
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Mostrar un mensaje de éxito en un modal
+                        if (data.Success) {
+                            alert("Evaluación Guardada");
+                            // Redirigir al usuario a PerfilFamiliar
+                            window.location.href = "/User/PerfilFamiliar";
+                        } else {
+                            alert("Error al guardar la evaluación");
+                        }
+                    });
+            } else {
+                // Mostrar un mensaje de error si no todas las preguntas tienen respuesta
+                alert("Por favor, responde todas las preguntas antes de guardar.");
+            }
+        });
+    });
+</script>
+
+
+
+
+
