@@ -163,7 +163,7 @@ function NumerosLetras(event, textbox) {
     var id = textbox.id;
     var input = event.key;
 
-    if (/^[a-zA-Z0-9]+$/.test(input)) {
+    if (/^[a-zA-Z0-9\/\s]+$/.test(input)) {
         $("#" + id).css('border', '2px solid #28a745');
         $("#" + id + "ErrorMessage").text('');
         if (id == "txtCalle") {
@@ -199,7 +199,7 @@ function ConfirmarPassword() {
         return false;
     } else {
         $("#lblConfirmPasswordErrorMessage").text('') //jQuery
-        $("#txtConfirmPassword").css('border', '');
+        $("#txtConfirmPassword").css('border', '2px solid #28a745');
         //$("#txtConfirmPassword").css('border', '2px solid #23C552');
 
 

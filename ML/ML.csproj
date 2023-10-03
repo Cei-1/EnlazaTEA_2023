@@ -47,8 +47,10 @@
     <Compile Include="DetallesCita.cs" />
     <Compile Include="Especialista.cs" />
     <Compile Include="Like.cs" />
+    <Compile Include="Membresia.cs" />
     <Compile Include="Multimedia.cs" />
     <Compile Include="Paciente.cs" />
+    <Compile Include="Pago.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="Rol.cs" />
     <Compile Include="Usuario.cs" />
