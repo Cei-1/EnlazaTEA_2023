@@ -13,7 +13,7 @@ namespace ML
         public string ApellidoPaterno { get; set; }
         public string ApellidoMaterno { get; set; }
         public string Parentesco { get; set; }
-        public int NivelTDA { get; set; }
+        public int NivelTEA { get; set; }
         public bool Sexo { get; set; }
         public int Edad { get; set; }
         public string Calle { get; set; }

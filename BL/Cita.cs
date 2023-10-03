@@ -413,7 +413,7 @@ namespace BL
                         cita.Usuario.Paciente.Nombre = item.NombrePaciente;
                         cita.Usuario.Paciente.ApellidoPaterno = item.ApellidoPaternoPaciente;
                         cita.Usuario.Paciente.ApellidoMaterno = item.ApellidoMaternoPaciente;
-                        cita.Usuario.Paciente.NivelTDA = item.Nivel.Value;
+                        cita.Usuario.Paciente.NivelTEA = item.Nivel.Value;
                         cita.Usuario.Paciente.Usuario = new ML.Usuario();
                         cita.Usuario.Paciente.Usuario.IdUsuario = item.Familiar.Value;
                         cita.Virtual = item.Virtual.Value;

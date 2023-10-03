@@ -4,26 +4,30 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="092e3913b24c4244b3733037d7aa0b85" Name="Diagram1">
-        <EntityTypeShape EntityType="EnlazaTEA2023Entities.Blog" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EnlazaTEA2023Entities.Cita" Width="1.5" PointX="7.5" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EnlazaTEA2023Entities.DetallesCita" Width="1.5" PointX="9.75" PointY="13.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EnlazaTEA2023Entities.Especialista" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EnlazaTEA2023Entities.Like" Width="1.5" PointX="7.5" PointY="17.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EnlazaTEA2023Entities.Multimedia" Width="1.5" PointX="5.25" PointY="20.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EnlazaTEA2023Entities.Paciente" Width="1.5" PointX="5.25" PointY="24.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EnlazaTEA2023Entities.Rol" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
-        <EntityTypeShape EntityType="EnlazaTEA2023Entities.Usuario" Width="1.5" PointX="3" PointY="11.75" IsExpanded="true" />
-        <AssociationConnector Association="EnlazaTEA2023Entities.FK__Blog__IdUsuario__6B24EA82" ManuallyRouted="false" />
-        <AssociationConnector Association="EnlazaTEA2023Entities.FK__Cita__IdEspecial__5629CD9C" ManuallyRouted="false" />
-        <AssociationConnector Association="EnlazaTEA2023Entities.FK__Cita__IdUsuario__5535A963" ManuallyRouted="false" />
-        <AssociationConnector Association="EnlazaTEA2023Entities.FK__DetallesC__IdCit__6A30C649" ManuallyRouted="false" />
-        <AssociationConnector Association="EnlazaTEA2023Entities.FK__Especiali__IdUsu__3E52440B" ManuallyRouted="false" />
-        <AssociationConnector Association="EnlazaTEA2023Entities.FK__Likes__IdMultime__6754599E" ManuallyRouted="false" />
-        <AssociationConnector Association="EnlazaTEA2023Entities.FK__Likes__IdUsuario__66603565" ManuallyRouted="false" />
-        <AssociationConnector Association="EnlazaTEA2023Entities.FK__Multimedi__IdUsu__5DCAEF64" ManuallyRouted="false" />
-        <AssociationConnector Association="EnlazaTEA2023Entities.FK__Paciente__IdUsua__4316F928" ManuallyRouted="false" />
-        <AssociationConnector Association="EnlazaTEA2023Entities.FK__Usuario__IdRol__38996AB5" ManuallyRouted="false" />
+      <Diagram DiagramId="4186b60e80af42bd9653a1da8c0a7ffa" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="EnlazaTEA2023Model.Blog" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnlazaTEA2023Model.Cita" Width="1.5" PointX="7.5" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnlazaTEA2023Model.DetallesCita" Width="1.5" PointX="9.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnlazaTEA2023Model.Especialista" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnlazaTEA2023Model.Like" Width="1.5" PointX="7.5" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnlazaTEA2023Model.Membresia" Width="1.5" PointX="8.25" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnlazaTEA2023Model.Multimedia" Width="1.5" PointX="5.25" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnlazaTEA2023Model.Paciente" Width="1.5" PointX="5.25" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnlazaTEA2023Model.Pago" Width="1.5" PointX="10.5" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnlazaTEA2023Model.Rol" Width="1.5" PointX="0.75" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnlazaTEA2023Model.Usuario" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Blog__IdUsuario__6C190EBB" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Cita__IdEspecial__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Cita__IdUsuario__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__DetallesC__IdCit__6B24EA82" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Especiali__IdUsu__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Pago__IdEspecial__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Likes__IdMultime__68487DD7" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Likes__IdUsuario__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Pago__IdMembresi__72C60C4A" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Multimedi__IdUsu__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Paciente__IdUsua__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Usuario__IdRol__38996AB5" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

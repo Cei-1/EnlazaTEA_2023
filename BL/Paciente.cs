@@ -17,7 +17,7 @@ namespace BL
             {
                 using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
                 {
-                    var query = context.AgregarPaciente(paciente.Nombre,paciente.ApellidoPaterno, paciente.ApellidoMaterno, paciente.Parentesco, paciente.NivelTDA, paciente.Sexo, paciente.Edad, paciente.Calle, paciente.NumeroExterior,paciente.NumeroInterior,paciente.Colonia,paciente.Municipio,paciente.Estado,paciente.CP,paciente.Escolaridad,paciente.Usuario.IdUsuario);
+                    var query = context.AgregarPaciente(paciente.Nombre,paciente.ApellidoPaterno, paciente.ApellidoMaterno, paciente.Parentesco, paciente.NivelTEA, paciente.Sexo, paciente.Edad, paciente.Calle, paciente.NumeroExterior,paciente.NumeroInterior,paciente.Colonia,paciente.Municipio,paciente.Estado,paciente.CP,paciente.Escolaridad,paciente.Usuario.IdUsuario);
                     if (query > 0)
                     {
                         result.Correct = true;
@@ -53,7 +53,7 @@ namespace BL
                         paciente.ApellidoPaterno = pacienteDL.ApellidoPaterno;
                         paciente.ApellidoMaterno = pacienteDL.ApellidoMaterno;
                         paciente.Parentesco = pacienteDL.Parentesco;
-                        paciente.NivelTDA = pacienteDL.NivelTDA.Value;
+                        paciente.NivelTEA = pacienteDL.NivelTDA.Value;
                         paciente.Sexo = pacienteDL.Sexo.Value;
                         paciente.Edad = pacienteDL.Edad.Value;
                         paciente.Calle = pacienteDL.Calle;
@@ -105,7 +105,7 @@ namespace BL
                             paciente.ApellidoPaterno = pacienteDL.ApellidoPaterno;
                             paciente.ApellidoMaterno = pacienteDL.ApellidoMaterno;
                             paciente.Parentesco = pacienteDL.Parentesco;
-                            paciente.NivelTDA = pacienteDL.NivelTDA.Value;
+                            paciente.NivelTEA = pacienteDL.NivelTDA.Value;
                             paciente.Sexo = pacienteDL.Sexo.Value;
                             paciente.Edad = pacienteDL.Edad.Value;
                             paciente.Calle = pacienteDL.Calle;

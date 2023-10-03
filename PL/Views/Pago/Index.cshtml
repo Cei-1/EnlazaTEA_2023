@@ -1,0 +1,175 @@
+﻿@model ML.Membresia
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+
+
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Membresias</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+          rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          rel="stylesheet" />
+    <style>
+        body {
+            background-image: linear-gradient(180deg, #eee, #fff 100px, #fff);
+        }
+
+        .container {
+            max-width: 960px;
+        }
+
+        .pricing-header {
+            max-width: 700px;
+        }
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        media (min-width: 768px) {
+            .bd-placeholder-img-lg
+
+        {
+            font-size: 3.5rem;
+        }
+        }
+    </style>
+    <script type="text/javascript" src=""></script>
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script type="text/javascript"
+            src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+</head>
+<body oncontextmenu="return false" class="snippet-body">
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+        <symbol id="right" viewBox="0 0 16 16">
+            <title>Right Tick</title>
+            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+        </symbol>
+    </svg>
+
+    <div class="container py-3">
+        <header>
+            <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom"></div>
+
+            <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+                <h1 class="display-4 fw-normal">Precios</h1>
+                <p class="fs-5 text-muted">
+                    Consulta nuestros planes más eficaces. Puedes elegir según tu presupuesto.
+                </p>
+            </div>
+        </header>
+
+        <main>
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                @foreach (ML.Membresia membresia in Model.Membresias)
+                {
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-sm">
+                            <div class="card-header py-3">
+                                <h4 class="my-0 fw-normal">@membresia.Nombre</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title">
+                                    @membresia.Precio<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>Huele a Limon UwU</li>
+                                    <li>2 GB of storage</li>
+                                    <li>No Email support</li>
+                                    <li>No Help Center</li>
+                                </ul>
+                                @*<button type="button"
+                                        class="w-100 btn btn-lg btn-outline-danger">
+                                    Comenzar
+                                </button>*@
+                                <div class="d-flex flex-row">
+                                    <a  class="w-100 btn btn-lg btn-outline-danger" href="@Url.Action("AddCart", "Pago", new { IdMembresia = membresia.IdMembresia })">Comenzar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                @*<div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Free</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">
+                                ₹0<small class="text-muted fw-light">/mo</small>
+                            </h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>1 user included</li>
+                                <li>2 GB of storage</li>
+                                <li>No Email support</li>
+                                <li>No Help Center</li>
+                            </ul>
+                            <button type="button"
+                                    class="w-100 btn btn-lg btn-outline-danger">
+                                Sign up for free
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Pro</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">
+                                ₹550<small class="text-muted fw-light">/mo</small>
+                            </h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>20 users included</li>
+                                <li>10 GB of storage</li>
+                                <li>Priority email support</li>
+                                <li>Help center access</li>
+                            </ul>
+                            <button type="button" class="w-100 btn btn-lg btn-danger">
+                                Get started
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm border-danger">
+                        <div class="card-header py-3 text-white bg-danger border-danger">
+                            <h4 class="my-0 fw-normal">Enterprise</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">
+                                ₹1000<small class="text-muted fw-light">/mo</small>
+                            </h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>30 users included</li>
+                                <li>30 GB of storage</li>
+                                <li>Phone and email support</li>
+                                <li>Help center access</li>
+                            </ul>
+                            <button type="button" class="w-100 btn btn-lg btn-danger">
+                                Contact us
+                            </button>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+
+           
+        </main>
+    </div>
+    <script type="text/javascript"></script>
+</body>
+
+

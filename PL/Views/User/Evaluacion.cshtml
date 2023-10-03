@@ -503,7 +503,7 @@
                     .then(response => response.json())
                     .then(data => {
                         // Mostrar un mensaje de éxito en un modal
-                        if (data.Success) {
+                        if (data.success) {
                             alert("Evaluación Guardada");
                             // Redirigir al usuario a PerfilFamiliar
                             window.location.href = "/User/PerfilFamiliar";

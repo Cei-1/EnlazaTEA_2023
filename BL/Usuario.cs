@@ -101,7 +101,7 @@ namespace BL
                         usuario.Paciente.ApellidoPaterno = usuarioQuery.ApellidoPP;
                         usuario.Paciente.ApellidoMaterno = usuarioQuery.ApellidoMP;
                         usuario.Paciente.Parentesco = usuarioQuery.Parentesco;
-                        usuario.Paciente.NivelTDA = usuarioQuery.NivelTDA.Value;
+                        usuario.Paciente.NivelTEA = usuarioQuery.NivelTDA.Value;
                         usuario.Paciente.Sexo = usuarioQuery.Sexo.Value;
                         usuario.Paciente.Edad = usuarioQuery.Edad.Value;
                         usuario.Paciente.Calle = usuarioQuery.Calle;
@@ -185,7 +185,7 @@ namespace BL
                         paciente.ApellidoPaterno = pacienteQuery.ApellidoPaterno;
                         paciente.ApellidoMaterno = pacienteQuery.ApellidoMaterno;
                         paciente.Parentesco = pacienteQuery.Parentesco;
-                        paciente.NivelTDA = pacienteQuery.NivelTDA.Value;
+                        paciente.NivelTEA = pacienteQuery.NivelTDA.Value;
                         paciente.Sexo = pacienteQuery.Sexo.Value;
                         paciente.Edad = pacienteQuery.Edad.Value;
                         paciente.Calle = pacienteQuery.Calle;
@@ -229,7 +229,7 @@ namespace BL
                         new SqlParameter("@ApellidoPaterno", paciente.ApellidoPaterno),
                         new SqlParameter("@ApellidoMaterno", paciente.ApellidoMaterno),
                         new SqlParameter("@Parentesco", paciente.Parentesco),
-                        new SqlParameter("@NivelTDA", paciente.NivelTDA),
+                        new SqlParameter("@NivelTDA", paciente.NivelTEA),
                         new SqlParameter("@Sexo", paciente.Sexo),
                         new SqlParameter("@Edad", paciente.Edad),
                         new SqlParameter("@Calle", paciente.Calle),

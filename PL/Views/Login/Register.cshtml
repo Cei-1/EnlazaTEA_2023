@@ -81,6 +81,13 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
+                            @*@Html.LabelFor(m => m.Contraseña, new { @class = "form-label" })*@
+                            <label class="form-label">Confirmar Contraseña</label>
+                            @Html.PasswordFor(m => m.Contraseña, new { @class = "form-control", oninput = "ConfirmarPassword()", @id = "txtConfirmPassword" })
+                            @Html.ValidationMessageFor(m => m.Contraseña, "", new { @class = "text-danger", @id = "lblConfirmPasswordErrorMessage" })
+
+                        </div>
+                        <div class="col-md-6">
                             @Html.LabelFor(m => m.Rol.IdRol, new { @class = "form-label" })
                             @Html.DropDownListFor(m => m.Rol.IdRol, new SelectList(Model.Rol.Roles, "IdRol", "Nombre"), "Seleccionar", new { @class = "form-select" })
                         </div>

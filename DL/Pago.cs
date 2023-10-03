@@ -12,12 +12,15 @@ namespace DL
     using System;
     using System.Collections.Generic;
     
-    public partial class DetallesCita
+    public partial class Pago
     {
-        public int IdDetallesCita { get; set; }
-        public string Observaciones { get; set; }
-        public Nullable<int> IdCita { get; set; }
+        public int IdPago { get; set; }
+        public Nullable<System.DateTime> FechaPago { get; set; }
+        public Nullable<System.DateTime> FechaProximoPago { get; set; }
+        public Nullable<int> IdEspecialista { get; set; }
+        public Nullable<int> IdMembresia { get; set; }
     
-        public virtual Cita Cita { get; set; }
+        public virtual Especialista Especialista { get; set; }
+        public virtual Membresia Membresia { get; set; }
     }
 }

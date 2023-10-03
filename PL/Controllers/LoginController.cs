@@ -84,11 +84,9 @@ namespace PL.Controllers
         public ActionResult CompletarEspecialista()
         {
             return View();
-        }
-
+        }    
+       
         public ActionResult Validacion(string email, string Contraseña)
-        
-        
         {
             ML.Usuario usuario = new ML.Usuario();
 
@@ -170,6 +168,28 @@ namespace PL.Controllers
                 return View();
             }
         }
+        
+        [HttpGet]
+        public ActionResult Pagar()
+        {
+            // Obtener el valor de SessionUsuario
+            int idUsuario = Convert.ToInt32(Session["SessionUsuario"]);
+
+            // Llamar al método GetByIdEF para obtener el especialista asociado al usuario
+            ML.Result result = BL.Membresia.GetByUser(idUsuario);
+
+            if (result.Correct && result.Object != null)
+            {
+                // Si se encontró un especialista asociado al usuario, redirige al Index
+                return RedirectToAction("Index", "Pago");
+
+            }
+            else
+            {
+                // Si no se encontró un especialista asociado al usuario, muestra la vista
+                return View();
+            }
+        }
 
         [HttpPost]
         public ActionResult CompletarEspecialistaP(ML.Especialista especialista)
@@ -218,7 +238,7 @@ namespace PL.Controllers
         {
             int idUsuario = Convert.ToInt32(Session["SessionUsuario"]);
             paciente.Usuario = new ML.Usuario { IdUsuario = idUsuario };
-            paciente.NivelTDA = 1;
+            paciente.NivelTEA = 1;
 
             ML.Result result = BL.Paciente.Add(paciente);
 
