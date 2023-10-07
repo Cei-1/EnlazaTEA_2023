@@ -23,6 +23,7 @@ namespace PL.Controllers
         public ActionResult AddCart(int IdMembresia)
         {
             ML.Membresia membresia = new ML.Membresia();
+            Session["SessionMembresia"] = IdMembresia;
 
 
             return RedirectToAction("CheckOut", "Pago", new { IdMembership = IdMembresia });
@@ -75,7 +76,7 @@ namespace PL.Controllers
             TempData["Session"] = session.Id;
             Response.Headers.Add("Location", session.Url);
 
-            return new HttpStatusCodeResult(303);
+            return new HttpStatusCodeResult(303 );
         }
         public ActionResult OrderConfirmation()
         {
@@ -83,6 +84,9 @@ namespace PL.Controllers
             Session session = service.Get(TempData["Session"].ToString());
             if (session.PaymentStatus == "paid")
             {
+                int idUsuario = Convert.ToInt32(Session["SessionUsuario"]);
+                int idMembresia = Convert.ToInt32(Session["SessionMembresia"]);
+                BL.Pago.Add(idUsuario, idMembresia);
                 return View("Success");
             }
 
