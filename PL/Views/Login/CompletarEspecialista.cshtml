@@ -34,74 +34,85 @@
                             @Html.TextBoxFor(m => m.NombreCarrera, new { @class = "form-control", onkeypress = "return SoloLetras(event,this)", @id = "txtNombre" })
                             @Html.ValidationMessageFor(model => Model.NombreCarrera, "", new { @class = "text-danger", @id = "lblNombreErrorMessage" })
                         </div>
-                        <div class="col-md-6">
-                            @Html.LabelFor(m => m.NoCedula, new { @class = "form-label" })
-                            @Html.TextBoxFor(m => m.NoCedula, new { @class = "form-control", onkeypress = "return NumerosLetras(event,this)", @id = "txtNoCedula" })
-                            @Html.ValidationMessageFor(model => Model.NoCedula, "", new { @class = "text-danger", @id = "lblNoCedulaErrorMessage" })
-                        </div>
 
+                        <div class="col-md-6">
+                            <label class="form-label">¿Cuento con una cedula?</label>
+                            <div class="col-md-6 text-center">
+                                <input type="radio" name="CedulaExistente" value="true" id="rdbCedulaSi" /> <label for="rdbCedulaSi">Sí</label>
+                                <input type="radio" name="CedulaExistente" value="false" id="rdbCedulaNo" /> <label for="rdbCedulaNo">No</label>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="row">
+                        <div class="col-md-6" id="NoCedula">
+                            @Html.LabelFor(m => m.NoCedula, new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.NoCedula, new { @class = "form-control", onkeypress = "return SoloNumeros(event,this)", @id = "txtNoCedula" })
+                            @Html.ValidationMessageFor(model => Model.NoCedula, "", new { @class = "text-danger", @id = "lblNoCedulaErrorMessage" })
+                        </div>
+
+                        <div class="col-md-6" id="fileUploadDiv" style="display: none;">
+                            <label class="form-label">Captura comprobante experiencia</label>
+                            <input type="file" accept=".jpg, .jpeg, .png" name="file" id="file" class="form-control" />
+                            <span id="fileErrorMessage" class="text-danger"></span>
+                        </div>
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.Especialidad, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.Especialidad, new { @class = "form-control", onkeypress = "return SoloLetras(event,this)", @id = "txtEspecialidad" })
                             @Html.ValidationMessageFor(model => Model.Especialidad, "", new { @class = "text-danger", @id = "lblEspecialidadErrorMessage" })
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.Calle, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.Calle, new { @class = "form-control", onkeypress = "return NumerosLetras(event,this)", @id = "txtCalle" })
                             @Html.ValidationMessageFor(model => Model.Calle, "", new { @class = "text-danger", @id = "lblCalleErrorMessage" })
                         </div>
-                    </div>
-
-                    <div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.NumeroExterno, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.NumeroExterno, new { @class = "form-control", onkeypress = "return NumerosLetras(event,this)", @id = "txtNumeroExterior" })
                             @Html.ValidationMessageFor(model => Model.NumeroExterno, "", new { @class = "text-danger", @id = "lblNumeroExteriorErrorMessage" })
                         </div>
+                    </div>
 
+                    <div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.NumeroInterno, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.NumeroInterno, new { @class = "form-control", onkeypress = "return NumerosLetras(event,this)", @id = "txtNumeroInterior" })
                             @Html.ValidationMessageFor(model => Model.NumeroInterno, "", new { @class = "text-danger", @id = "lblNumeroInteriorErrorMessage" })
                         </div>
-                    </div>
-
-                    <div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.Colonia, new { @class = "form-label" }) <!-- Nuevo campo Colonia -->
                             @Html.TextBoxFor(m => m.Colonia, new { @class = "form-control", onkeypress = "return SoloLetras(event,this)", @id = "txtColonia" })
                             @Html.ValidationMessageFor(model => Model.Colonia, "", new { @class = "text-danger", @id = "lblColoniaErrorMessage" })
                         </div>
+                    </div>
 
+                    <div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.Ciudad, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.Ciudad, new { @class = "form-control", onkeypress = "return SoloLetras(event,this)", @id = "txtMunicipio" })
                             @Html.ValidationMessageFor(model => Model.Ciudad, "", new { @class = "text-danger", @id = "lblMunicipioErrorMessage" })
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.Estado, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.Estado, new { @class = "form-control", onkeypress = "return SoloLetras(event,this)", @id = "txtEstado" })
                             @Html.ValidationMessageFor(model => Model.Estado, "", new { @class = "text-danger", @id = "lblEstadoErrorMessage" })
                         </div>
-
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.CodigoPostal, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.CodigoPostal, new { @class = "form-control", onkeypress = "return SoloNumeros(event,this)", @id = "txtCP" })
                             @Html.ValidationMessageFor(model => Model.CodigoPostal, "", new { @class = "text-danger", @id = "lblCPErrorMessage" })
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.Telefono, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.Telefono, new { @class = "form-control", onkeypress = "return SoloNumeros(event,this)", @id = "txtTelefono" })
                             @Html.ValidationMessageFor(model => Model.Telefono, "", new { @class = "text-danger", @id = "lblTelefonoErrorMessage" })
                         </div>
-
+                    </div>
+                    <div class="row">
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.Celular, new { @class = "form-label" }) <!-- Nuevo campo Celular -->
                             @Html.TextBoxFor(m => m.Celular, new { @class = "form-control", onkeypress = "return SoloNumeros(event,this)", @id = "txtCelular" })
@@ -137,12 +148,12 @@
                     $('#lblNombreErrorMessage').text('');
                 }
 
-                if ($('#txtNoCedula').val() === '') {
-                    $('#lblNoCedulaErrorMessage').text('Campo obligatorio');
-                    isValid = false;
-                } else {
-                    $('#lblNoCedulaErrorMessage').text('');
-                }
+                //if ($('#txtNoCedula').val() === '') {
+                //    $('#lblNoCedulaErrorMessage').text('Campo obligatorio');
+                //    isValid = false;
+                //} else {
+                //    $('#lblNoCedulaErrorMessage').text('');
+                //}
 
                 if ($('#txtEspecialidad').val() === '') {
                     $('#lblEspecialidadErrorMessage').text('Campo obligatorio');
@@ -219,7 +230,41 @@
             });
         });
     </script>
+    <script>
+        $(document).ready(function () {
+            $('#rdbCedulaSi').change(function () {
+                $('#fileUploadDiv').hide();
+                $('#NoCedula').show();
+                $('#file').prop('required', false);
+                $('#txtNoCedula').prop('required', true);
+            });
 
+            $('#rdbCedulaNo').change(function () {
+                $('#fileUploadDiv').show();
+                $('#NoCedula').hide();
+                $('#file').prop('required', true);
+                $('#txtNoCedula').prop('required', false);
+            });
+
+            $('form').submit(function (e) {
+                var isValid = true;
+
+                // Resto de la validación aquí...
+
+                // Validación específica para el campo de carga de archivos
+                if ($('#rdbCedulaNo').is(':checked') && $('#file').get(0).files.length === 0) {
+                    $('#fileErrorMessage').text('Campo obligatorio');
+                    isValid = false;
+                } else {
+                    $('#fileErrorMessage').text('');
+                }
+
+                if (!isValid) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
