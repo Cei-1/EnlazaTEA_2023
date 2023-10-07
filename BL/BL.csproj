@@ -58,6 +58,7 @@
     <Compile Include="Membresia.cs" />
     <Compile Include="Multimedia.cs" />
     <Compile Include="Paciente.cs" />
+    <Compile Include="Pago.cs" />
     <Compile Include="Rol.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

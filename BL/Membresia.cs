@@ -111,7 +111,7 @@ namespace BL
                                  join pago  in context.Pagoes on membresia.IdMembresia equals pago.IdMembresia
                                  join especialista  in context.Especialistas on pago.IdEspecialista equals especialista.IdEspecialista
                                  join usuario  in context.Usuarios on especialista.IdUsuario equals usuario.IdUsuario
-                                 where especialista.IdEspecialista == IdUsuario
+                                 where especialista.IdUsuario == IdUsuario
                                  select new
                                  {
                                      IdMembresia = membresia.IdMembresia,

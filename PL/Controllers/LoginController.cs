@@ -181,13 +181,15 @@ namespace PL.Controllers
             if (result.Correct && result.Object != null)
             {
                 // Si se encontró un especialista asociado al usuario, redirige al Index
-                return RedirectToAction("Index", "Pago");
+                return RedirectToAction("Perfil", "User");
+
 
             }
             else
             {
                 // Si no se encontró un especialista asociado al usuario, muestra la vista
-                return View();
+                return RedirectToAction("Index", "Pago");
+
             }
         }
 
@@ -209,7 +211,7 @@ namespace PL.Controllers
                 ViewBag.Mensaje = "No se ha podido completar el usuario. Error: " + result.ErrorMessage;
             }
 
-            return PartialView("Modal");
+            return PartialView("Modal3");
         }
 
         [HttpGet]

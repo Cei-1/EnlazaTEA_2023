@@ -36,7 +36,7 @@
                         </div>
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.NoCedula, new { @class = "form-label" })
-                            @Html.TextBoxFor(m => m.NoCedula, new { @class = "form-control", onkeypress = "return SoloNumeros(event,this)", @id = "txtNoCedula" })
+                            @Html.TextBoxFor(m => m.NoCedula, new { @class = "form-control", onkeypress = "return NumerosLetras(event,this)", @id = "txtNoCedula" })
                             @Html.ValidationMessageFor(model => Model.NoCedula, "", new { @class = "text-danger", @id = "lblNoCedulaErrorMessage" })
                         </div>
 
