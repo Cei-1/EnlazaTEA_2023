@@ -37,7 +37,7 @@ namespace PL.Controllers
         public ActionResult Form(int? IdBlog)
         {
             ML.Blog blog = new ML.Blog();
-            
+
             if (IdBlog == null)
             {
                 return View(blog);
@@ -63,36 +63,41 @@ namespace PL.Controllers
             {
                 blog.Imagen = ConvertToBytes(imgBlog);
             }
-
-            blog.Usuario = new ML.Usuario();
-            blog.Usuario.IdUsuario = (int)Session["SessionUsuario"];
-            if (blog.IdBlog == 0)//add
+            if (ModelState.IsValid)
             {
-                ML.Result result = BL.Blog.Add(blog);
+                blog.Usuario = new ML.Usuario();
+                blog.Usuario.IdUsuario = (int)Session["SessionUsuario"];
+                if (blog.IdBlog == 0)//add
+                {
+                    ML.Result result = BL.Blog.Add(blog);
 
-                if (result.Correct)
-                {
-                    ViewBag.Mensaje = "Se ha registrado correctamente el Articulo";
+                    if (result.Correct)
+                    {
+                        ViewBag.Mensaje = "Se ha registrado correctamente el Articulo";
+                    }
+                    else
+                    {
+                        ViewBag.Mensaje = "No se ha registado correctamente el articulo " + result.ErrorMessage;
+                    }
                 }
-                else
+                else //update
                 {
-                    ViewBag.Mensaje = "No se ha registado correctamente el articulo " + result.ErrorMessage;
-                }
-            }
-            else //update
-            {
-                ML.Result result = BL.Blog.Update(blog);
+                    ML.Result result = BL.Blog.Update(blog);
 
-                if (result.Correct)
-                {
-                    ViewBag.Mensaje = "Se ha actualizado correctamente el articulo";
+                    if (result.Correct)
+                    {
+                        ViewBag.Mensaje = "Se ha actualizado correctamente el articulo";
+                    }
+                    else
+                    {
+                        ViewBag.Mensaje = "No se ha podido actualizar conrrectamente el articulo " + result.ErrorMessage;
+                    }
                 }
-                else
-                {
-                    ViewBag.Mensaje = "No se ha podido actualizar conrrectamente el articulo " + result.ErrorMessage;
-                }
+                return PartialView("Modal");
             }
-            return PartialView("Modal");
+
+            return View(blog);
+           
         }
 
         public ActionResult Delete(int IdBlog)

@@ -187,6 +187,8 @@
     <Content Include="Content\Images\carousel-2.jpg" />
     <Content Include="Content\Images\carousel-3.jpg" />
     <Content Include="Content\Images\Disc-1.jpg" />
+    <Content Include="Content\Images\favicon-enlaza.jpeg" />
+    <Content Include="Content\Images\favicon.ico" />
     <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\home-decor-1.jpg" />
     <Content Include="Content\Images\home-decor-2.jpg" />
@@ -221,6 +223,7 @@
     <Content Include="Content\Login\Login.css" />
     <Content Include="Content\Login\Registro.css" />
     <Content Include="favicon.ico" />
+    <Content Include="favicon1.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Image\facebook.png" />
