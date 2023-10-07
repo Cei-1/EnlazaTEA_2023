@@ -32,14 +32,14 @@
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.Nombre, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", onkeypress = "return SoloLetras(event,this)", @id = "txtNombre" })
-                            @Html.ValidationMessageFor(model => Model.Nombre, "", new { @class = "text-danger", @id = "lblNombreErrorMessage" })
+                            @*@Html.ValidationMessageFor(model => Model.Nombre, "", new { @class = "text-danger", @id = "lblNombreErrorMessage" })*@
 
                         </div>
 
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.ApellidoPaterno, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.ApellidoPaterno, new { @class = "form-control", onkeypress = "return SoloLetras(event,this)", @id = "txtApellidoPaterno" })
-                            @Html.ValidationMessageFor(model => Model.Nombre, "", new { @class = "text-danger", @id = "lblApellidoPaternoErrorMessage" })
+                            @*@Html.ValidationMessageFor(model => Model.Nombre, "", new { @class = "text-danger", @id = "lblApellidoPaternoErrorMessage" })*@
 
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                         <div class="col-md-6 bol">
                             @Html.LabelFor(m => m.ApellidoMaterno, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.ApellidoMaterno, new { @class = "form-control", onkeypress = "return SoloLetras(event,this)", @id = "txtApellidoMaterno" })
-                            @Html.ValidationMessageFor(model => Model.ApellidoMaterno, "", new { @class = "text-danger", @id = "lblApellidoMaternoErrorMessage" })
+                            @*@Html.ValidationMessageFor(model => Model.ApellidoMaterno, "", new { @class = "text-danger", @id = "lblApellidoMaternoErrorMessage" })*@
 
                         </div>
 
@@ -56,7 +56,7 @@
 
                             @Html.LabelFor(m => m.Parentesco, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.Parentesco, new { @class = "form-control", onkeypress = "return SoloLetras(event,this)", @id = "txtParentesco" })
-                            @Html.ValidationMessageFor(model => Model.Parentesco, "", new { @class = "text-danger", @id = "lblParentescoErrorMessage" })
+                            @*@Html.ValidationMessageFor(model => Model.Parentesco, "", new { @class = "text-danger", @id = "lblParentescoErrorMessage" })*@
 
                         </div>
                     </div>
@@ -80,7 +80,7 @@
 
                             @Html.LabelFor(m => m.Edad, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.Edad, new { @class = "form-control", onkeypress = "return SoloNumeros(event,this)", @id = "txtEdad" })
-                            @Html.ValidationMessageFor(model => Model.Edad, "", new { @class = "text-danger", @id = "lblEdadErrorMessage" })
+                            @*@Html.ValidationMessageFor(model => Model.Edad, "", new { @class = "text-danger", @id = "lblEdadErrorMessage" })*@
 
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.Calle, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.Calle, new { @class = "form-control", onkeypress = "return NumerosLetras(event,this)", @id = "txtCalle" })
-                            @Html.ValidationMessageFor(model => Model.Calle, "", new { @class = "text-danger", @id = "lblCalleErrorMessage" })
+                            @*@Html.ValidationMessageFor(model => Model.Calle, "", new { @class = "text-danger", @id = "lblCalleErrorMessage" })*@
 
                         </div>
 
@@ -98,7 +98,7 @@
 
                             @Html.LabelFor(m => m.NumeroExterior, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.NumeroExterior, new { @class = "form-control", onkeypress = "return NumerosLetras(event,this)", @id = "txtNumeroExterior" })
-                            @Html.ValidationMessageFor(model => Model.NumeroExterior, "", new { @class = "text-danger", @id = "lblNumeroExteriorErrorMessage" })
+                            @*@Html.ValidationMessageFor(model => Model.NumeroExterior, "", new { @class = "text-danger", @id = "lblNumeroExteriorErrorMessage" })*@
 
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.NumeroInterior, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.NumeroInterior, new { @class = "form-control", onkeypress = "return NumerosLetras(event,this)", @id = "txtNumeroInterior" })
-                            @Html.ValidationMessageFor(model => Model.NumeroInterior, "", new { @class = "text-danger", @id = "lblNumeroInteriorErrorMessage" })
+                            @*@Html.ValidationMessageFor(model => Model.NumeroInterior, "", new { @class = "text-danger", @id = "lblNumeroInteriorErrorMessage" })*@
 
                         </div>
 
@@ -116,7 +116,7 @@
 
                             @Html.LabelFor(m => m.Colonia, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.Colonia, new { @class = "form-control", onkeypress = "return SoloLetras(event,this)", @id = "txtColonia" })
-                            @Html.ValidationMessageFor(model => Model.Colonia, "", new { @class = "text-danger", @id = "lblColoniaErrorMessage" })
+                            @*@Html.ValidationMessageFor(model => Model.Colonia, "", new { @class = "text-danger", @id = "lblColoniaErrorMessage" })*@
 
                         </div>
                     </div>
@@ -126,7 +126,7 @@
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.Municipio, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.Municipio, new { @class = "form-control", onkeypress = "return SoloLetras(event,this)", @id = "txtMunicipio" })
-                            @Html.ValidationMessageFor(model => Model.Municipio, "", new { @class = "text-danger", @id = "lblMunicipioErrorMessage" })
+                            @*@Html.ValidationMessageFor(model => Model.Municipio, "", new { @class = "text-danger", @id = "lblMunicipioErrorMessage" })*@
 
                         </div>
 
@@ -134,7 +134,7 @@
 
                             @Html.LabelFor(m => m.Estado, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.Estado, new { @class = "form-control", onkeypress = "return SoloLetras(event,this)", @id = "txtEstado" })
-                            @Html.ValidationMessageFor(model => Model.Estado, "", new { @class = "text-danger", @id = "lblEstadoErrorMessage" })
+                            @*@Html.ValidationMessageFor(model => Model.Estado, "", new { @class = "text-danger", @id = "lblEstadoErrorMessage" })*@
 
                         </div>
                     </div>
@@ -144,7 +144,7 @@
                         <div class="col-md-6">
                             @Html.LabelFor(m => m.CP, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.CP, new { @class = "form-control", onkeypress = "return SoloNumeros(event,this)", @id = "txtCP" })
-                            @Html.ValidationMessageFor(model => Model.CP, "", new { @class = "text-danger", @id = "lblCPErrorMessage" })
+                            @*@Html.ValidationMessageFor(model => Model.CP, "", new { @class = "text-danger", @id = "lblCPErrorMessage" })*@
 
                         </div>
 
@@ -152,7 +152,7 @@
 
                             @Html.LabelFor(m => m.Escolaridad, new { @class = "form-label" })
                             @Html.TextBoxFor(m => m.Escolaridad, new { @class = "form-control", onkeypress = "return SoloLetras(event,this)", @id = "txtEscolaridad" })
-                            @Html.ValidationMessageFor(model => Model.Escolaridad, "", new { @class = "text-danger", @id = "lblEscolaridadMessage" })
+                            @*@Html.ValidationMessageFor(model => Model.Escolaridad, "", new { @class = "text-danger", @id = "lblEscolaridadMessage" })*@
 
                         </div>
                     </div>
