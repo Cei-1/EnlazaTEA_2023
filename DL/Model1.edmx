@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="EnlazaTEA2023Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="EnlazaTEA2023Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Blog">
           <Key>
             <PropertyRef Name="IdBlog" />
@@ -57,6 +57,7 @@
           <Property Name="IdUsuario" Type="int" />
           <Property Name="Colonia" Type="varchar" MaxLength="100" />
           <Property Name="Celular" Type="varchar" MaxLength="20" />
+          <Property Name="Comprobante" Type="varbinary(max)" />
           <Property Name="FechaRegistro" Type="datetime" />
         </EntityType>
         <EntityType Name="Likes">
@@ -143,7 +144,7 @@
           <Property Name="Contraseña" Type="varchar(max)" />
           <Property Name="IdRol" Type="int" />
         </EntityType>
-        <Association Name="FK__Blog__IdUsuario__6C190EBB">
+        <Association Name="FK__Blog__IdUsuario__6B24EA82">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Blog" Type="Self.Blog" Multiplicity="*" />
           <ReferentialConstraint>
@@ -179,7 +180,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DetallesC__IdCit__6B24EA82">
+        <Association Name="FK__DetallesC__IdCit__6A30C649">
           <End Role="Cita" Type="Self.Cita" Multiplicity="0..1" />
           <End Role="DetallesCita" Type="Self.DetallesCita" Multiplicity="*" />
           <ReferentialConstraint>
@@ -188,6 +189,18 @@
             </Principal>
             <Dependent Role="DetallesCita">
               <PropertyRef Name="IdCita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Especiali__IdUsu__02084FDA">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Especialista" Type="Self.Especialista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Especialista">
+              <PropertyRef Name="IdUsuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -203,7 +216,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Likes__IdMultime__68487DD7">
+        <Association Name="FK__Likes__IdMultime__6754599E">
           <End Role="Multimedia" Type="Self.Multimedia" Multiplicity="0..1" />
           <End Role="Likes" Type="Self.Likes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -215,7 +228,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Likes__IdUsuario__6754599E">
+        <Association Name="FK__Likes__IdUsuario__66603565">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Likes" Type="Self.Likes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -227,7 +240,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Multimedi__IdUsu__5EBF139D">
+        <Association Name="FK__Multimedi__IdUsu__5DCAEF64">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <End Role="Multimedia" Type="Self.Multimedia" Multiplicity="*" />
           <ReferentialConstraint>
@@ -251,7 +264,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pago__IdEspecial__71D1E811">
+        <Association Name="FK__Pago__IdEspecial__06CD04F7">
           <End Role="Especialista" Type="Self.Especialista" Multiplicity="0..1" />
           <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
           <ReferentialConstraint>
@@ -263,7 +276,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Pago__IdMembresi__72C60C4A">
+        <Association Name="FK__Pago__IdMembresi__07C12930">
           <End Role="Membresia" Type="Self.Membresia" Multiplicity="0..1" />
           <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
           <ReferentialConstraint>
@@ -470,7 +483,7 @@
           <EntitySet Name="Pago" EntityType="Self.Pago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Blog__IdUsuario__6C190EBB" Association="Self.FK__Blog__IdUsuario__6C190EBB">
+          <AssociationSet Name="FK__Blog__IdUsuario__6B24EA82" Association="Self.FK__Blog__IdUsuario__6B24EA82">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Blog" EntitySet="Blog" />
           </AssociationSet>
@@ -482,23 +495,27 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Cita" EntitySet="Cita" />
           </AssociationSet>
-          <AssociationSet Name="FK__DetallesC__IdCit__6B24EA82" Association="Self.FK__DetallesC__IdCit__6B24EA82">
+          <AssociationSet Name="FK__DetallesC__IdCit__6A30C649" Association="Self.FK__DetallesC__IdCit__6A30C649">
             <End Role="Cita" EntitySet="Cita" />
             <End Role="DetallesCita" EntitySet="DetallesCita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Especiali__IdUsu__02084FDA" Association="Self.FK__Especiali__IdUsu__02084FDA">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Especialista" EntitySet="Especialista" />
           </AssociationSet>
           <AssociationSet Name="FK__Especiali__IdUsu__3E52440B" Association="Self.FK__Especiali__IdUsu__3E52440B">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Especialista" EntitySet="Especialista" />
           </AssociationSet>
-          <AssociationSet Name="FK__Likes__IdMultime__68487DD7" Association="Self.FK__Likes__IdMultime__68487DD7">
+          <AssociationSet Name="FK__Likes__IdMultime__6754599E" Association="Self.FK__Likes__IdMultime__6754599E">
             <End Role="Multimedia" EntitySet="Multimedia" />
             <End Role="Likes" EntitySet="Likes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Likes__IdUsuario__6754599E" Association="Self.FK__Likes__IdUsuario__6754599E">
+          <AssociationSet Name="FK__Likes__IdUsuario__66603565" Association="Self.FK__Likes__IdUsuario__66603565">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Likes" EntitySet="Likes" />
           </AssociationSet>
-          <AssociationSet Name="FK__Multimedi__IdUsu__5EBF139D" Association="Self.FK__Multimedi__IdUsu__5EBF139D">
+          <AssociationSet Name="FK__Multimedi__IdUsu__5DCAEF64" Association="Self.FK__Multimedi__IdUsu__5DCAEF64">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Multimedia" EntitySet="Multimedia" />
           </AssociationSet>
@@ -506,11 +523,11 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Paciente" EntitySet="Paciente" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pago__IdEspecial__71D1E811" Association="Self.FK__Pago__IdEspecial__71D1E811">
+          <AssociationSet Name="FK__Pago__IdEspecial__06CD04F7" Association="Self.FK__Pago__IdEspecial__06CD04F7">
             <End Role="Especialista" EntitySet="Especialista" />
             <End Role="Pago" EntitySet="Pago" />
           </AssociationSet>
-          <AssociationSet Name="FK__Pago__IdMembresi__72C60C4A" Association="Self.FK__Pago__IdMembresi__72C60C4A">
+          <AssociationSet Name="FK__Pago__IdMembresi__07C12930" Association="Self.FK__Pago__IdMembresi__07C12930">
             <End Role="Membresia" EntitySet="Membresia" />
             <End Role="Pago" EntitySet="Pago" />
           </AssociationSet>
@@ -519,8 +536,7 @@
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EnlazaTEA2023Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -549,9 +565,9 @@
           <Property Name="Virtual" Type="Boolean" />
           <Property Name="Link" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Observacion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Especialista" Relationship="Self.FK__Cita__IdEspecial__5629CD9C" FromRole="Cita" ToRole="Especialista" />
           <NavigationProperty Name="Usuario" Relationship="Self.FK__Cita__IdUsuario__5535A963" FromRole="Cita" ToRole="Usuario" />
           <NavigationProperty Name="DetallesCitas" Relationship="Self.FK__DetallesC__IdCit__6B24EA82" FromRole="Cita" ToRole="DetallesCita" />
+          <NavigationProperty Name="Especialista" Relationship="EnlazaTEA2023Model.FK__Cita__IdEspecial__5629CD9C" FromRole="Cita" ToRole="Especialista" />
         </EntityType>
         <EntityType Name="DetallesCita">
           <Key>
@@ -561,30 +577,6 @@
           <Property Name="Observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IdCita" Type="Int32" />
           <NavigationProperty Name="Cita" Relationship="Self.FK__DetallesC__IdCit__6B24EA82" FromRole="DetallesCita" ToRole="Cita" />
-        </EntityType>
-        <EntityType Name="Especialista">
-          <Key>
-            <PropertyRef Name="IdEspecialista" />
-          </Key>
-          <Property Name="IdEspecialista" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NombreCarrera" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="NoCedula" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Especialidad" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Calle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="NumeroExterno" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="NumeroInterno" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Ciudad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Estatus" Type="Boolean" />
-          <Property Name="IdUsuario" Type="Int32" />
-          <Property Name="Colonia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Celular" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Citas" Relationship="Self.FK__Cita__IdEspecial__5629CD9C" FromRole="Especialista" ToRole="Cita" />
-          <NavigationProperty Name="Usuario" Relationship="Self.FK__Especiali__IdUsu__3E52440B" FromRole="Especialista" ToRole="Usuario" />
-          <NavigationProperty Name="Pagoes" Relationship="Self.FK__Pago__IdEspecial__71D1E811" FromRole="Especialista" ToRole="Pago" />
         </EntityType>
         <EntityType Name="Like">
           <Key>
@@ -654,8 +646,8 @@
           <Property Name="FechaProximoPago" Type="DateTime" Precision="3" />
           <Property Name="IdEspecialista" Type="Int32" />
           <Property Name="IdMembresia" Type="Int32" />
-          <NavigationProperty Name="Especialista" Relationship="Self.FK__Pago__IdEspecial__71D1E811" FromRole="Pago" ToRole="Especialista" />
           <NavigationProperty Name="Membresia" Relationship="Self.FK__Pago__IdMembresi__72C60C4A" FromRole="Pago" ToRole="Membresia" />
+          <NavigationProperty Name="Especialista" Relationship="EnlazaTEA2023Model.FK__Pago__IdEspecial__06CD04F7" FromRole="Pago" ToRole="Especialista" />
         </EntityType>
         <EntityType Name="Rol">
           <Key>
@@ -680,11 +672,12 @@
           <Property Name="IdRol" Type="Int32" />
           <NavigationProperty Name="Blogs" Relationship="Self.FK__Blog__IdUsuario__6C190EBB" FromRole="Usuario" ToRole="Blog" />
           <NavigationProperty Name="Citas" Relationship="Self.FK__Cita__IdUsuario__5535A963" FromRole="Usuario" ToRole="Cita" />
-          <NavigationProperty Name="Especialistas" Relationship="Self.FK__Especiali__IdUsu__3E52440B" FromRole="Usuario" ToRole="Especialista" />
           <NavigationProperty Name="Likes" Relationship="Self.FK__Likes__IdUsuario__6754599E" FromRole="Usuario" ToRole="Likes" />
           <NavigationProperty Name="Multimedias" Relationship="Self.FK__Multimedi__IdUsu__5EBF139D" FromRole="Usuario" ToRole="Multimedia" />
           <NavigationProperty Name="Pacientes" Relationship="Self.FK__Paciente__IdUsua__4316F928" FromRole="Usuario" ToRole="Paciente" />
           <NavigationProperty Name="Rol" Relationship="Self.FK__Usuario__IdRol__38996AB5" FromRole="Usuario" ToRole="Rol" />
+          <NavigationProperty Name="Especialistas" Relationship="EnlazaTEA2023Model.FK__Especiali__IdUsu__02084FDA" FromRole="Usuario" ToRole="Especialista" />
+          <NavigationProperty Name="Especialistas1" Relationship="EnlazaTEA2023Model.FK__Especiali__IdUsu__3E52440B" FromRole="Usuario" ToRole="Especialista" />
         </EntityType>
         <Association Name="FK__Blog__IdUsuario__6C190EBB">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
@@ -695,18 +688,6 @@
             </Principal>
             <Dependent Role="Blog">
               <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Cita__IdEspecial__5629CD9C">
-          <End Role="Especialista" Type="Self.Especialista" Multiplicity="0..1" />
-          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Especialista">
-              <PropertyRef Name="IdEspecialista" />
-            </Principal>
-            <Dependent Role="Cita">
-              <PropertyRef Name="IdEspecialista" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -731,30 +712,6 @@
             </Principal>
             <Dependent Role="DetallesCita">
               <PropertyRef Name="IdCita" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Especiali__IdUsu__3E52440B">
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
-          <End Role="Especialista" Type="Self.Especialista" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="IdUsuario" />
-            </Principal>
-            <Dependent Role="Especialista">
-              <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Pago__IdEspecial__71D1E811">
-          <End Role="Especialista" Type="Self.Especialista" Multiplicity="0..1" />
-          <End Role="Pago" Type="Self.Pago" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Especialista">
-              <PropertyRef Name="IdEspecialista" />
-            </Principal>
-            <Dependent Role="Pago">
-              <PropertyRef Name="IdEspecialista" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -834,7 +791,6 @@
           <EntitySet Name="Blogs" EntityType="Self.Blog" />
           <EntitySet Name="Citas" EntityType="Self.Cita" />
           <EntitySet Name="DetallesCitas" EntityType="Self.DetallesCita" />
-          <EntitySet Name="Especialistas" EntityType="Self.Especialista" />
           <EntitySet Name="Likes" EntityType="Self.Like" />
           <EntitySet Name="Membresias" EntityType="Self.Membresia" />
           <EntitySet Name="Multimedias" EntityType="Self.Multimedia" />
@@ -846,10 +802,6 @@
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="Blog" EntitySet="Blogs" />
           </AssociationSet>
-          <AssociationSet Name="FK__Cita__IdEspecial__5629CD9C" Association="Self.FK__Cita__IdEspecial__5629CD9C">
-            <End Role="Especialista" EntitySet="Especialistas" />
-            <End Role="Cita" EntitySet="Citas" />
-          </AssociationSet>
           <AssociationSet Name="FK__Cita__IdUsuario__5535A963" Association="Self.FK__Cita__IdUsuario__5535A963">
             <End Role="Usuario" EntitySet="Usuarios" />
             <End Role="Cita" EntitySet="Citas" />
@@ -857,14 +809,6 @@
           <AssociationSet Name="FK__DetallesC__IdCit__6B24EA82" Association="Self.FK__DetallesC__IdCit__6B24EA82">
             <End Role="Cita" EntitySet="Citas" />
             <End Role="DetallesCita" EntitySet="DetallesCitas" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Especiali__IdUsu__3E52440B" Association="Self.FK__Especiali__IdUsu__3E52440B">
-            <End Role="Usuario" EntitySet="Usuarios" />
-            <End Role="Especialista" EntitySet="Especialistas" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Pago__IdEspecial__71D1E811" Association="Self.FK__Pago__IdEspecial__71D1E811">
-            <End Role="Especialista" EntitySet="Especialistas" />
-            <End Role="Pago" EntitySet="Pagoes" />
           </AssociationSet>
           <AssociationSet Name="FK__Likes__IdMultime__68487DD7" Association="Self.FK__Likes__IdMultime__68487DD7">
             <End Role="Multimedia" EntitySet="Multimedias" />
@@ -905,22 +849,6 @@
             <Parameter Name="Telefono" Mode="In" Type="String" />
             <Parameter Name="Colonia" Mode="In" Type="String" />
             <Parameter Name="Celular" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="AddEspecialista">
-            <Parameter Name="NombreCarrera" Mode="In" Type="String" />
-            <Parameter Name="NoCedula" Mode="In" Type="String" />
-            <Parameter Name="Especialidad" Mode="In" Type="String" />
-            <Parameter Name="Calle" Mode="In" Type="String" />
-            <Parameter Name="NumeroExterno" Mode="In" Type="String" />
-            <Parameter Name="NumeroInterno" Mode="In" Type="String" />
-            <Parameter Name="Colonia" Mode="In" Type="String" />
-            <Parameter Name="Ciudad" Mode="In" Type="String" />
-            <Parameter Name="Estado" Mode="In" Type="String" />
-            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
-            <Parameter Name="Telefono" Mode="In" Type="String" />
-            <Parameter Name="Celular" Mode="In" Type="String" />
-            <Parameter Name="Estatus" Mode="In" Type="Boolean" />
-            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="AddUsuario">
             <Parameter Name="Nombre" Mode="In" Type="String" />
@@ -963,14 +891,14 @@
             <Parameter Name="Imagen" Mode="In" Type="Binary" />
           </FunctionImport>
           <FunctionImport Name="BlogDelete">
-            <Parameter Name="IdBlog" Mode="In" Type="Int32" />
+          <Parameter Name="IdBlog" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="BlogGetAll" ReturnType="Collection(EnlazaTEA2023Model.BlogGetAll_Result)" />
           <FunctionImport Name="BlogGetById" ReturnType="Collection(EnlazaTEA2023Model.BlogGetById_Result)">
-            <Parameter Name="IdBlog" Mode="In" Type="Int32" />
+          <Parameter Name="IdBlog" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="BlogGetByUser" ReturnType="Collection(EnlazaTEA2023Model.BlogGetByUser_Result)">
-            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="BlogUpdate">
             <Parameter Name="IdBlog" Mode="In" Type="Int32" />
@@ -980,28 +908,28 @@
             <Parameter Name="Imagen" Mode="In" Type="Binary" />
           </FunctionImport>
           <FunctionImport Name="BuscarCitasPorIdEspecialista" ReturnType="Collection(EnlazaTEA2023Model.BuscarCitasPorIdEspecialista_Result)">
-            <Parameter Name="IdEspecialista" Mode="In" Type="Int32" />
+          <Parameter Name="IdEspecialista" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="BuscarCitasPorIdUsuario" ReturnType="Collection(EnlazaTEA2023Model.BuscarCitasPorIdUsuario_Result)">
-            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="BuscarPacientePorIdUsuario" ReturnType="Collection(EnlazaTEA2023Model.BuscarPacientePorIdUsuario_Result)">
-            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="BuscarSolicitudCitasPorIdEspecialista" ReturnType="Collection(EnlazaTEA2023Model.BuscarSolicitudCitasPorIdEspecialista_Result)">
-            <Parameter Name="IdEspecialista" Mode="In" Type="Int32" />
+          <Parameter Name="IdEspecialista" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="ConsultarEspecialistasInactivos" ReturnType="Collection(EnlazaTEA2023Model.ConsultarEspecialistasInactivos_Result)" />
           <FunctionImport Name="GetAllEspecialistas" ReturnType="Collection(EnlazaTEA2023Model.GetAllEspecialistas_Result)" />
           <FunctionImport Name="GetAllRol" ReturnType="Collection(EnlazaTEA2023Model.GetAllRol_Result)" />
           <FunctionImport Name="GetPacienteByIdUsuario" ReturnType="Collection(EnlazaTEA2023Model.GetPacienteByIdUsuario_Result)">
-            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserById" ReturnType="Collection(EnlazaTEA2023Model.GetUserById_Result)">
-            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUsuarioByEmail" ReturnType="Collection(EnlazaTEA2023Model.GetUsuarioByEmail_Result)">
-            <Parameter Name="Email" Mode="In" Type="String" />
+          <Parameter Name="Email" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="MultimediaAdd">
             <Parameter Name="Titulo" Mode="In" Type="String" />
@@ -1013,14 +941,14 @@
             <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="MultimediaDelete">
-            <Parameter Name="IdMultimedia" Mode="In" Type="Int32" />
+          <Parameter Name="IdMultimedia" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="MultimediaGetAll" ReturnType="Collection(EnlazaTEA2023Model.MultimediaGetAll_Result)" />
           <FunctionImport Name="MultimediaGetById" ReturnType="Collection(EnlazaTEA2023Model.MultimediaGetById_Result)">
-            <Parameter Name="IdMultimedia" Mode="In" Type="Int32" />
+          <Parameter Name="IdMultimedia" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="MultimediaGetByUser" ReturnType="Collection(EnlazaTEA2023Model.MultimediaGetByUser_Result)">
-            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="MultimediaUpdate">
             <Parameter Name="IdMultimedia" Mode="In" Type="Int32" />
@@ -1032,7 +960,7 @@
             <Parameter Name="Audio" Mode="In" Type="Binary" />
           </FunctionImport>
           <FunctionImport Name="sp_BuscarEspecialistaPorIdUsuario" ReturnType="Collection(EnlazaTEA2023Model.sp_BuscarEspecialistaPorIdUsuario_Result)">
-            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+          <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UpdatePaciente">
             <Parameter Name="IdPaciente" Mode="In" Type="Int32" />
@@ -1060,6 +988,39 @@
             <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
             <Parameter Name="Email" Mode="In" Type="String" />
             <Parameter Name="Contraseña" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Especialistas" EntityType="EnlazaTEA2023Model.Especialista" />
+          <AssociationSet Name="FK__Cita__IdEspecial__5629CD9C" Association="EnlazaTEA2023Model.FK__Cita__IdEspecial__5629CD9C">
+            <End Role="Especialista" EntitySet="Especialistas" />
+            <End Role="Cita" EntitySet="Citas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Especiali__IdUsu__02084FDA" Association="EnlazaTEA2023Model.FK__Especiali__IdUsu__02084FDA">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Especialista" EntitySet="Especialistas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Especiali__IdUsu__3E52440B" Association="EnlazaTEA2023Model.FK__Especiali__IdUsu__3E52440B">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Especialista" EntitySet="Especialistas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pago__IdEspecial__06CD04F7" Association="EnlazaTEA2023Model.FK__Pago__IdEspecial__06CD04F7">
+            <End Role="Especialista" EntitySet="Especialistas" />
+            <End Role="Pago" EntitySet="Pagoes" />
+          </AssociationSet>
+          <FunctionImport Name="AddEspecialista">
+            <Parameter Name="NombreCarrera" Mode="In" Type="String" />
+            <Parameter Name="NoCedula" Mode="In" Type="String" />
+            <Parameter Name="Especialidad" Mode="In" Type="String" />
+            <Parameter Name="Calle" Mode="In" Type="String" />
+            <Parameter Name="NumeroExterno" Mode="In" Type="String" />
+            <Parameter Name="NumeroInterno" Mode="In" Type="String" />
+            <Parameter Name="Colonia" Mode="In" Type="String" />
+            <Parameter Name="Ciudad" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="String" />
+            <Parameter Name="CodigoPostal" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="Celular" Mode="In" Type="String" />
+            <Parameter Name="Estatus" Mode="In" Type="Boolean" />
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="BlogGetAll_Result">
@@ -1299,6 +1260,80 @@
           <Property Type="String" Name="UsuarioContraseña" Nullable="true" />
           <Property Type="Int32" Name="UsuarioIdRol" Nullable="true" />
         </ComplexType>
+        <EntityType Name="Especialista">
+          <Key>
+            <PropertyRef Name="IdEspecialista" />
+          </Key>
+          <Property Name="IdEspecialista" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreCarrera" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NoCedula" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Especialidad" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Calle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroExterno" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroInterno" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Ciudad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Estatus" Type="Boolean" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <Property Name="Colonia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Comprobante" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Citas" Relationship="EnlazaTEA2023Model.FK__Cita__IdEspecial__5629CD9C" FromRole="Especialista" ToRole="Cita" />
+          <NavigationProperty Name="Usuario" Relationship="EnlazaTEA2023Model.FK__Especiali__IdUsu__02084FDA" FromRole="Especialista" ToRole="Usuario" />
+          <NavigationProperty Name="Usuario1" Relationship="EnlazaTEA2023Model.FK__Especiali__IdUsu__3E52440B" FromRole="Especialista" ToRole="Usuario" />
+          <NavigationProperty Name="Pagoes" Relationship="EnlazaTEA2023Model.FK__Pago__IdEspecial__06CD04F7" FromRole="Especialista" ToRole="Pago" />
+        </EntityType>
+        <Association Name="FK__Cita__IdEspecial__5629CD9C">
+          <End Type="EnlazaTEA2023Model.Especialista" Role="Especialista" Multiplicity="0..1" />
+          <End Type="EnlazaTEA2023Model.Cita" Role="Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialista">
+              <PropertyRef Name="IdEspecialista" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="IdEspecialista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Especiali__IdUsu__02084FDA">
+          <End Type="EnlazaTEA2023Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="EnlazaTEA2023Model.Especialista" Role="Especialista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Especialista">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Especiali__IdUsu__3E52440B">
+          <End Type="EnlazaTEA2023Model.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="EnlazaTEA2023Model.Especialista" Role="Especialista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Especialista">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pago__IdEspecial__06CD04F7">
+          <End Type="EnlazaTEA2023Model.Especialista" Role="Especialista" Multiplicity="0..1" />
+          <End Type="EnlazaTEA2023Model.Pago" Role="Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Especialista">
+              <PropertyRef Name="IdEspecialista" />
+            </Principal>
+            <Dependent Role="Pago">
+              <PropertyRef Name="IdEspecialista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1338,28 +1373,6 @@
                 <ScalarProperty Name="IdDetallesCita" ColumnName="IdDetallesCita" />
                 <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
                 <ScalarProperty Name="IdCita" ColumnName="IdCita" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Especialistas">
-            <EntityTypeMapping TypeName="EnlazaTEA2023Model.Especialista">
-              <MappingFragment StoreEntitySet="Especialista">
-                <ScalarProperty Name="IdEspecialista" ColumnName="IdEspecialista" />
-                <ScalarProperty Name="NombreCarrera" ColumnName="NombreCarrera" />
-                <ScalarProperty Name="NoCedula" ColumnName="NoCedula" />
-                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
-                <ScalarProperty Name="Calle" ColumnName="Calle" />
-                <ScalarProperty Name="NumeroExterno" ColumnName="NumeroExterno" />
-                <ScalarProperty Name="NumeroInterno" ColumnName="NumeroInterno" />
-                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
-                <ScalarProperty Name="Celular" ColumnName="Celular" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1456,7 +1469,6 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="ActualizarEstatusCita" FunctionName="EnlazaTEA2023Model.Store.ActualizarEstatusCita" />
           <FunctionImportMapping FunctionImportName="ActualizarPerfilEspecialista" FunctionName="EnlazaTEA2023Model.Store.ActualizarPerfilEspecialista" />
-          <FunctionImportMapping FunctionImportName="AddEspecialista" FunctionName="EnlazaTEA2023Model.Store.AddEspecialista" />
           <FunctionImportMapping FunctionImportName="AddUsuario" FunctionName="EnlazaTEA2023Model.Store.AddUsuario" />
           <FunctionImportMapping FunctionImportName="AgregarCita" FunctionName="EnlazaTEA2023Model.Store.AgregarCita" />
           <FunctionImportMapping FunctionImportName="AgregarPaciente" FunctionName="EnlazaTEA2023Model.Store.AgregarPaciente" />
@@ -1773,6 +1785,30 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="UpdatePaciente" FunctionName="EnlazaTEA2023Model.Store.UpdatePaciente" />
           <FunctionImportMapping FunctionImportName="UpdateUser" FunctionName="EnlazaTEA2023Model.Store.UpdateUser" />
+          <EntitySetMapping Name="Especialistas">
+            <EntityTypeMapping TypeName="EnlazaTEA2023Model.Especialista">
+              <MappingFragment StoreEntitySet="Especialista">
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Comprobante" ColumnName="Comprobante" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="Colonia" ColumnName="Colonia" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="NumeroInterno" ColumnName="NumeroInterno" />
+                <ScalarProperty Name="NumeroExterno" ColumnName="NumeroExterno" />
+                <ScalarProperty Name="Calle" ColumnName="Calle" />
+                <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
+                <ScalarProperty Name="NoCedula" ColumnName="NoCedula" />
+                <ScalarProperty Name="NombreCarrera" ColumnName="NombreCarrera" />
+                <ScalarProperty Name="IdEspecialista" ColumnName="IdEspecialista" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddEspecialista" FunctionName="EnlazaTEA2023Model.Store.AddEspecialista" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
