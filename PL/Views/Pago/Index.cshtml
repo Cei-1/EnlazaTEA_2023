@@ -71,99 +71,101 @@
         </header>
 
         <main>
-            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-                @foreach (ML.Membresia membresia in Model.Membresias)
-                {
+            <div class="row row-cols-1 row-cols-md-3 mb-3 ">
+                <!--foreach (ML.Membresia membresia in Model.Membresias)
+                    //{
                     <div class="col">
                         <div class="card mb-4 rounded-3 shadow-sm">
                             <div class="card-header py-3">
-                                <h4 class="my-0 fw-normal">@membresia.Nombre</h4>
+                                <h4 class="my-0 fw-normal">membresia.Nombre</h4>
                             </div>
                             <div class="card-body">
                                 <h1 class="card-title pricing-card-title">
-                                    @membresia.Precio<small class="text-muted fw-light">/mx</small>
+                                    membresia.Precio<small class="text-muted fw-light">/mx</small>
                                 </h1>
                                 <ul class="list-unstyled mt-3 mb-4">
                                     <li>Huele a Limon UwU</li>
                                     <li>2 GB of storage</li>
                                     <li>No Email support</li>
                                     <li>No Help Center</li>
-                                </ul>
+                                </ul>-->
                                 @*<button type="button"
-                                        class="w-100 btn btn-lg btn-outline-danger">
+                                        class="w-100 btn btn-lg btn-outline-primary">
                                     Comenzar
                                 </button>*@
-                                <div class="d-flex flex-row">
-                                    <a  class="w-100 btn btn-lg btn-outline-danger" href="@Url.Action("AddCart", "Pago", new { IdMembresia = membresia.IdMembresia })">Comenzar</a>
+                                <!--<div class="d-flex flex-row">
+                                    <a  class="w-100 btn btn-lg btn-outline-primary" href="Url.Action("AddCart", "Pago", new { IdMembresia = membresia.IdMembresia })">Comenzar</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                }
-                @*<div class="col">
+                }-->
+                <div class="col">
                     <div class="card mb-4 rounded-3 shadow-sm">
                         <div class="card-header py-3">
-                            <h4 class="my-0 fw-normal">Free</h4>
+                            <h4 class="my-0 fw-normal text-center">Básico</h4>
                         </div>
                         <div class="card-body">
-                            <h1 class="card-title pricing-card-title">
-                                ₹0<small class="text-muted fw-light">/mo</small>
+                            <h1 class="card-title pricing-card-title text-center">
+                                $449<small class="text-muted fw-light">/mx</small>
                             </h1>
                             <ul class="list-unstyled mt-3 mb-4">
-                                <li>1 user included</li>
-                                <li>2 GB of storage</li>
-                                <li>No Email support</li>
-                                <li>No Help Center</li>
+                                <li>•Agenda online 24/7 con disponibilidad de horarios.</li>
+                                <li>•Cita presencial</li>
+                                <li>•Servicios ofrecidos y listado de precios.</li>
+                                <li>•Indexación en la zona.</li>
                             </ul>
-                            <button type="button"
-                                    class="w-100 btn btn-lg btn-outline-danger">
-                                Sign up for free
-                            </button>
+                            <div class="d-flex flex-row">
+                                <a class="w-100 btn btn-lg btn-outline-primary" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 1 })">Comenzar</a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="card mb-4 rounded-3 shadow-sm">
                         <div class="card-header py-3">
-                            <h4 class="my-0 fw-normal">Pro</h4>
+                            <h4 class="my-0 fw-normal text-center">Premium</h4>
                         </div>
                         <div class="card-body">
-                            <h1 class="card-title pricing-card-title">
-                                ₹550<small class="text-muted fw-light">/mo</small>
+                            <h1 class="card-title pricing-card-title text-center">
+                                $599<small class="text-muted fw-light">/mx</small>
                             </h1>
                             <ul class="list-unstyled mt-3 mb-4">
-                                <li>20 users included</li>
-                                <li>10 GB of storage</li>
-                                <li>Priority email support</li>
-                                <li>Help center access</li>
+                                <li>•Agenda online 24/7 con disponibilidad de horarios.</li>
+                                <li>•Cita presencial.</li>
+                                <li>•Servicios ofrecidos y listado de precios.</li>
+                                <li>•Indexación en la zona</li>
+                                <li>•Seguimiento clínico propio</li>
                             </ul>
-                            <button type="button" class="w-100 btn btn-lg btn-danger">
-                                Get started
-                            </button>
+                            <div class="d-flex flex-row">
+                                <a class="w-100 btn btn-lg btn-outline-primary" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 2 })">Comenzar</a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm border-danger">
-                        <div class="card-header py-3 text-white bg-danger border-danger">
-                            <h4 class="my-0 fw-normal">Enterprise</h4>
+                    <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                        <div class="card-header py-3 text-white bg-primary border-primary">
+                            <h4 class="my-0 fw-normal text-center">Enlaza</h4>
                         </div>
                         <div class="card-body">
-                            <h1 class="card-title pricing-card-title">
-                                ₹1000<small class="text-muted fw-light">/mo</small>
+                            <h1 class="card-title pricing-card-title text-center">
+                                $749<small class="text-muted fw-light">/mx</small>
                             </h1>
                             <ul class="list-unstyled mt-3 mb-4">
-                                <li>30 users included</li>
-                                <li>30 GB of storage</li>
-                                <li>Phone and email support</li>
-                                <li>Help center access</li>
+                                <li>•Agenda online 24/7 con disponibilidad de horarios.</li>
+                                <li>•Cita presencial y virtual.</li>
+                                <li>•Servicios ofrecidos y listado de precios.</li>
+                                <li>•Indexación en la zona</li>
+                                <li>•Seguimiento clínico de otros especialistas (sin poder modificar).</li>
+                                <li>•Apartado para subir certificaciones y diplomados.</li>
                             </ul>
-                            <button type="button" class="w-100 btn btn-lg btn-danger">
-                                Contact us
-                            </button>
+                            <div class="d-flex flex-row">
+                                <a class="w-100 btn btn-lg btn-outline-primary" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 3 })">Comenzar</a>
+                            </div>
                         </div>
                     </div>
-                </div>*@
+                </div>
             </div>
 
            
