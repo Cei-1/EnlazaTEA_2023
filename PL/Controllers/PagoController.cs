@@ -41,7 +41,8 @@ namespace PL.Controllers
             membresia.Nombre = ((ML.Membresia)resultMembresia.Object).Nombre;
             membresia.Precio = ((ML.Membresia)resultMembresia.Object).Precio;
 
-            var domain = "https://localhost:44346/";
+            //var domain = "https://localhost:44346/";
+            var domain = "https://www.enlaza-tea.com/";
             var options = new SessionCreateOptions
             {
                 SuccessUrl = domain + $"Pago/OrderConfirmation",

@@ -18,7 +18,7 @@ namespace ML
         [Display(Name = "Número de Cédula")]
         public string NoCedula { get; set; }
 
-        [Required(ErrorMessage = "El campo 'Especialidad' es requerido.")]
+        //[Required(ErrorMessage = "El campo 'Especialidad' es requerido.")]
         [Display(Name = "Especialidad")]
         public string Especialidad { get; set; }
 
@@ -49,10 +49,10 @@ namespace ML
         public string CodigoPostal { get; set; }
 
         [Required(ErrorMessage = "El campo 'Teléfono' es requerido.")]
-        [Display(Name = "Teléfono")]
+        [Display(Name = "Teléfono Local")]
         public string Telefono { get; set; }
 
-        [Display(Name = "Celular")]
+        [Display(Name = "Teléfono Movil o Celular")]
         public string Celular { get; set; } // Nuevo campo Celular
         public bool Estatus { get; set; }
         public ML.Usuario Usuario { get; set; }
