@@ -50,7 +50,7 @@ function SoloLetras(event, textbox) {
     var input = event.key;
     var inputlength = input.length;
 
-    if (/^[a-zA-Z ]+$/.test(input) || input === " ") {
+    if (/^[a-zA-ZñÑ ]+$/.test(input) || input === " ") {
         if (id == "txtNombre") {
             $("#" + id).css('border', '2px solid #28a745');
             $("#lblNombreErrorMessage").text('');
@@ -123,6 +123,8 @@ function SoloLetras(event, textbox) {
 function SoloNumeros(event, textbox) {
     var id = textbox.id;
     var input = event.key;
+    // Convertir el input a mayúsculas
+    input = input.toUpperCase();
 
     if (/^[0-9]+$/.test(input)) {
 
@@ -162,6 +164,8 @@ function SoloNumeros(event, textbox) {
 function NumerosLetras(event, textbox) {
     var id = textbox.id;
     var input = event.key;
+
+    input = input.toUpperCase(); // Convertir el input a mayúsculas
 
     if (/^[a-zA-Z0-9\/\s]+$/.test(input)) {
         $("#" + id).css('border', '2px solid #28a745');

@@ -336,6 +336,7 @@
     <Content Include="Views\Pago\Success.cshtml" />
     <Content Include="Views\Pago\Failed.cshtml" />
     <Content Include="Views\Login\Modal3.cshtml" />
+    <Content Include="Views\Home\Cookies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

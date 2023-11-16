@@ -15,27 +15,23 @@ namespace PL.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }        
         public ActionResult SobreNosotros()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
         public ActionResult Privacy()
         {
-            ViewBag.Message = "Your contact page.";
-
+            return View();
+        }
+        public ActionResult Cookies()
+        {
             return View();
         }
     }
