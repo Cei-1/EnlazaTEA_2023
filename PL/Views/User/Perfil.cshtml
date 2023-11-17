@@ -3,7 +3,7 @@
 }
 
 <style>
-    .image-divider{
+    .image-divider {
         background-image: url('@Url.Content("~/Content/Images/tea-2.jpeg")');
         background-size: cover;
         background-position: center;
@@ -11,6 +11,7 @@
         width: 100%;
     }
 </style>
+
 <div class="user-profile">
     <div class="header-image">
         <img src="~/Image/Usuario.png" alt="Imagen de cabecera" style="width:150px; height:150px;">
@@ -37,10 +38,13 @@
                 <h5>Carrera:</h5>
                 <p>@Model.NombreCarrera</p>
             </div>
-            <div class="col-md-4 profile-data-item">
-                <h5>Especialidad:</h5>
-                <p>@Model.Especialidad</p>
-            </div>
+            @if (Model.Especialidad != null)
+            {
+                <div class="col-md-4 profile-data-item">
+                    <h5>Especialidad:</h5>
+                    <p>@Model.Especialidad</p>
+                </div>
+            }
             <div class="col-md-4 profile-data-item">
                 <h5>Cédula:</h5>
                 <p>@Model.NoCedula</p>
@@ -50,7 +54,11 @@
         <div class="row text-center">
             <div class="col-md-6 profile-data-item">
                 <h5>Dirección:</h5>
-                <p>@Model.Calle, @Model.NumeroExterno, @Model.NumeroInterno, @Model.Colonia, @Model.Ciudad, @Model.Estado, @Model.CodigoPostal</p>
+                @{
+                    string formattedAddress = $"{Model.Calle.ToLower()}, {Model.NumeroExterno.ToLower()}, {Model.NumeroInterno.ToLower()}, {Model.Colonia.ToLower()}, {Model.Ciudad.ToLower()}, {Model.Estado.ToLower()}, {Model.CodigoPostal}";
+                    formattedAddress = System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(formattedAddress);
+                }
+                <p>@formattedAddress</p>
             </div>
             <div class="col-md-3 profile-data-item">
                 <h5>Teléfono:</h5>
