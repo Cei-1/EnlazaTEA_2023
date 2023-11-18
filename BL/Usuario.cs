@@ -76,6 +76,37 @@ namespace BL
             return result;
         }
 
+        public static ML.Result UpdateImagen(int idUsuario, string fileName)
+        {
+            try
+            {
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2()) // Reemplaza "YourDbContext" con el nombre real de tu contexto
+                {
+                    // Obtener el usuario por su Id
+                    var usuario = context.Usuarios.FirstOrDefault(u => u.IdUsuario == idUsuario);
+
+                    if (usuario != null)
+                    {
+                        // Actualizar la propiedad de la imagen con el nuevo nombre de archivo
+                        usuario.Fotografia = fileName;
+
+                        // Guardar los cambios en la base de datos
+                        context.SaveChanges();
+
+                        return new ML.Result { Correct = true };
+                    }
+                    else
+                    {
+                        return new ML.Result { Correct = false, ErrorMessage = "Usuario no encontrado." };
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return new ML.Result { Correct = false, ErrorMessage = "Error al actualizar la imagen: " + ex.Message };
+            }
+        }
+
         public static ML.Result GetById(int idUsuario)
         {
             ML.Result result = new ML.Result();

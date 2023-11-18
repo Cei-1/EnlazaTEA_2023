@@ -30,17 +30,18 @@
     @Html.HiddenFor(model => model.Especialista.IdEspecialista)
     @Html.HiddenFor(model => model.Usuario.IdUsuario)
     <p></p>
-    <div class="form-check">
+    @*<div class="form-check">
         @Html.CheckBoxFor(model => model.Virtual, new { @class = "form-check-input", id = "virtualCheckbox" })
         @Html.LabelFor(model => model.Virtual, "Virtual", new { @class = "form-check-label" })
-    </div>
-
+    </div>*@
+    <p></p>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Agregar Cita" class="btn btn-primary" />
         </div>
     </div>
+    <a></a>
 }
 
 

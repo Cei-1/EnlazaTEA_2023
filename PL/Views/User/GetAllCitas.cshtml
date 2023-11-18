@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "GetALLCitas";
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-ez2bhj5A0ST1N4Vz3N/gCvA1oRr0F4Jp0PXYRfj6j1z4CSxOTQ5HswB8PccWO5K3" crossorigin="anonymous">
 
 <style>
     /* Estilo para las tarjetas */
@@ -35,6 +36,40 @@
     .btn {
         margin-top: 10px;
     }
+
+
+    .rating {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+    }
+
+        .rating input {
+            display: none;
+        }
+
+        .rating label {
+            color: #aaa;
+            font-size: 2.5rem;
+            padding: 0.1rem;
+            cursor: pointer;
+        }
+
+            .rating label:hover,
+            .rating label:hover ~ label {
+                color: #ffbd2e;
+            }
+
+        .rating input:checked ~ label {
+            color: #ffbd2e;
+        }
+
+            .rating input:checked ~ label:hover,
+            .rating input:checked ~ label:hover ~ label {
+                color: #ffbd2e;
+            }
+
+    /* Agrega estilos adicionales según sea necesario */
 </style>
 
 <h2>Citas</h2>
@@ -46,54 +81,57 @@
         <div class="row">
             @foreach (ML.Cita cita in Model.Citas)
             {
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Cita</h5>
-                            <p class="card-text">Fecha: @cita.Fecha.ToString("dd/MM/yyyy")</p>
-                            <p class="card-text">Hora: @cita.Horario</p>
-                            <p class="card-text">Especialista: @cita.Especialista.Usuario.Nombre @cita.Especialista.Usuario.ApellidoPaterno @cita.Especialista.Usuario.ApellidoMaterno</p>
-                            <p class="card-text">Tipo: @(cita.Virtual ? "Virtual" : "Presencial")</p>
-                            <p class="card-text">
-                                Estatus: @{
-                                    switch (cita.Estatus)
-                                    {
-                                        case 1:
-                                            @Html.Raw("Pendiente")
-                                            break;
-                                        case 2:
-                                            @Html.Raw("Aceptada")
-                                            break;
-                                        case 3:
-                                            @Html.Raw("Rechazada")
-                                            break;
-                                        case 4:
-                                            @Html.Raw("Cancelada")
-                                            break;
-                                        case 5:
-                                            @Html.Raw("Completada")
-                                            break;
+                if (cita.Estatus != 3 && cita.Estatus != 4)
+                {
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Cita</h5>
+                                <p class="card-text">Fecha: @cita.Fecha.ToString("dd/MM/yyyy")</p>
+                                <p class="card-text">Hora: @cita.Horario</p>
+                                <p class="card-text">Especialista: @cita.Especialista.Usuario.Nombre @cita.Especialista.Usuario.ApellidoPaterno @cita.Especialista.Usuario.ApellidoMaterno</p>
+                                <p class="card-text">Tipo: @(cita.Virtual ? "Virtual" : "Presencial")</p>
+                                <p class="card-text">
+                                    Estatus: @{
+                                        switch (cita.Estatus)
+                                        {
+                                            case 1:
+                                                @Html.Raw("Pendiente")
+                                                break;
+                                            case 2:
+                                                @Html.Raw("Aceptada")
+                                                break;
+                                            case 3:
+                                                @Html.Raw("Rechazada")
+                                                break;
+                                            case 4:
+                                                @Html.Raw("Cancelada")
+                                                break;
+                                            case 5:
+                                                @Html.Raw("Completada")
+                                                break;
+                                        }
                                     }
-                                }
-                            </p>
-                            <p class="card-text">Observación: @cita.Observacion</p>
-                            @if (cita.Virtual && !string.IsNullOrEmpty(cita.Link))
-                            {
-                                <a href="@cita.Link" class="btn btn-primary">Entrar</a>
-                            }
-                            <div class="card-action">
-                                @if (cita.Estatus == 2 || cita.Estatus == 1)
+                                </p>
+                                <p class="card-text">Observación: @cita.Observacion</p>
+                                @if (cita.Virtual && !string.IsNullOrEmpty(cita.Link))
                                 {
-                                    <a class="btn btn-danger" href="@Url.Action("CancelarCita", "User", new { idCita = cita.IdCita })">Cancelar</a>
+                                    <a href="@cita.Link" class="btn btn-primary">Entrar</a>
                                 }
-                                else if (cita.Estatus == 4 || cita.Estatus == 3)
-                                {
-                                    <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("EliminarCitaPaciente", "User", new { idCita = cita.IdCita })'">Eliminar</button>
-                                }
+                                <div class="card-action">
+                                    @if (cita.Estatus == 2 || cita.Estatus == 1)
+                                    {
+                                        <a class="btn btn-danger" href="@Url.Action("CancelarCita", "User", new { idCita = cita.IdCita })">Cancelar</a>
+                                    }
+                                    else if (cita.Estatus == 5)
+                                    {
+                                        <button type="button" class="btn btn-success btn-calificar" data-bs-toggle="modal" data-bs-target="#calificarModal" data-cita-id="@cita.IdCita">Calificar</button>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
             }
         </div>
     }
@@ -103,11 +141,113 @@
     }
 </div>
 
+<!-- ... Tu código anterior ... -->
 
+<div class="modal fade" id="calificarModal" tabindex="-1" role="dialog" aria-labelledby="calificarModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="calificarModalLabel">Calificar Cita</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Selecciona tu calificación:</p>
+                <div class="rating">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5" title="Excelente"><i class="fas fa-star"></i></label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4" title="Muy bueno"><i class="fas fa-star"></i></label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3" title="Bueno"><i class="fas fa-star"></i></label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2" title="Regular"><i class="fas fa-star"></i></label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1" title="Malo"><i class="fas fa-star"></i></label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btnCerrarModal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="btnGuardarCalificacion">Guardar Calificación</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="agradecimientoModal" tabindex="-1" role="dialog" aria-labelledby="agradecimientoModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="agradecimientoModalLabel">¡Gracias por tu apoyo!</h5>
+            </div>
+            <div class="modal-body">
+                <p>Estamos agradecidos por tu calificación. Tu apoyo significa mucho para nosotros.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ... Resto de tu código ... -->
+<!-- Referencias a DataTables y scripts -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- Script para activar el DataTable -->
 <script>
-    $('#myTable').DataTable();
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Manejar el clic en el botón de calificar
+        $('.btn-calificar').on('click', function () {
+            // Obtener el ID de la cita desde el atributo data-cita-id
+            var citaId = $(this).data('cita-id');
+
+            // Configurar el modal para que sepa qué cita está siendo calificada
+            $('#calificarModal').data('cita-id', citaId);
+
+            // Mostrar el modal
+            $('#calificarModal').modal('show');
+        });
+
+        // Manejar el clic en el botón de cerrar el modal
+        $('#btnCerrarModal').on('click', function () {
+            // Cerrar el modal y limpiar la selección de la calificación
+            $('#calificarModal').modal('hide');
+            $('input[name="rating"]').prop('checked', false);
+
+            // Recargar la página
+            location.reload();
+        });
+
+        // Manejar el clic en el botón de guardar calificación
+        $('#btnGuardarCalificacion').on('click', function () {
+            // Obtener el ID de la cita de los datos del modal
+            var citaId = $('#calificarModal').data('cita-id');
+
+            // Obtener la calificación del usuario (ajusta esto según tus necesidades)
+            var calificacion = $('input[name="rating"]:checked').val();
+
+            // Ocultar el botón de calificar
+            $('.btn-calificar[data-cita-id="' + citaId + '"]').hide();
+
+            // Mostrar el mensaje de agradecimiento
+            $('#agradecimientoModal').modal('show');
+
+            // Cerrar el modal y limpiar la selección de la calificación después de 1 segundo
+            setTimeout(function () {
+                $('#calificarModal').modal('hide');
+                $('input[name="rating"]').prop('checked', false);
+
+                // Recargar la página
+                location.reload();
+            }, 1000);
+        });
+    });
 </script>

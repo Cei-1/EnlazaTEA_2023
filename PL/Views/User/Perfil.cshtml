@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Perfil";
 }
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy6mSMO5zC73UuXcqq9iJT6dExQV9P1qTp" crossorigin="anonymous">
 
 <style>
     .image-divider {
@@ -10,11 +11,25 @@
         height: 250px;
         width: 100%;
     }
+
+    #imagePreviewContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px; /* Altura deseada para la vista previa */
+    }
+
+    #imagePreview {
+        max-width: 100%;
+        max-height: 100%;
+    }
 </style>
 
 <div class="user-profile">
     <div class="header-image">
-        <img src="~/Image/Usuario.png" alt="Imagen de cabecera" style="width:150px; height:150px;">
+        <button type="button" class="btn btn-link" id="editImageBtn">
+            <img src="~/Image/Usuario.png" alt="Imagen de cabecera" style="width:150px; height:150px;">
+        </button>
         <div class="d-flex justify-content-between align-items-center">
             <h4>@Model.Usuario.Nombre @Model.Usuario.ApellidoPaterno @Model.Usuario.ApellidoMaterno</h4>
             @if (Session["SessionRol"] != null && Session["SessionUsuario"] != null)
@@ -23,10 +38,14 @@
                 if (rol_id == 1)
                 {
                     <a href="@Url.Action("ActualizarEspecialista", "User")" class="btn btn-primary">Editar Perfil</a>
+                    @*<a class="btn btn-secondary" id="SubirCV1" onclick="downloadImage()">CV</a>*@
+                    <a class="btn btn-secondary" id="SubirCV2" data-toggle="modal" data-target="#uploadPdfModal">CV</a>
                 }
                 else if (rol_id == 2)
                 {
                     <a href="@Url.Action("Agendar", "User", new { idEspecialista = Model.IdEspecialista })" class="btn btn-primary">Agendar</a>
+
+                    <a class="btn btn-secondary" id="bajar" data-toggle="modal" data-target="#downloadPdfModal">Descargar PDF</a>
                 }
             }
         </div>
@@ -45,10 +64,13 @@
                     <p>@Model.Especialidad</p>
                 </div>
             }
-            <div class="col-md-4 profile-data-item">
-                <h5>Cédula:</h5>
-                <p>@Model.NoCedula</p>
-            </div>
+            @if (Model.NoCedula != null)
+            {
+                <div class="col-md-4 profile-data-item">
+                    <h5>Cédula:</h5>
+                    <p>@Model.NoCedula</p>
+                </div>
+            }
         </div>
         <hr />
         <div class="row text-center">
@@ -73,3 +95,218 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="updateImageModal" tabindex="-1" role="dialog" aria-labelledby="updateImageModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateImageModalLabel">Actualizar Fotografía</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="imagePreviewContainer" class="text-center" style="display: none;">
+                    <img id="imagePreview" src="#" alt="Vista previa de la imagen">
+                </div>
+                <form id="updateImageForm" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="imageInput">Seleccionar archivo (jpg, png o jpeg):</label>
+                        <input type="file" class="form-control-file" id="imageInput" accept=".png, .jpg, .jpeg" onchange="previewImage()">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#imageInput').val(''); $('#updateImageModal').modal('hide');">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="updateImage()" id="btnGuardarImagen">Guardar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para subir archivo PDF -->
+<div class="modal fade" id="uploadPdfModal" tabindex="-1" role="dialog" aria-labelledby="uploadPdfModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadPdfModalLabel">Subir Archivo PDF</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Agrega aquí el formulario para subir archivos PDF -->
+                <form id="uploadPdfForm" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="pdfInput">Seleccionar archivo (pdf):</label>
+                        <input type="file" class="form-control-file" id="pdfInput" accept=".pdf">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#pdfInput').val(''); $('#uploadPdfModal').modal('hide');">Cancelar</button>
+                <button type="button" class="btn btn-primary" onclick="uploadPdf()">Subir</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="downloadPdfModal" tabindex="-1" role="dialog" aria-labelledby="downloadPdfModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="downloadPdfModalLabel">Descargar PDF</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Haz clic en el enlace para abrir el PDF en una nueva pestaña:</p>
+                <a href="#" id="openPdfLink" target="_blank">Abrir PDF en Nueva Pestaña</a>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy6mSMO5zC73UuXcqq9iJT6dExQV9P1qTp" crossorigin="anonymous"></script>
+
+<script>
+$(document).ready(function () {
+    // Verificar si hay una URL de imagen almacenada en el almacenamiento local
+    var storedImageUrl = localStorage.getItem('userImageUrl');
+    if (storedImageUrl) {
+        $('#editImageBtn img').attr('src', storedImageUrl);
+    }
+
+    // Obtener el rol_id desde la sesión en Razor
+    var rol_id = @((int)Session["SessionRol"]);
+
+    $('#editImageBtn').on('click', function () {
+        // Mostrar el modal solo si el rol_id es igual a 1
+        if (rol_id === 1) {
+            $('#updateImageModal').modal('show');
+        }
+    });
+
+    $('#btnGuardarImagen').on('click', function () {
+        updateImage();
+    });
+
+    function updateImage() {
+        var fileInput = $('#imageInput')[0];
+
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // Actualizar la fuente de la imagen en el botón
+                var newImageUrl = e.target.result;
+                $('#editImageBtn img').attr('src', newImageUrl);
+
+                // Almacenar la nueva URL de la imagen en el almacenamiento local
+                localStorage.setItem('userImageUrl', newImageUrl);
+
+                // Cerrar el modal
+                $('#updateImageModal').modal('hide');
+            };
+
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+
+    // Llamar a previewImage() cuando cambia el archivo de entrada
+    $('#imageInput').on('change', function () {
+        previewImage();
+    });
+
+    function previewImage() {
+        var fileInput = $('#imageInput')[0];
+        var imagePreview = $('#imagePreview')[0];
+        var imagePreviewContainer = $('#imagePreviewContainer')[0];
+
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                imagePreview.src = e.target.result;
+                imagePreviewContainer.style.display = 'flex'; // Mostrar el contenedor de la vista previa
+            };
+
+            reader.readAsDataURL(fileInput.files[0]);
+        } else {
+            imagePreview.src = '#';
+            imagePreviewContainer.style.display = 'none';
+        }
+    }
+
+    function clearFileInput() {
+        $('#imageInput').val('');
+        $('#imagePreview').attr('src', '#');
+        $('#imagePreviewContainer').css('display', 'none');
+    }
+
+    // Función para subir el archivo PDF
+    function uploadPdf() {
+        var pdfInput = $('#pdfInput')[0];
+
+        if (pdfInput.files && pdfInput.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                // Almacenar la cadena Base64 del archivo PDF en el almacenamiento local
+                localStorage.setItem('userPdfBase64', e.target.result);
+
+                // Cerrar el modal
+                $('#pdfInput').val('');
+                $('#uploadPdfModal').modal('hide');
+            };
+
+            reader.readAsDataURL(pdfInput.files[0]);
+        }
+    }
+
+    function openPdfInNewTab() {
+        var storedPdfBase64 = localStorage.getItem('userPdfBase64');
+
+        if (storedPdfBase64) {
+            // Convertir la cadena base64 a ArrayBuffer
+            var binaryPdf = atob(storedPdfBase64);
+            var arrayBuffer = new ArrayBuffer(binaryPdf.length);
+            var uint8Array = new Uint8Array(arrayBuffer);
+
+            for (var i = 0; i < binaryPdf.length; i++) {
+                uint8Array[i] = binaryPdf.charCodeAt(i);
+            }
+
+            // Crear un Blob a partir del ArrayBuffer
+            var blob = new Blob([arrayBuffer], { type: 'application/pdf' });
+
+            // Crear una URL de datos para el Blob
+            var blobUrl = URL.createObjectURL(blob);
+
+            // Abrir el PDF en una nueva pestaña
+            window.open(blobUrl, '_blank');
+        }
+    }
+
+    // Función para abrir el modal de subir PDF
+    $('#SubirCV2').on('click', function () {
+        $('#uploadPdfModal').modal('show');
+    });
+
+    // Función para abrir el modal de descargar PDF
+    $('#bajar').on('click', function () {
+        $('#downloadPdfModal').modal('show');
+        var storedPdfUrl = localStorage.getItem('userPdfUrl');
+        $('#openPdfLink').attr('href', storedPdfUrl);
+    });
+
+    // ... tu código existente ...
+});
+
+</script>

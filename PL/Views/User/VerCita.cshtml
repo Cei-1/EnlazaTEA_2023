@@ -4,13 +4,14 @@
     ViewBag.Title = "VerCita";
 }
 
-<h2>VerCita</h2>
-
+<h2>Detalles de la consulta</h2>
+<button type="button" class="btn btn-secondary" id="verHistorialMedico" style="display: none;">Ver Historial Médico</button>
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <form method="post" action="@Url.Action("AddDetalles", "User")">
-                @Html.Hidden("IdCita", Model.IdCita)                @Html.Hidden("IdFamiliar", Model.Usuario.Paciente.Usuario.IdUsuario)
+                @Html.Hidden("IdCita", Model.IdCita)
+                @Html.Hidden("IdFamiliar", Model.Usuario.Paciente.Usuario.IdUsuario)
 
                 <div class="form-group">
                     <label for="PacienteNombre">Nombre del Paciente:</label>
@@ -33,3 +34,37 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Obtener el valor de la sesión "Membresia"
+        var membresia = @Session["Membresia"];
+
+        // Verificar si la membresia es igual a 2 o 3 para mostrar el botón
+        if (membresia === 2 || membresia === 3) {
+            $("#verHistorialMedico").show();
+        }
+
+        // Manejar el clic del botón "Ver Historial Médico"
+        $("#verHistorialMedico").on("click", function () {
+            // Obtener el IdUsuario
+            var idUsuario = @Model.Usuario.Paciente.Usuario.IdUsuario;
+
+            // Hacer la solicitud AJAX al método HistorialMedico
+            $.ajax({
+                url: "@Url.Action("HistorialMedico", "User")",
+                type: "GET",
+                data: { IdUsuario: idUsuario },
+                success: function (data) {
+                    // Manejar la respuesta, por ejemplo, redireccionar a la página de historial médico
+                    window.location.href = "@Url.Action("HistorialMedico", "User")?IdUsuario=" + idUsuario;
+                },
+                error: function (error) {
+                    // Manejar errores si es necesario
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,115 @@
+﻿@model ML.Cita
+
+@{
+    ViewBag.Title = "GetALLCitas";
+}
+
+<style>
+    /* Estilo para las tarjetas */
+    .card {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        padding: 15px;
+        transition: transform 0.2s;
+    }
+
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+    }
+
+    .btn {
+        margin-top: 10px;
+    }
+</style>
+
+<h2>Historial</h2>
+
+<div class="container">
+
+    @if (Model.Citas.Count > 0)
+    {
+        <div class="row">
+            @foreach (ML.Cita cita in Model.Citas)
+            {
+                if (cita.Estatus != 1 && cita.Estatus != 2 && cita.Estatus != 4)
+                {
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Cita</h5>
+                                <p class="card-text">Fecha: @cita.Fecha.ToString("dd/MM/yyyy")</p>
+                                <p class="card-text">Hora: @cita.Horario</p>
+                                <p class="card-text">Especialista: @cita.Especialista.Usuario.Nombre @cita.Especialista.Usuario.ApellidoPaterno @cita.Especialista.Usuario.ApellidoMaterno</p>
+                                <p class="card-text">Tipo: @(cita.Virtual ? "Virtual" : "Presencial")</p>
+                                <p class="card-text">
+                                    Estatus: @{
+                                        switch (cita.Estatus)
+                                        {
+                                            case 1:
+                                                @Html.Raw("Pendiente")
+                                                break;
+                                            case 2:
+                                                @Html.Raw("Aceptada")
+                                                break;
+                                            case 3:
+                                                @Html.Raw("Rechazada")
+                                                break;
+                                            case 4:
+                                                @Html.Raw("Cancelada")
+                                                break;
+                                            case 5:
+                                                @Html.Raw("Completada")
+                                                break;
+                                        }
+                                    }
+                                </p>
+                                <p class="card-text">Observación: @cita.Observacion</p>
+                                @if (cita.Virtual && !string.IsNullOrEmpty(cita.Link))
+                                {
+                                    <a href="@cita.Link" class="btn btn-primary">Entrar</a>
+                                }
+                                <div class="card-action">
+                                    @if (cita.Estatus == 2 || cita.Estatus == 1)
+                                    {
+                                        <a class="btn btn-danger" href="@Url.Action("CancelarCita", "User", new { idCita = cita.IdCita })">Cancelar</a>
+                                    }
+                                    else if (cita.Estatus == 4 || cita.Estatus == 3)
+                                    {
+                                        <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("EliminarCitaPaciente", "User", new { idCita = cita.IdCita })'">Eliminar</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">No existen registros.</div>
+    }
+</div>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $('#myTable').DataTable();
+</script>

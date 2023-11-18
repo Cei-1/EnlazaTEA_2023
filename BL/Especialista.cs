@@ -91,6 +91,79 @@ namespace BL
             return result;
         }
 
+        public static ML.Result GetIdMembresiaByEspecialistaId(int IdEspecialista)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
+                {
+                    // Obtener el IdMembresia asociado al especialista desde la tabla Pago mediante LINQ
+                    var idMembresia = (from p in context.Pagoes
+                                       where p.Especialista.IdEspecialista == IdEspecialista
+                                       select p.Membresia.IdMembresia).SingleOrDefault();
+
+                    if (idMembresia != null)
+                    {
+                        result.Object = idMembresia;
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "No se encontró el IdMembresia asociado al especialista.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
+        // Método en la capa de lógica de negocios (BL)
+        public static ML.Result UpdateCedula(ML.Especialista especialista)
+        {
+            ML.Result result = new ML.Result();
+
+            try
+            {
+                using (DL.EnlazaTEA2023Entities2 context = new DL.EnlazaTEA2023Entities2())
+                {
+                    // Obtener el especialista mediante el IdUsuario
+                    var especialistaDL = context.Especialistas
+                        .FirstOrDefault(e => e.IdUsuario == especialista.Usuario.IdUsuario);
+
+                    if (especialistaDL != null)
+                    {
+                        // Actualizar la cédula
+                        especialistaDL.NoCedula = especialista.NoCedula;
+
+                        // Guardar los cambios
+                        context.SaveChanges();
+
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "No se encontró el especialista asociado al usuario.";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+            }
+
+            return result;
+        }
+
         public static ML.Result UpdateEF(ML.Especialista especialista)
         {
             ML.Result result = new ML.Result();

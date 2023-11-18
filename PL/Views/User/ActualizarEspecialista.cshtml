@@ -110,6 +110,24 @@
             <input type="submit" value="Guardar" class="w-100 btn btn-lg btn-primary m-3" />
         </center>
     }
+    <hr />
+    @if (Model.NoCedula == null)
+    {
+        using (Html.BeginForm("ActualizarCedula", "User", FormMethod.Post))
+        {
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 form-group">
+                        @Html.LabelFor(model => model.NoCedula, new { @class = "form-label" })
+                        @Html.TextBoxFor(model => model.NoCedula, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <center>
+                <input type="submit" value="Guardar" class="w-100 btn btn-lg btn-primary m-3" />
+            </center>
+        }
+    }
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
