@@ -156,11 +156,26 @@ namespace PL.Controllers
 
             // Llamar al método GetByIdEF para obtener el especialista asociado al usuario
             ML.Result result = BL.Especialista.GetByIdEF(idUsuario);
-
+            ML.Especialista especialistaObtenido = null;
             if (result.Correct && result.Object != null)
             {
                 // Si se encontró un especialista asociado al usuario, redirige al Index
-                return RedirectToAction("Perfil", "User");
+                especialistaObtenido = (ML.Especialista)result.Object;
+                ML.Result result1 = BL.Especialista.GetIdMembresiaByEspecialistaId(especialistaObtenido.IdEspecialista);
+                if (result1.Correct && result1.Object != null)
+                {
+                    // Almacena el IdMembresia en la sesión
+                    Session["Membresia"] = result1.Object;
+
+                    // Redirige al Index
+                    return RedirectToAction("Perfil", "User");
+                }
+                else
+                {
+                    // Si hubo un problema al obtener el IdMembresia, muestra la vista con el mensaje de error
+                    ViewBag.ErrorMessage = result1.ErrorMessage;
+                    return View();
+                }
             }
             else
             {

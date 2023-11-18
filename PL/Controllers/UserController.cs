@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -70,6 +71,26 @@ namespace PL.Controllers
             }
             return PartialView("Modal");
         }
+
+        [HttpPost]
+        public ActionResult ActualizarCedula(ML.Especialista especialista)
+        {
+            especialista.Usuario = new ML.Usuario();
+            especialista.Usuario.IdUsuario = (int)Session["SessionUsuario"];
+
+            ML.Result result = BL.Especialista.UpdateCedula(especialista);
+
+            if (result.Correct)
+            {
+                ViewBag.Mensaje = "Perfil actualizado correctamente";
+            }
+            else
+            {
+                ViewBag.Mensaje = "No se ha podido actualizar. Error: " + result.ErrorMessage;
+            }
+            return PartialView("Modal");
+        }
+
 
         public ActionResult PerfilFamiliar()
         {
@@ -392,6 +413,72 @@ namespace PL.Controllers
             ML.Result result = new ML.Result();
             result = BL.Paciente.AddEvaluacion(usuario_id, Calificacion);
             return Json(new { success = true });
+        }
+
+        public ActionResult HistorialMedico(int IdUsuario)
+        {
+            var result = BL.Cita.GetCitasByUsuario(IdUsuario);
+
+            if (result.Correct)
+            {
+                ML.Cita cita = new ML.Cita();
+                cita.Citas = result.Objects; // Asegúrate de usar el tipo ML.Especialista aquí
+
+
+                // Enviar el modelo Especialista a la vista
+                return View(cita);
+            }
+            else
+            {
+                ViewBag.ErrorMessage = result.ErrorMessage;
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UpdateImagen()
+        {
+            try
+            {
+                // Verificar si hay un archivo en la solicitud
+                if (Request.Files.Count > 0)
+                {
+                    // Obtener el archivo de la solicitud
+                    HttpPostedFileBase file = Request.Files[0];
+
+                    // Verificar si el archivo no está vacío
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        int IdUsuario = (int)Session["SessionUsuario"];
+
+                        // Obtener la extensión del archivo
+                        string extension = Path.GetExtension(file.FileName);
+
+                        // Construir el nombre del archivo utilizando el IdUsuario y la extensión
+                        string fileName = $"{IdUsuario}{extension}";
+
+                        // Obtener la ruta completa del archivo en la carpeta "Image" del proyecto
+                        string filePath = Path.Combine(Server.MapPath("~/Image/"), fileName);
+
+                        // Guardar el archivo en la carpeta "Image"
+                        file.SaveAs(filePath);
+
+                        // Actualizar la referencia de la imagen en la base de datos
+                        ML.Result result = BL.Usuario.UpdateImagen(IdUsuario, fileName);
+
+                        // Retornar el resultado exitoso
+                        return Json(new { success = true });
+                    }
+                }
+
+                // Retornar un mensaje de error si no se proporcionó una imagen
+                return Json(new { success = false, error = "No se proporcionó una imagen válida." });
+            }
+            catch (Exception ex)
+            {
+                // Manejar cualquier excepción y retornar un mensaje de error
+                return Json(new { success = false, error = "Error al procesar la imagen: " + ex.Message });
+            }
         }
 
     }
