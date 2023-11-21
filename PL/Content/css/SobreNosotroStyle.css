@@ -1,9 +1,6 @@
 ﻿:root {
-
-    --bs-dark: #344767;
-
-    --bs-dark-rgb: 52, 71, 103;
-    
+    --bs-dark: #344767 !important;
+    --bs-dark-rgb: 52, 71, 103 !important;
 }
 
 /*General*/

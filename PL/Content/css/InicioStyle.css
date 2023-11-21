@@ -1,4 +1,9 @@
-﻿/**General**/
+﻿﻿:root {
+    --bs-dark: #344767 !important;
+    --bs-dark-rgb: 52, 71, 103;
+}
+
+/**General**/
 
 .opacity-0 {
     opacity: 0 !important;

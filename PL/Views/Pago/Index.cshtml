@@ -64,9 +64,14 @@
 
             <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
                 <h1 class="display-4 fw-normal">Precios</h1>
+                <hr />
+
+
                 <p class="fs-5 text-muted">
                     Consulta nuestros planes más eficaces. Puedes elegir según tu presupuesto.
                 </p>
+                <hr />
+
             </div>
         </header>
 
@@ -101,8 +106,8 @@
                     </div>
                 }-->
                 <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm border-primary">
-                        <div class="card-header py-3">
+                    <div class="card mb-4 rounded-3 shadow-sm border-success">
+                        <div class="card-header py-3 bg-success border-success">
                             <h4 class="my-0 fw-normal text-center">Básico</h4>
                         </div>
                         <div class="card-body">
@@ -116,14 +121,14 @@
                                 <li>•Indexación en la zona.</li>
                             </ul>
                             <div class="d-flex flex-row">
-                                <a class="w-100 btn btn-lg btn-outline-primary" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 1 })">Comenzar</a>
+                                <a class="w-100 btn btn-lg btn-outline-success" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 1 })">Comenzar</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm border-primary">
-                        <div class="card-header py-3">
+                    <div class="card mb-4 rounded-3 shadow-sm border-danger">
+                        <div class="card-header py-3 bg-danger border-danger">
                             <h4 class="my-0 fw-normal text-center">Premium</h4>
                         </div>
                         <div class="card-body">
@@ -138,7 +143,7 @@
                                 <li>•Seguimiento clínico propio</li>
                             </ul>
                             <div class="d-flex flex-row">
-                                <a class="w-100 btn btn-lg btn-outline-primary" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 2 })">Comenzar</a>
+                                <a class="w-100 btn btn-lg btn-outline-danger" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 2 })">Comenzar</a>
                             </div>
                         </div>
                     </div>

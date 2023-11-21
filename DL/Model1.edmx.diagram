@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bb00293ac0a04582b7e08e9536fedfdd" Name="Diagram1" ZoomLevel="67">
+      <Diagram DiagramId="e5779c06dc1845b5a2812991bae66b08" Name="Diagram1">
         <EntityTypeShape EntityType="EnlazaTEA2023Model.Blog" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="EnlazaTEA2023Model.Cita" Width="1.5" PointX="7.5" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="EnlazaTEA2023Model.DetallesCita" Width="1.5" PointX="9.75" PointY="10.875" IsExpanded="true" />
@@ -15,20 +15,19 @@
         <EntityTypeShape EntityType="EnlazaTEA2023Model.Paciente" Width="1.5" PointX="5.25" PointY="25" IsExpanded="true" />
         <EntityTypeShape EntityType="EnlazaTEA2023Model.Pago" Width="1.5" PointX="10.5" PointY="14" IsExpanded="true" />
         <EntityTypeShape EntityType="EnlazaTEA2023Model.Rol" Width="1.5" PointX="0.75" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EnlazaTEA2023Model.Usuario" Width="1.5" PointX="3" PointY="12" IsExpanded="true" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Blog__IdUsuario__6B24EA82" ManuallyRouted="false" />
         <AssociationConnector Association="EnlazaTEA2023Model.FK__Cita__IdEspecial__5629CD9C" ManuallyRouted="false" />
-        <AssociationConnector Association="EnlazaTEA2023Model.FK__DetallesC__IdCit__6B24EA82" ManuallyRouted="false" />
-        <AssociationConnector Association="EnlazaTEA2023Model.FK__Pago__IdEspecial__71D1E811" ManuallyRouted="false" />
-        <AssociationConnector Association="EnlazaTEA2023Model.FK__Likes__IdMultime__68487DD7" ManuallyRouted="false" />
-        <AssociationConnector Association="EnlazaTEA2023Model.FK__Pago__IdMembresi__72C60C4A" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="EnlazaTEA2023Model.Usuario" Width="1.5" PointX="3" PointY="11.875" />
-        <AssociationConnector Association="EnlazaTEA2023Model.FK__Blog__IdUsuario__6B24EA82" />
-        <AssociationConnector Association="EnlazaTEA2023Model.FK__Cita__IdUsuario__5535A963" />
-        <AssociationConnector Association="EnlazaTEA2023Model.FK__Especiali__IdUsu__02084FDA" />
-        <AssociationConnector Association="EnlazaTEA2023Model.FK__Especiali__IdUsu__3E52440B" />
-        <AssociationConnector Association="EnlazaTEA2023Model.FK__Likes__IdUsuario__66603565" />
-        <AssociationConnector Association="EnlazaTEA2023Model.FK__Multimedi__IdUsu__5DCAEF64" />
-        <AssociationConnector Association="EnlazaTEA2023Model.FK__Paciente__IdUsua__4316F928" />
-        <AssociationConnector Association="EnlazaTEA2023Model.FK__Usuario__IdRol__38996AB5" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Cita__IdUsuario__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__DetallesC__IdCit__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Especiali__IdUsu__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Pago__IdEspecial__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Likes__IdMultime__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Likes__IdUsuario__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Pago__IdMembresi__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Multimedi__IdUsu__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Paciente__IdUsua__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="EnlazaTEA2023Model.FK__Usuario__IdRol__38996AB5" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
