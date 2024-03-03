@@ -4,10 +4,1127 @@
     Layout = null;
 }
 
-
-
-
+<!DOCTYPE html>
+<html>
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Membresias</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" rel="stylesheet" />
+    <style>
+        body {
+            background-image: linear-gradient(180deg, #eee, #fff 100px, #fff);
+        }
+
+        .container {
+            max-width: 960px;
+        }
+
+        .pricing-header {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+            .pricing-header h1 {
+                color: #344676; /* Morado oscuro */
+                font-weight: 400;
+            }
+
+            .pricing-header p {
+                color: #344676; /* Gris oscuro */
+            }
+
+        .card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            }
+
+        .card-header-basico {
+            background-color: #b4cef6; /* Morado suave */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+            padding: 0.75rem 1.25rem;
+        }
+
+        .card-header-premium {
+            background-color: #7275A6; /* Amarillo */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+            padding: 0.75rem 1.25rem;
+        }
+
+        .card-header-enlaza {
+            background-color: #CAB4D9; /* Azul */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+            padding: 0.75rem 1.25rem;
+        }
+
+        .btn-basico {
+            color: #b4cef6; /* Morado suave */
+            border-color: #b4cef6; /* Morado suave */
+            border-radius: 20px;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            margin-bottom: 4px;
+            margin-top: 4px;
+        }
+
+            .btn-basico:hover {
+                background-color: #b4cef6; /* Morado suave */
+                color: #fff; /* Blanco */
+            }
+
+        .btn-premium {
+            color: #7275A6; /* Amarillo */
+            border-color: #7275A6; /* Amarillo */
+            border-radius: 20px;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            margin-bottom: 4px;
+            margin-top: 4px;
+        }
+
+            .btn-premium:hover {
+                background-color: #7275A6; /* Amarillo */
+                color: #fff; /* Blanco */
+            }
+
+        .btn-enlaza {
+            color: #CAB4D9; /* Azul */
+            border-color: #CAB4D9; /* Azul */
+            border-radius: 20px;
+            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+            margin-bottom: 4px;
+            margin-top: 4px;
+        }
+
+            .btn-enlaza:hover {
+                background-color: #CAB4D9; /* Azul */
+                color: #fff; /* Blanco */
+            }
+
+        .border-basico {
+            border-color: #b4cef6;
+        }
+
+        .border-premium {
+            border-color: #7275A6;
+        }
+
+        .border-enlaza {
+            border-color: #CAB4D9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-3">
+        <header>
+            <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom"></div>
+
+            <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+                <h1 class="display-4 fw-normal">Precios</h1>
+                <hr />
+                <p class="fs-5 text-muted">
+                    Consulta nuestros planes más eficaces. Puedes elegir según tu presupuesto.
+                </p>
+                <hr />
+            </div>
+        </header>
+
+        <main>
+            <div class="row row-cols-1 row-cols-md-3 mb-3">
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-lg border-basico h-100">
+                        <div class="card-header card-header-basico text-white">
+                            <h4 class="my-0 fw-normal text-center">Básico</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title text-center">
+                                $449<small class="text-muted fw-light">/mx</small>
+                            </h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                <li>• Cita presencial.</li>
+                                <li>• Servicios ofrecidos y listado de precios.</li>
+                                <li>• Indexación en la zona.</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-transparent border-basico text-center">
+                            @*                            <a class="btn btn-lg btn-basico" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 1 })">Comenzar</a>*@
+                            <a class="w-100 btn btn-lg btn-basico" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 1 })">Comenzar</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-lg border-premium h-100">
+                        <div class="card-header card-header-premium text-white">
+                            <h4 class="my-0 fw-normal text-center">Premium</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title text-center">
+                                $599<small class="text-muted fw-light">/mx</small>
+                            </h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                <li>• Cita presencial.</li>
+                                <li>• Servicios ofrecidos y listado de precios.</li>
+                                <li>• Indexación en la zona.</li>
+                                <li>• Seguimiento clínico propio.</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-transparent border-premium text-center">
+                            @*                            <a class="btn btn-lg btn-premium" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 2 })">Comenzar</a>*@
+                            <a class="w-100 btn btn-lg btn-premium" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 2 })">Comenzar</a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-lg border-enlaza h-100">
+                        <div class="card-header card-header-enlaza text-white">
+                            <h4 class="my-0 fw-normal text-center">Enlaza</h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title text-center">
+                                $749<small class="text-muted fw-light">/mx</small>
+                            </h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                <li>• Cita presencial y virtual.</li>
+                                <li>• Servicios ofrecidos y listado de precios.</li>
+                                <li>• Indexación en la zona.</li>
+                                <li>• Seguimiento clínico de otros especialistas.</li>
+                                <li>• Apartado para subir certificaciones y diplomados.</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer bg-transparent border-enlaza text-center">
+                            @*<a class="btn btn-lg btn-enlaza" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 3 })">Comenzar</a>*@
+                            <a class="w-100 btn btn-lg btn-enlaza" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 3 })">Comenzar</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
+
+
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Membresias</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" rel="stylesheet" />
+        <style>
+            body {
+                background-image: linear-gradient(180deg, #eee, #fff 100px, #fff);
+            }
+
+            .container {
+                max-width: 960px;
+            }
+
+            .pricing-header {
+                background-color: #f8f9fa;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+                margin-bottom: 30px;
+            }
+
+                .pricing-header h1 {
+                    color: #4b0082; /* Morado oscuro */
+                }
+
+                .pricing-header p {
+                    color: #555; /* Gris oscuro */
+                }
+
+            .card {
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            }
+
+                .card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                }
+
+            .card-header-basico {
+                background-color: #b4cef6; /* Morado suave */
+                border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+                padding: 0.75rem 1.25rem;
+            }
+
+            .card-header-premium {
+                background-color: #7275A6; /* Amarillo */
+                border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+                padding: 0.75rem 1.25rem;
+            }
+
+            .card-header-enlaza {
+                background-color: #CAB4D9; /* Azul */
+                border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+                padding: 0.75rem 1.25rem;
+            }
+
+            .btn-basico {
+                background-color: #b4cef6; /* Morado suave */
+                border-color: #b4cef6; /* Morado suave */
+                border-radius: 20px;
+                transition: background-color 0.3s ease-in-out;
+            }
+
+                .btn-basico:hover {
+                    background-color: #fff; /* Blanco */
+                    color: #b4cef6; /* Morado suave */
+                }
+
+            .btn-premium {
+                background-color: #7275A6; /* Amarillo */
+                border-color: #7275A6; /* Amarillo */
+                border-radius: 20px;
+                transition: background-color 0.3s ease-in-out;
+            }
+
+                .btn-premium:hover {
+                    background-color: #fff; /* Blanco */
+                    color: #7275A6; /* Amarillo */
+                }
+
+            .btn-enlaza {
+                background-color: #CAB4D9; /* Azul */
+                border-color: #CAB4D9; /* Azul */
+                border-radius: 20px;
+                transition: background-color 0.3s ease-in-out;
+            }
+
+                .btn-enlaza:hover {
+                    background-color: #fff; /* Blanco */
+                    color: #CAB4D9; /* Azul */
+                }
+        </style>
+    </head>
+    <body>
+        <div class="container py-3">
+            <header>
+                <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom"></div>
+
+                <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+                    <h1 class="display-4 fw-normal">Precios</h1>
+                    <hr />
+                    <p class="fs-5 text-muted">
+                        Consulta nuestros planes más eficaces. Puedes elegir según tu presupuesto.
+                    </p>
+                    <hr />
+                </div>
+            </header>
+
+            <main>
+                <div class="row row-cols-1 row-cols-md-3 mb-3">
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-lg border-success h-100">
+                            <div class="card-header card-header-basico text-white">
+                                <h4 class="my-0 fw-normal text-center">Básico</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title text-center">
+                                    $449<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                    <li>• Cita presencial.</li>
+                                    <li>• Servicios ofrecidos y listado de precios.</li>
+                                    <li>• Indexación en la zona.</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-transparent border-success text-center">
+                                <a class="btn btn-lg btn-basico" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 1 })">Comenzar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-lg border-danger h-100">
+                            <div class="card-header card-header-premium text-white">
+                                <h4 class="my-0 fw-normal text-center">Premium</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title text-center">
+                                    $599<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                    <li>• Cita presencial.</li>
+                                    <li>• Servicios ofrecidos y listado de precios.</li>
+                                    <li>• Indexación en la zona.</li>
+                                    <li>• Seguimiento clínico propio.</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-transparent border-danger text-center">
+                                <a class="btn btn-lg btn-premium" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 2 })">Comenzar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-lg border-primary h-100">
+                            <div class="card-header card-header-enlaza text-white">
+                                <h4 class="my-0 fw-normal text-center">Enlaza</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title text-center">
+                                    $749<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                    <li>• Cita presencial y virtual.</li>
+                                    <li>• Servicios ofrecidos y listado de precios.</li>
+                                    <li>• Indexación en la zona.</li>
+                                    <li>• Seguimiento clínico de otros especialistas.</li>
+                                    <li>• Apartado para subir certificaciones y diplomados.</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-transparent border-primary text-center">
+                                <a class="btn btn-lg btn-enlaza" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 3 })">Comenzar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+    </html>*@
+
+
+
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Membresias</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" rel="stylesheet" />
+        <style>
+            body {
+                background-image: linear-gradient(180deg, #eee, #fff 100px, #fff);
+            }
+
+            .container {
+                max-width: 960px;
+            }
+
+            .pricing-header {
+                background-color: #f8f9fa;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+                margin-bottom: 30px;
+            }
+
+                .pricing-header h1 {
+                    color: #4b0082; /* Morado oscuro */
+                }
+
+                .pricing-header p {
+                    color: #555; /* Gris oscuro */
+                }
+
+            .card {
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            }
+
+                .card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                }
+
+            .card-header-basico {
+                background-color: #b088f9; /* Morado suave */
+                border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+                padding: 0.75rem 1.25rem;
+            }
+
+            .card-header-premium {
+                background-color: #ffc107; /* Amarillo */
+                border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+                padding: 0.75rem 1.25rem;
+            }
+
+            .card-header-enlaza {
+                background-color: #3498db; /* Azul */
+                border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+                padding: 0.75rem 1.25rem;
+            }
+
+            .btn-basico {
+                background-color: #b088f9; /* Morado suave */
+                border-color: #b088f9; /* Morado suave */
+            }
+
+            .btn-premium {
+                background-color: #ffc107; /* Amarillo */
+                border-color: #ffc107; /* Amarillo */
+            }
+
+            .btn-enlaza {
+                background-color: #3498db; /* Azul */
+                border-color: #3498db; /* Azul */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container py-3">
+            <header>
+                <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom"></div>
+
+                <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+                    <h1 class="display-4 fw-normal">Precios</h1>
+                    <hr />
+                    <p class="fs-5 text-muted">
+                        Consulta nuestros planes más eficaces. Puedes elegir según tu presupuesto.
+                    </p>
+                    <hr />
+                </div>
+            </header>
+
+            <main>
+                <div class="row row-cols-1 row-cols-md-3 mb-3">
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-lg border-success h-100">
+                            <div class="card-header card-header-basico text-white">
+                                <h4 class="my-0 fw-normal text-center">Básico</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title text-center">
+                                    $449<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                    <li>• Cita presencial.</li>
+                                    <li>• Servicios ofrecidos y listado de precios.</li>
+                                    <li>• Indexación en la zona.</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-transparent border-success text-center">
+                                <a class="btn btn-lg btn-basico" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 1 })">Comenzar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-lg border-danger h-100">
+                            <div class="card-header card-header-premium text-white">
+                                <h4 class="my-0 fw-normal text-center">Premium</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title text-center">
+                                    $599<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                    <li>• Cita presencial.</li>
+                                    <li>• Servicios ofrecidos y listado de precios.</li>
+                                    <li>• Indexación en la zona.</li>
+                                    <li>• Seguimiento clínico propio.</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-transparent border-danger text-center">
+                                <a class="btn btn-lg btn-premium" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 2 })">Comenzar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-lg border-primary h-100">
+                            <div class="card-header card-header-enlaza text-white">
+                                <h4 class="my-0 fw-normal text-center">Enlaza</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title text-center">
+                                    $749<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                    <li>• Cita presencial y virtual.</li>
+                                    <li>• Servicios ofrecidos y listado de precios.</li>
+                                    <li>• Indexación en la zona.</li>
+                                    <li>• Seguimiento clínico de otros especialistas.</li>
+                                    <li>• Apartado para subir certificaciones y diplomados.</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-transparent border-primary text-center">
+                                <a class="btn btn-lg btn-enlaza" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 3 })">Comenzar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+    </html>*@
+
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Membresias</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" rel="stylesheet" />
+        <style>
+            body {
+                background-image: linear-gradient(180deg, #eee, #fff 100px, #fff);
+            }
+
+            .container {
+                max-width: 960px;
+            }
+
+            .pricing-header {
+                background-color: #f8f9fa;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+                margin-bottom: 30px;
+            }
+
+                .pricing-header h1 {
+                    color: #4b0082; /* Morado oscuro */
+                }
+
+                .pricing-header p {
+                    color: #555; /* Gris oscuro */
+                }
+
+            .card {
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            }
+
+                .card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                }
+
+            .card-header-basico {
+                background-color: #b4cef6; /* Morado suave */
+                border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+                padding: 0.75rem 1.25rem;
+            }
+
+            .card-header-premium {
+                background-color: #ffc107; /* Amarillo */
+                border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+                padding: 0.75rem 1.25rem;
+            }
+
+            .card-header-enlaza {
+                background-color: #3498db; /* Azul */
+                border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+                padding: 0.75rem 1.25rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container py-3">
+            <header>
+                <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom"></div>
+
+                <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+                    <h1 class="display-4 fw-normal">Precios</h1>
+                    <hr />
+                    <p class="fs-5 text-muted">
+                        Consulta nuestros planes más eficaces. Puedes elegir según tu presupuesto.
+                    </p>
+                    <hr />
+                </div>
+            </header>
+
+            <main>
+                <div class="row row-cols-1 row-cols-md-3 mb-3">
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-lg border-success h-100">
+                            <div class="card-header card-header-basico text-white">
+                                <h4 class="my-0 fw-normal text-center">Básico</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title text-center">
+                                    $449<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                    <li>• Cita presencial.</li>
+                                    <li>• Servicios ofrecidos y listado de precios.</li>
+                                    <li>• Indexación en la zona.</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-transparent border-success text-center">
+                                <a class="btn btn-lg btn-Basico" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 1 })">Comenzar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-lg border-danger h-100">
+                            <div class="card-header card-header-premium text-white">
+                                <h4 class="my-0 fw-normal text-center">Premium</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title text-center">
+                                    $599<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                    <li>• Cita presencial.</li>
+                                    <li>• Servicios ofrecidos y listado de precios.</li>
+                                    <li>• Indexación en la zona.</li>
+                                    <li>• Seguimiento clínico propio.</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-transparent border-danger text-center">
+                                <a class="btn btn-lg btn-danger" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 2 })">Comenzar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-lg border-primary h-100">
+                            <div class="card-header card-header-enlaza text-white">
+                                <h4 class="my-0 fw-normal text-center">Enlaza</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title text-center">
+                                    $749<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                    <li>• Cita presencial y virtual.</li>
+                                    <li>• Servicios ofrecidos y listado de precios.</li>
+                                    <li>• Indexación en la zona.</li>
+                                    <li>• Seguimiento clínico de otros especialistas.</li>
+                                    <li>• Apartado para subir certificaciones y diplomados.</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-transparent border-primary text-center">
+                                <a class="btn btn-lg btn-primary" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 3 })">Comenzar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+    </html>*@
+
+
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Membresias</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" rel="stylesheet" />
+        <style>
+            body {
+                background-image: linear-gradient(180deg, #eee, #fff 100px, #fff);
+            }
+
+            .container {
+                max-width: 960px;
+            }
+
+            .pricing-header {
+                background-color: #f8f9fa;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+                margin-bottom: 30px;
+            }
+
+                .pricing-header h1 {
+                    color: #4b0082; /* Morado oscuro */
+                }
+
+                .pricing-header p {
+                    color: #555; /* Gris oscuro */
+                }
+
+            .card {
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            }
+
+                .card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                }
+            .card-header-basico {
+                background-color: #b088f9; /* Morado suave */
+                border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+                padding: 0.75rem 1.25rem;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container py-3">
+            <header>
+                <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom"></div>
+
+                <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+                    <h1 class="display-4 fw-normal">Precios</h1>
+                    <hr />
+                    <p class="fs-5 text-muted">
+                        Consulta nuestros planes más eficaces. Puedes elegir según tu presupuesto.
+                    </p>
+                    <hr />
+                </div>
+            </header>
+
+            <main>
+                <div class="row row-cols-1 row-cols-md-3 mb-3">
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-lg border-success h-100">
+                            <div class="card-header-basico py-3 bg-light border-success text-dark">
+                                <h4 class="my-0 fw-normal text-center">Básico</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title text-center">
+                                    $449<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                    <li>• Cita presencial.</li>
+                                    <li>• Servicios ofrecidos y listado de precios.</li>
+                                    <li>• Indexación en la zona.</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-transparent border-success text-center">
+                                <a class="btn btn-lg btn-success" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 1 })">Comenzar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-lg border-danger h-100">
+                            <div class="card-header py-3 bg-light border-danger text-dark">
+                                <h4 class="my-0 fw-normal text-center">Premium</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title text-center">
+                                    $599<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                    <li>• Cita presencial.</li>
+                                    <li>• Servicios ofrecidos y listado de precios.</li>
+                                    <li>• Indexación en la zona.</li>
+                                    <li>• Seguimiento clínico propio.</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-transparent border-danger text-center">
+                                <a class="btn btn-lg btn-danger" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 2 })">Comenzar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-lg border-primary h-100">
+                            <div class="card-header py-3 bg-light border-primary text-dark">
+                                <h4 class="my-0 fw-normal text-center">Enlaza</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title text-center">
+                                    $749<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                    <li>• Cita presencial y virtual.</li>
+                                    <li>• Servicios ofrecidos y listado de precios.</li>
+                                    <li>• Indexación en la zona.</li>
+                                    <li>• Seguimiento clínico de otros especialistas.</li>
+                                    <li>• Apartado para subir certificaciones y diplomados.</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-transparent border-primary text-center">
+                                <a class="btn btn-lg btn-primary" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 3 })">Comenzar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+    </html>*@
+
+
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Membresias</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" rel="stylesheet" />
+        <style>
+            body {
+                background-image: linear-gradient(180deg, #eee, #fff 100px, #fff);
+            }
+
+            .container {
+                max-width: 960px;
+            }
+
+            .pricing-header {
+                background-color: #f8f9fa;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+                margin-bottom: 30px;
+            }
+
+                .pricing-header h1 {
+                    color: #4e2f7b; /* Morado no tan deslumbrante */
+                }
+
+                .pricing-header p {
+                    color: #6c757d; /* Gris */
+                }
+
+            .card {
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            }
+
+                .card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                }
+        </style>
+    </head>
+    <body>
+        <div class="container py-3">
+            <header>
+                <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom"></div>
+
+                <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+                    <h1 class="display-4 fw-normal">Precios</h1>
+                    <hr />
+                    <p class="fs-5 text-muted">
+                        Consulta nuestros planes más eficaces. Puedes elegir según tu presupuesto.
+                    </p>
+                    <hr />
+                </div>
+            </header>
+
+            <main>
+                <div class="row row-cols-1 row-cols-md-3 mb-3">
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-lg border-success h-100">
+                            <div class="card-header py-3 bg-success border-success text-white">
+                                <h4 class="my-0 fw-normal text-center">Básico</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title text-center">
+                                    $449<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                    <li>• Cita presencial.</li>
+                                    <li>• Servicios ofrecidos y listado de precios.</li>
+                                    <li>• Indexación en la zona.</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-transparent border-success text-center">
+                                <a class="btn btn-lg btn-success" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 1 })">Comenzar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-lg border-danger h-100">
+                            <div class="card-header py-3 bg-secondary border-secondary text-white">
+                                <h4 class="my-0 fw-normal text-center">Premium</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title text-center">
+                                    $599<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                    <li>• Cita presencial.</li>
+                                    <li>• Servicios ofrecidos y listado de precios.</li>
+                                    <li>• Indexación en la zona.</li>
+                                    <li>• Seguimiento clínico propio.</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-transparent border-danger text-center">
+                                <a class="btn btn-lg btn-danger" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 2 })">Comenzar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-lg border-primary h-100">
+                            <div class="card-header py-3 bg-info border-info text-white">
+                                <h4 class="my-0 fw-normal text-center">Enlaza</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title text-center">
+                                    $749<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                    <li>• Cita presencial y virtual.</li>
+                                    <li>• Servicios ofrecidos y listado de precios.</li>
+                                    <li>• Indexación en la zona.</li>
+                                    <li>• Seguimiento clínico de otros especialistas.</li>
+                                    <li>• Apartado para subir certificaciones y diplomados.</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-transparent border-primary text-center">
+                                <a class="btn btn-lg btn-primary" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 3 })">Comenzar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+    </html>*@
+
+@*<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Membresias</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" rel="stylesheet" />
+        <style>
+            body {
+                background-image: linear-gradient(180deg, #eee, #fff 100px, #fff);
+            }
+
+            .container {
+                max-width: 960px;
+            }
+
+            .pricing-header {
+                background-color: #f8f9fa;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+                margin-bottom: 30px;
+            }
+
+                .pricing-header h1 {
+                    color: #007bff;
+                }
+
+                .pricing-header p {
+                    color: #6c757d;
+                }
+
+            .card {
+                transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            }
+
+                .card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+                }
+        </style>
+    </head>
+    <body>
+        <div class="container py-3">
+            <header>
+                <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom"></div>
+
+                <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+                    <h1 class="display-4 fw-normal">Precios</h1>
+                    <hr />
+                    <p class="fs-5 text-muted">
+                        Consulta nuestros planes más eficaces. Puedes elegir según tu presupuesto.
+                    </p>
+                    <hr />
+                </div>
+            </header>
+
+            <main>
+                <div class="row row-cols-1 row-cols-md-3 mb-3">
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-lg border-success h-100">
+                            <div class="card-header py-3 bg-success border-success text-white">
+                                <h4 class="my-0 fw-normal text-center">Básico</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title text-center">
+                                    $449<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                    <li>• Cita presencial.</li>
+                                    <li>• Servicios ofrecidos y listado de precios.</li>
+                                    <li>• Indexación en la zona.</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-transparent border-success text-center">
+                                <a class="btn btn-lg btn-success" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 1 })">Comenzar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-lg border-danger h-100">
+                            <div class="card-header py-3 bg-danger border-danger text-white">
+                                <h4 class="my-0 fw-normal text-center">Premium</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title text-center">
+                                    $599<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                    <li>• Cita presencial.</li>
+                                    <li>• Servicios ofrecidos y listado de precios.</li>
+                                    <li>• Indexación en la zona.</li>
+                                    <li>• Seguimiento clínico propio.</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-transparent border-danger text-center">
+                                <a class="btn btn-lg btn-danger" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 2 })">Comenzar</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card mb-4 rounded-3 shadow-lg border-primary h-100">
+                            <div class="card-header py-3 bg-primary border-primary text-white">
+                                <h4 class="my-0 fw-normal text-center">Enlaza</h4>
+                            </div>
+                            <div class="card-body">
+                                <h1 class="card-title pricing-card-title text-center">
+                                    $749<small class="text-muted fw-light">/mx</small>
+                                </h1>
+                                <ul class="list-unstyled mt-3 mb-4">
+                                    <li>• Agenda online 24/7 con disponibilidad de horarios.</li>
+                                    <li>• Cita presencial y virtual.</li>
+                                    <li>• Servicios ofrecidos y listado de precios.</li>
+                                    <li>• Indexación en la zona.</li>
+                                    <li>• Seguimiento clínico de otros especialistas.</li>
+                                    <li>• Apartado para subir certificaciones y diplomados.</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-transparent border-primary text-center">
+                                <a class="btn btn-lg btn-primary" href="@Url.Action("AddCart", "Pago", new { IdMembresia = 3 })">Comenzar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+    </html>*@
+
+
+<!--<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Membresias</title>
@@ -94,18 +1211,19 @@
                                     <li>No Email support</li>
                                     <li>No Help Center</li>
                                 </ul>-->
-                                @*<button type="button"
-                                        class="w-100 btn btn-lg btn-outline-primary">
-                                    Comenzar
-                                </button>*@
-                                <!--<div class="d-flex flex-row">
-                                    <a  class="w-100 btn btn-lg btn-outline-primary" href="Url.Action("AddCart", "Pago", new { IdMembresia = membresia.IdMembresia })">Comenzar</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }-->
-                <div class="col">
+-->
+<!--@*<button type="button"
+        class="w-100 btn btn-lg btn-outline-primary">
+    Comenzar
+</button>*@-->
+<!--<div class="d-flex flex-row">
+                    <a  class="w-100 btn btn-lg btn-outline-primary" href="Url.Action("AddCart", "Pago", new { IdMembresia = membresia.IdMembresia })">Comenzar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}-->
+<!--<div class="col">
                     <div class="card mb-4 rounded-3 shadow-sm border-success">
                         <div class="card-header py-3 bg-success border-success">
                             <h4 class="my-0 fw-normal text-center">Básico</h4>
@@ -173,10 +1291,8 @@
                 </div>
             </div>
 
-           
+
         </main>
     </div>
     <script type="text/javascript"></script>
-</body>
-
-
+</body>-->

@@ -12,18 +12,18 @@ namespace ML
         public int IdMultimedia { get; set; }
 
         [Required(ErrorMessage = "El campo 'Título' es requerido.")]
-        [Display(Name = "Título")]
+        [Display(Name = "Título *")]
         public string Titulo { get; set; }
 
         [Required(ErrorMessage = "El campo 'Contenido' es requerido.")]
-        [Display(Name = "Contenido")]
+        [Display(Name = "Contenido *")]
         public string Contenido { get; set; }
 
         [Display(Name = "Imagen")]
         public byte[] Imagen { get; set; }
 
         [Required(ErrorMessage = "El campo 'Tipo' es requerido.")]
-        [Display(Name = "Tipo")]
+        [Display(Name = "Tipo *")]
         public string Tipo { get; set; }
 
         [Display(Name = "ID del Video")]

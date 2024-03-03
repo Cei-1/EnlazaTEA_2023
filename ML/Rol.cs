@@ -10,7 +10,7 @@ namespace ML
 {
     public class Rol
     {
-        [Display(Name = "Tipo de Usuario")]
+        [Display(Name = "Tipo de Usuario *")]
         public int IdRol { get; set; }
         public string Nombre { get; set; }
         public List<object> Roles { get; set; }

@@ -14,15 +14,15 @@ namespace ML
         public ML.Especialista Especialista { get; set; }
 
         [Required(ErrorMessage = "El campo 'Fecha' es requerido.")]
-        [Display(Name = "Fecha")]
+        [Display(Name = "Fecha *")]
         public DateTime Fecha { get; set; }
 
         [Required(ErrorMessage = "El campo 'Horario' es requerido.")]
-        [Display(Name = "Horario")]
+        [Display(Name = "Horario *")]
         public TimeSpan Horario { get; set; }
 
         [Required(ErrorMessage = "El campo 'Estatus' es requerido.")]
-        [Display(Name = "Estatus")]
+        [Display(Name = "Estatus *")]
         public int Estatus { get; set; }
         [Display(Name = "Virtual")]
         public bool Virtual { get; set; }

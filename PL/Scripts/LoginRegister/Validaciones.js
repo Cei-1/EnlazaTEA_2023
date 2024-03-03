@@ -211,3 +211,18 @@ function ConfirmarPassword() {
 
     return true;
 }
+
+
+
+function MostrarContrasena() {
+    var inputContraseña = document.getElementById("txtPassword");
+    var btnMostrarContraseña = document.getElementById("btnMostrarContraseña");
+
+    if (inputContraseña.type === "password") {
+        inputContraseña.type = "text";
+        btnMostrarContraseña.innerHTML = '<i class="bi bi-eye-slash"></i>';
+    } else {
+        inputContraseña.type = "password";
+        btnMostrarContraseña.innerHTML = '<i class="bi bi-eye"></i>';
+    }
+}

@@ -11,11 +11,11 @@ namespace ML
     {
         public int IdEspecialista { get; set; }
         [Required(ErrorMessage = "El campo 'Nombre de Carrera' es requerido.")]
-        [Display(Name = "Nombre de Carrera")]
+        [Display(Name = "Nombre de Carrera *")]
         public string NombreCarrera { get; set; }
 
         [Required(ErrorMessage = "El campo 'Número de Cédula' es requerido.")]
-        [Display(Name = "Número de Cédula")]
+        [Display(Name = "Número de Cédula *")]
         public string NoCedula { get; set; }
 
         //[Required(ErrorMessage = "El campo 'Especialidad' es requerido.")]
@@ -23,7 +23,7 @@ namespace ML
         public string Especialidad { get; set; }
 
         [Required(ErrorMessage = "El campo 'Calle' es requerido.")]
-        [Display(Name = "Calle")]
+        [Display(Name = "Calle *")]
         public string Calle { get; set; }
 
         [Display(Name = "Número Externo")]
@@ -33,23 +33,23 @@ namespace ML
         public string NumeroInterno { get; set; }
 
         [Required(ErrorMessage = "El campo 'Colonia' es requerido.")]
-        [Display(Name = "Colonia")]
+        [Display(Name = "Colonia *")]
         public string Colonia { get; set; }
 
         [Required(ErrorMessage = "El campo 'Ciudad' es requerido.")]
-        [Display(Name = "Ciudad")]
+        [Display(Name = "Ciudad *")]
         public string Ciudad { get; set; }
 
         [Required(ErrorMessage = "El campo 'Estado' es requerido.")]
-        [Display(Name = "Estado")]
+        [Display(Name = "Estado *")]
         public string Estado { get; set; }
 
         [Required(ErrorMessage = "El campo 'Código Postal' es requerido.")]
-        [Display(Name = "Código Postal")]
+        [Display(Name = "Código Postal *")]
         public string CodigoPostal { get; set; }
 
         [Required(ErrorMessage = "El campo 'Teléfono' es requerido.")]
-        [Display(Name = "Teléfono Local")]
+        [Display(Name = "Teléfono Local *")]
         public string Telefono { get; set; }
 
         [Display(Name = "Teléfono Movil o Celular")]
