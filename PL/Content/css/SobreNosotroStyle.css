@@ -185,6 +185,9 @@ h4,
 }
 
 
+p {
+    text-align: justify;
+}
 /**Nosotros**/
 @media (min-width: 768px) {
     .nosotros,
@@ -196,7 +199,7 @@ h4,
 }
 
 .sobre-nosotros__lista {
-    text-align: left;
+    text-align: justify;
 }
 
 .titulo,

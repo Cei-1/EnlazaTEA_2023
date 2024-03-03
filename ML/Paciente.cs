@@ -11,31 +11,31 @@ namespace ML
     {
         public int IdPaciente { get; set; }
         [Required(ErrorMessage = "El campo 'Nombre' es requerido.")]
-        [Display(Name = "Nombre")]
+        [Display(Name = "Nombre *")]
         public string Nombre { get; set; }
 
         [Required(ErrorMessage = "El campo 'Apellido Paterno' es requerido.")]
-        [Display(Name = "Apellido Paterno")]
+        [Display(Name = "Apellido Paterno *")]
         public string ApellidoPaterno { get; set; }
 
         [Required(ErrorMessage = "El campo 'Apellido Materno' es requerido.")]
-        [Display(Name = "Apellido Materno")]
+        [Display(Name = "Apellido Materno *")]
         public string ApellidoMaterno { get; set; }
 
         [Required(ErrorMessage = "El campo 'Parentesco' es requerido.")]
-        [Display(Name = "Parentesco")]
+        [Display(Name = "Parentesco *")]
         public string Parentesco { get; set; }
         public int NivelTEA { get; set; }
         [Required(ErrorMessage = "El campo 'Sexo' es requerido.")]
-        [Display(Name = "Sexo")]
+        [Display(Name = "Sexo *")]
         public bool Sexo { get; set; }
 
         [Required(ErrorMessage = "El campo 'Edad' es requerido.")]
-        [Display(Name = "Edad")]
+        [Display(Name = "Edad *")]
         public int Edad { get; set; }
 
         [Required(ErrorMessage = "El campo 'Calle' es requerido.")]
-        [Display(Name = "Calle")]
+        [Display(Name = "Calle *")]
         public string Calle { get; set; }
 
         [Display(Name = "Número Exterior")]
@@ -45,23 +45,23 @@ namespace ML
         public string NumeroInterior { get; set; }
 
         [Required(ErrorMessage = "El campo 'Colonia' es requerido.")]
-        [Display(Name = "Colonia")]
+        [Display(Name = "Colonia *")]
         public string Colonia { get; set; }
 
         [Required(ErrorMessage = "El campo 'Municipio' es requerido.")]
-        [Display(Name = "Municipio")]
+        [Display(Name = "Municipio *")]
         public string Municipio { get; set; }
 
         [Required(ErrorMessage = "El campo 'Estado' es requerido.")]
-        [Display(Name = "Estado")]
+        [Display(Name = "Estado *")]
         public string Estado { get; set; }
 
         [Required(ErrorMessage = "El campo 'Código Postal' es requerido.")]
-        [Display(Name = "Código Postal")]
+        [Display(Name = "Código Postal *")]
         public string CP { get; set; }
 
         [Required(ErrorMessage = "El campo 'Escolaridad' es requerido.")]
-        [Display(Name = "Escolaridad")]
+        [Display(Name = "Escolaridad *")]
         public string Escolaridad { get; set; }
         public int Evaluacion { get; set; }
         public ML.Usuario Usuario { get; set; }

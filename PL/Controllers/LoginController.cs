@@ -44,23 +44,35 @@ namespace PL.Controllers
             }
             else
             {
-                string hashedPassword = GenerateHash(usuario.Contraseña);
-
-                usuario.Contraseña = hashedPassword;
-
-
-
-                ML.Result result = BL.Usuario.Add(usuario);
-
-                if (result.Correct)
+                if (ModelState.IsValid)
                 {
-                    ViewBag.Mensaje = "Usuario asignado correctamente";
+                    string hashedPassword = GenerateHash(usuario.Contraseña);
+
+                    usuario.Contraseña = hashedPassword;
+
+
+
+                    ML.Result result = BL.Usuario.Add(usuario);
+
+                    if (result.Correct)
+                    {
+                        ViewBag.Mensaje = "Usuario asignado correctamente";
+                    }
+                    else
+                    {
+                        ViewBag.Mensaje = "No se ha podido agregar el usuario. Error: " + result.ErrorMessage;
+                    }
+                    return PartialView("Modal");
                 }
                 else
                 {
-                    ViewBag.Mensaje = "No se ha podido agregar el usuario. Error: " + result.ErrorMessage;
+                    ML.Result resultRol = BL.Rol.GetAll();
+                    usuario.Rol = new Rol();
+                    usuario.Rol.Roles = resultRol.Objects;
+                    return View("Register", usuario);
+
                 }
-                return PartialView("Modal");
+
             }
         }
 
@@ -84,8 +96,8 @@ namespace PL.Controllers
         public ActionResult CompletarEspecialista()
         {
             return View();
-        }    
-       
+        }
+
         public ActionResult Validacion(string email, string Contraseña)
         {
             ML.Usuario usuario = new ML.Usuario();
@@ -183,7 +195,7 @@ namespace PL.Controllers
                 return View();
             }
         }
-        
+
         [HttpGet]
         public ActionResult Pagar()
         {
@@ -215,18 +227,28 @@ namespace PL.Controllers
             especialista.Usuario = new ML.Usuario { IdUsuario = idUsuario };
             especialista.Estatus = false;
 
-            ML.Result result = BL.Especialista.Add(especialista);
-
-            if (result.Correct)
+            if (ModelState.IsValid)
             {
-                ViewBag.Mensaje = "Usuario completado correctamente";
+                ML.Result result = BL.Especialista.Add(especialista);
+
+                if (result.Correct)
+                {
+                    ViewBag.Mensaje = "Usuario completado correctamente";
+                }
+                else
+                {
+                    ViewBag.Mensaje = "No se ha podido completar el usuario. Error: " + result.ErrorMessage;
+                }
+
+                return PartialView("Modal3");
             }
             else
             {
-                ViewBag.Mensaje = "No se ha podido completar el usuario. Error: " + result.ErrorMessage;
+                return View("CompletarEspecialista", especialista);
+
             }
 
-            return PartialView("Modal3");
+
         }
 
         [HttpGet]
@@ -259,16 +281,23 @@ namespace PL.Controllers
 
             ML.Result result = BL.Paciente.Add(paciente);
 
-            if (result.Correct)
+            if (ModelState.IsValid)
             {
-                ViewBag.Mensaje = "Paciente agregado correctamente";
+
+                if (result.Correct)
+                {
+                    ViewBag.Mensaje = "Paciente agregado correctamente";
+                }
+                //else
+                //{
+                //    ViewBag.Mensaje = "No se ha podido agregar el paciente. Error: " + result.ErrorMessage;
+                //}
+                return PartialView("Modal2");
             }
             else
             {
-                ViewBag.Mensaje = "No se ha podido agregar el paciente. Error: " + result.ErrorMessage;
+                return View("RegistrarPaciente", paciente);
             }
-
-            return PartialView("Modal2");
         }
     }
 
